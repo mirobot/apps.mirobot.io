@@ -1,0 +1,10 @@
+#app{
+  text-align:center;
+}
+.bg{
+  fill:#999;
+  stroke:#FFF;
+}
+.pressed{
+  fill: #f25803;
+}

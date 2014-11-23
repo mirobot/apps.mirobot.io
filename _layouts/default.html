@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+        <title>{{ page.title }}</title>
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="/assets/css/main.css">
+        <script type="text/javascript" src="/assets/js/mirobot.js"></script>
+        <script type="text/javascript" src="/assets/js/mirobot-app.js"></script>
+        {% if page.stylesheets %}
+          {% for sheet in page.stylesheets %}
+            <link rel="stylesheet" href="/assets/apps{{ page.url }}{{ sheet }}">
+          {% endfor %}
+        {% endif %}
+    </head>
+    <body>
+
+{% if page.index == true %}
+      <div id="header">
+        <h1 class="title"><a href="/"><img src="/assets/logo_lg.png" alt="Mirobot Apps" /></a></h1>
+      </div>
+{% else %}
+      <div id="header">
+        <span class="connState"></span>
+        <h1 class="title"><a href="/"><img src="/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>
+      </div>
+{% endif %}
+
+      {{ content }}
+      
+      <script type="text/javascript">
+        [].forEach.call(document.links, function(l) {
+          l.href = l.href + document.location.hash;
+        });
+      </script>
+    </body>
+</html>

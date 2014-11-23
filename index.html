@@ -1,0 +1,17 @@
+---
+layout: default
+title: Mirobot Apps
+index: true
+---
+
+<div id="home">
+  <ul class="apps">
+    {% for app in site.apps %}
+      <li>
+        <a class="icon" href="{{ app.url }}" style="background:url('/assets/apps{{ app.url }}icon.jpg')">&nbsp</a>
+        <a href="{{ app.url }}"><h2>{{ app.title }}</h2></a>
+        <p>{{ app.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
