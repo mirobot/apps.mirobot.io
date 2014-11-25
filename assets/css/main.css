@@ -20,12 +20,15 @@ html, body{
 }
 
 #header .connState{
-  float: right;
-  margin:30px 10px 0 0;
+  position:absolute;
+  right:0;
+  bottom:5px;
+#  margin:30px 10px 0 0;
 }
 
 #header img{
   margin:10px 0 0 10px;
+  max-width:80%;
 }
 
 .connState.disconnected{ color:#D12121}
