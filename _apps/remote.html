@@ -6,7 +6,7 @@ stylesheets:
  - main.css
 description: Use buttons to directly remote control your Mirobot
 ---
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="399.999px" viewBox="0 0 400 550">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="400px" viewBox="0 0 400 550">
 <g class="left">
   <path class="bg" stroke="#8A8A8A" stroke-width="0.2835" stroke-miterlimit="10" d="M115.352,284.656c-8.404,2.643-17.354,4.066-26.633,4.066 C39.717,288.722,0,249,0,200.004s39.717-88.718,88.718-88.718c9.268,0,18.207,1.423,26.608,4.061l58.045,58.021 c2.642,8.409,4.065,17.356,4.065,26.637c0,9.189-1.398,18.05-3.991,26.384L115.352,284.656z"/>
   <path fill="#FFFFFF" d="M95.022,182.249L49.15,199.938l45.873,17.685v23.58l-75.484-31.371v-19.708l75.484-31.317V182.249z"/>
@@ -110,9 +110,11 @@ var app  = new MirobotApp(function(mirobot){
   var cmds = ['forward', 'back', 'left', 'right', 'penup', 'pendown', 'beep'];
   cmds.map(function(cmd){
     document.querySelector('.' + cmd).addEventListener('mousedown', function(){ sendCommand(cmd)});
+    document.querySelector('.' + cmd).addEventListener('touchstart', function(){ sendCommand(cmd)});
   })
   
   document.addEventListener('mouseup', stop);
+  document.addEventListener('touchend', stop);
   document.addEventListener('keydown', keyHandler);
   document.addEventListener('keyup', stop);
   
