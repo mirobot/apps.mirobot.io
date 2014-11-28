@@ -17,16 +17,14 @@
     </head>
     <body>
 
+      <div id="header">
 {% if page.index == true %}
-      <div id="header">
         <h1 class="title"><a href="/"><img src="/assets/logo_lg.png" alt="Mirobot Apps" /></a></h1>
-      </div>
 {% else %}
-      <div id="header">
         <span class="connState"></span>
         <h1 class="title"><a href="/"><img src="/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>
-      </div>
 {% endif %}
+      </div>
 
       {{ content }}
       

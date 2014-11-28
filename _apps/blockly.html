@@ -19,8 +19,9 @@ description: This app allows much more advanced programming techniques to be use
 <script type="text/javascript" src="/assets/apps/blockly/js/slider.js"></script>
 <script type="text/javascript">
   var init = function(){
+    Turtle.init();
     var app  = new MirobotApp(function(mirobot){
-      Turtle.init(mirobot);
+      Turtle.setMirobot(mirobot);
     });
   }
   

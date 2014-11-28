@@ -54,8 +54,7 @@ Turtle.visible = true;
 /**
  * Initialize Blockly and the turtle.  Called on page load.
  */
-Turtle.init = function(mirobot) {
-  this.mirobot = mirobot;
+Turtle.init = function() {
   BlocklyApps.init();
 
   var rtl = BlocklyApps.isRtl();
@@ -120,9 +119,18 @@ Turtle.init = function(mirobot) {
   BlocklyApps.bindClick('runButton', Turtle.runButtonClick);
   BlocklyApps.bindClick('stopButton', Turtle.stopButtonClick);
 
+  document.getElementById('runButton').disabled = true;
+  document.getElementById('runButton').className = 'disabled';
+
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);
 };
+
+Turtle.setMirobot = function(mirobot){
+  this.mirobot = mirobot;
+  document.getElementById('runButton').disabled = false;
+  document.getElementById('runButton').className = 'primary';
+}
 
 //window.addEventListener('load', Turtle.init);
 
