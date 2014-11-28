@@ -19,20 +19,23 @@ html, body{
   z-index: 10000;
 }
 
-#header .connState{
-  position:absolute;
-  right:0;
-  bottom:5px;
-#  margin:30px 10px 0 0;
-}
-
 #header img{
   margin:10px 0 0 10px;
   max-width:80%;
 }
 
-.connState.disconnected{ color:#D12121}
+
+.connState{
+  position:absolute;
+  right:5px;
+  bottom:5px;
+  color:#999;
+}
+.connState a{ color:#999}
+.connState.error{ color:#D12121}
+.connState.error a{ color:#D12121}
 .connState.connected{color:#33D121}
+.connState.connected a{color:#33D121}
 
 #app{
   margin-top: 60px;
