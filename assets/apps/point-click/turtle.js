@@ -104,8 +104,10 @@ Turtle.prototype = {
   jsControlHandler: function(e){
     if(this.js.style.display === 'none'){
       this.js.style.display = 'block';
+      this.jsControl.innerHTML = "Hide Javascript";
     }else{
       this.js.style.display = 'none';
+      this.jsControl.innerHTML = "Show Javascript";
     }
     e.preventDefault();
     e.cancelBubble = true;
@@ -149,6 +151,8 @@ Turtle.prototype = {
   },
   addTurtle: function(){
     var self = this;
+    console.log((window.innerHeight - this.el.getBoundingClientRect().top - 10) + 'px');
+    this.el.style.height = (window.innerHeight - this.el.getBoundingClientRect().top - 15) + 'px';
     this.canvas = document.createElement('canvas');
     this.context = this.canvas.getContext('2d');
     this.robot = document.createElement('div');
@@ -178,7 +182,7 @@ Turtle.prototype = {
     // lock the size of the canvas because it's difficult to resize it
     this.el.style.width = this.el.getBoundingClientRect().width + 'px';
     this.el.style.height = this.el.getBoundingClientRect().height + 'px';
-    this.js.style.height = this.el.getBoundingClientRect().height - 80 + 'px'
+    this.js.style.height = this.el.getBoundingClientRect().height - 75 + 'px'
     this.el.appendChild(this.robot);
     this.el.appendChild(this.canvas);
     this.el.appendChild(this.penControl);
