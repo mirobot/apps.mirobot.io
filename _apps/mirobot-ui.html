@@ -1,0 +1,25 @@
+---
+title: Mirobot UI
+author: Ben Pirt
+contact: ben@pirt.co.uk
+layout: app
+stylesheets:
+ - main.css
+description: This is the default app used to program Mirobot
+---
+
+<script type="text/javascript" src="/assets/apps/mirobot-ui/snack.js"></script>
+<script type="text/javascript" src="/assets/apps/mirobot-ui/builder.js"></script>
+<script type="text/javascript" src="/assets/apps/mirobot-ui/snack.sortableList.js"></script>
+<div id="code"></div>
+<script>
+var $;
+  var init = function(){
+    $ = snack.wrap;
+    var app  = new MirobotApp(function(mirobot){
+      var builder = new Builder($('#code'), mirobot);
+    });
+    
+  }
+  window.addEventListener('load', init);
+</script>
