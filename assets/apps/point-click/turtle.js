@@ -73,8 +73,8 @@ Turtle.prototype = {
     if(turnangle != 0){
       if(turnangle > 180){ turnangle -= 360}
       if(turnangle < -180){ turnangle += 360}
-      var dir = turnangle < 0 ? 'left' : 'right';
-      this.pushScript(dir, Math.floor(turnangle));
+      var dir = turnangle < 0 ? 'right' : 'left';
+      this.pushScript(dir, Math.floor(Math.abs(turnangle)));
     }
     if(Math.floor(distance) != 0){
       this.pushScript('forward', Math.floor(distance));
@@ -85,16 +85,39 @@ Turtle.prototype = {
     if(this.mirobot){
       this.mirobot[func](arg);
     }
+    this.js.value += 'mirobot.' + func + '(' + (arg ? arg : '') + ')\n';
   },
   penControlHandler: function(e){
     this.penDown = !this.penDown;
     if(this.penDown){
       this.pushScript('pendown');
+      this.robot.className = '';
       this.penControl.innerHTML = "Pen Up";
     }else{
       this.pushScript('penup');
+      this.robot.className = 'penup';
       this.penControl.innerHTML = "Pen Down";
     }
+    e.preventDefault();
+    e.cancelBubble = true;
+  },
+  jsControlHandler: function(e){
+    if(this.js.style.display === 'none'){
+      this.js.style.display = 'block';
+    }else{
+      this.js.style.display = 'none';
+    }
+    e.preventDefault();
+    e.cancelBubble = true;
+  },
+  resetControlHandler: function(e){
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawGrid();
+    this.js.value = '';
+    this.robot.style["-webkit-transform"] = '';
+    this.robot.style['-moz-transform'] = '';
+    this.robot.style.left = this.canvas.getBoundingClientRect().width/2 - this.robot.getBoundingClientRect().width/2 + "px";
+    this.robot.style.top = this.canvas.getBoundingClientRect().height/2 - this.robot.getBoundingClientRect().height/2 + "px";
     e.preventDefault();
     e.cancelBubble = true;
   },
@@ -129,21 +152,40 @@ Turtle.prototype = {
     this.canvas = document.createElement('canvas');
     this.context = this.canvas.getContext('2d');
     this.robot = document.createElement('div');
-    this.penControl = document.createElement('button');
+    this.robot.innerHTML = '<svg version="1.1" x="0px" y="0px" width="10px" height="14px" viewBox="0 0 10 14" xml:space="preserve"><polygon fill="#FFFFFF" stroke="#FF0000" stroke-miterlimit="10" points="0,14 5,0 10,14 "/></svg>';
     var label = document.createElement('span');
     label.innerHTML = "100mm grid";
+    this.penControl = document.createElement('button');
     this.penControl.id = "penControl";
     this.penControl.innerHTML = "Pen Up";
     this.penControl.addEventListener('click', function(e){ self.penControlHandler(e) });
+    var controls = document.createElement('div');
+    controls.id = 'controls';
+    this.jsControl = document.createElement('button');
+    this.jsControl.innerHTML = "Show Javascript";
+    this.jsControl.addEventListener('click', function(e){ self.jsControlHandler(e) });
+    this.resetControl = document.createElement('button');
+    this.resetControl.innerHTML = "Reset";
+    this.resetControl.addEventListener('click', function(e){ self.resetControlHandler(e) });
+    this.js = document.createElement('textarea');
+    this.js.id = 'js';
+    this.js.style.display = 'none';
+    this.js.readOnly = true;
+    this.js.addEventListener('click', function(e){ e.preventDefault(); e.cancelBubble = true; });
     this.robot.id = 'robot'
     this.canvas.style.width = "100%";
     this.canvas.style.height = "100%";
     // lock the size of the canvas because it's difficult to resize it
     this.el.style.width = this.el.getBoundingClientRect().width + 'px';
     this.el.style.height = this.el.getBoundingClientRect().height + 'px';
+    this.js.style.height = this.el.getBoundingClientRect().height - 80 + 'px'
     this.el.appendChild(this.robot);
     this.el.appendChild(this.canvas);
     this.el.appendChild(this.penControl);
+    controls.appendChild(this.jsControl);
+    controls.appendChild(this.resetControl);
+    this.el.appendChild(this.js);
+    this.el.appendChild(controls);
     this.el.appendChild(label);
     
     this.context.canvas.width = this.canvas.getBoundingClientRect().width;

@@ -3,21 +3,20 @@
   width:100%;
   height:650px;
   position:relative;
-  border:1px solid yellow;
-}
-#turtle canvas{
-  border: 1px solid blue;
+  border:1px solid #AAA;
 }
 
 #robot{
   display:block;
-  border-left:1px solid red;
-  border-right:1px solid red;
-  border-bottom:1px solid red;
-  width:10px;
-  height:10px;
   position:absolute;
-  background:rgba(255, 255, 255, 0.5);
+}
+
+#robot polygon{
+  fill:#F00;
+}
+
+#robot.penup polygon{
+  fill:#FFF;
 }
 
 #penControl{
@@ -26,9 +25,30 @@
   right:3px;
 }
 
+#controls{
+  position:absolute;
+  right:3px;
+  top:3px;
+}
+#controls button{
+  margin-left:3px;
+}
+
 #turtle span{
   position:absolute;
   bottom:3px;
   left:3px;
   color:#CCC;
+}
+
+#js{
+  position:absolute;
+  right:3px;
+  top:30px;
+  background:rgba(255,255,255,0.7);
+  border:1px solid #AAA;
+  width:160px;
+  height:500px;
+  padding:5px;
+  font-size:80%;
 }
