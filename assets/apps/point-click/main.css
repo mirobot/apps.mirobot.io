@@ -1,0 +1,34 @@
+#turtle{
+  display:block;
+  width:100%;
+  height:650px;
+  position:relative;
+  border:1px solid yellow;
+}
+#turtle canvas{
+  border: 1px solid blue;
+}
+
+#robot{
+  display:block;
+  border-left:1px solid red;
+  border-right:1px solid red;
+  border-bottom:1px solid red;
+  width:10px;
+  height:10px;
+  position:absolute;
+  background:rgba(255, 255, 255, 0.5);
+}
+
+#penControl{
+  position:absolute;
+  bottom:3px;
+  right:3px;
+}
+
+#turtle span{
+  position:absolute;
+  bottom:3px;
+  left:3px;
+  color:#CCC;
+}
