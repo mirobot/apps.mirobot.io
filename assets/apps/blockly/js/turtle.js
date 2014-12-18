@@ -80,7 +80,7 @@ Turtle.init = function() {
        toolbox: toolbox,
        trashcan: true});
 
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout(%1);\n';
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout();\n';
 
   // Add to reserved word list: API, local variables in execution evironment
   // (execute) and the infinite loop detection function.
@@ -280,7 +280,7 @@ Turtle.runButtonClick = function() {
  */
 Turtle.stopButtonClick = function() {
   var runButton = document.getElementById('runButton');
-  runButton.style.display = 'inline';
+  if(Turtle.mirobot){runButton.style.display = 'inline';}
   document.getElementById('stopButton').style.display = 'none';
   // Prevent double-clicks or double-taps.
   runButton.disabled = true;
@@ -290,7 +290,7 @@ Turtle.stopButtonClick = function() {
   //document.getElementById('spinner').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(false);
   Turtle.reset();
-  Turtle.mirobot.stop();
+  if(Turtle.mirobot){Turtle.mirobot.stop();}
 };
 
 
@@ -329,7 +329,7 @@ Turtle.animate = function() {
   var tuple = BlocklyApps.log.shift();
   if (!tuple) {
     //document.getElementById('spinner').style.visibility = 'hidden';    
-    document.getElementById('runButton').style.display = 'inline';
+    if(Turtle.mirobot){document.getElementById('runButton').style.display = 'inline';}
     document.getElementById('stopButton').style.display = 'none';
     BlocklyApps.highlight(null);
     return;
