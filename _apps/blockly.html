@@ -6,6 +6,7 @@ layout: app
 stylesheets:
  - css/common.css
  - css/style.css
+ - css/workspaces.css
 description: This app allows much more advanced programming techniques to be used to control Mirobot
 ---
 <script type="text/javascript" src="/assets/apps/blockly/js/storage.js"></script> 
@@ -17,6 +18,7 @@ description: This app allows much more advanced programming techniques to be use
 <script type="text/javascript" src="/assets/apps/blockly/js/common.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/turtle.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/slider.js"></script>
+<script type="text/javascript" src="/assets/apps/blockly/js/workspaces.js"></script>
 <script type="text/javascript">
   var init = function(){
     Turtle.init();
@@ -31,3 +33,17 @@ description: This app allows much more advanced programming techniques to be use
 
   window.addEventListener('load', init);
 </script>
+<div class="Workspaces" id="WorkspacesUI">
+	<div class="label">Workspaces:</div>
+		<button class="secondary" onclick="Blockly.getMainWorkspace().clear()">Clear Workspace</button>  
+	<div class="Workspaces">
+		<div class="label">Save Current:</div>
+		<input type="text" id="WorkspaceName"/>
+		<button class="secondary" onclick="WMManger.Save()">Save</button>  
+	</div>
+	<div class="Workspaces" id="ExistingWorkspacesUI">
+		<div class="label">Manage Existing:</div>
+		<select id="WorkspaceList"><option value=""></option></select><button class="secondary" onclick="WMManger.Load()">Load</button>
+		<button class="secondary" onclick="WMManger.Delete()">Delete</button>
+	</div>
+</div>

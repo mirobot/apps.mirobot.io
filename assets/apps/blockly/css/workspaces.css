@@ -1,0 +1,27 @@
+.Workspaces{
+position:relative;
+background-color:#ddd;
+border:solid 1px black;
+width:400px;
+font-size: large;
+margin-top:2em;
+padding-top:1em;
+}
+.Workspaces .label{
+font-size: large;
+position:absolute;
+top:-.6em;
+left:0.25em;
+background-color:LightGrey;
+padding:.1em 1em;
+border:solid 1px black;
+}
+.Workspaces .Workspaces{
+width:auto;
+margin:0.5em;
+margin-bottom:1em;
+}
+.Workspaces input, .Workspaces select{
+font-size: large;
+margin:5px;
+}
