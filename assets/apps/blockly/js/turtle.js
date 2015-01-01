@@ -79,13 +79,35 @@ Turtle.init = function() {
        rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
+	   
+window.setTimeout(
+function() {
+	BlocklyStorage.restoreBlocks();
+	if(Blockly.mainWorkspace.getAllBlocks().length==0){
+		var defaultXml =
+		  '<xml>' +
+		  '  <block type="draw_move" x="70" y="70">' +
+		  '    <value name="VALUE">' +
+		  '      <block type="math_number">' +
+		  '        <field name="NUM">100</field>' +
+		  '      </block>' +
+		  '    </value>' +
+		  '  </block>' +
+		  '</xml>';
+		BlocklyApps.loadBlocks(defaultXml);
+	}
+} 
+, 0);
+
+BlocklyStorage.backupOnUnload();
 
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout();\n';
 
-  // Add to reserved word list: API, local variables in execution evironment
+  // Add to reserved word list: API, local variables in execution environment
   // (execute) and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('Turtle,code');
 
+  /*
   window.addEventListener('beforeunload', function(e) {
     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
       e.returnValue = BlocklyApps.getMsg('Turtle_unloadWarning');  // Gecko.
@@ -93,22 +115,13 @@ Turtle.init = function() {
     }
     return null;
   });
+*/
 
   // Initialize the slider.
   var sliderSvg = document.getElementById('slider');
   Turtle.speedSlider = new Slider(10, 35, 130, sliderSvg);
 
-  var defaultXml =
-      '<xml>' +
-      '  <block type="draw_move" x="70" y="70">' +
-      '    <value name="VALUE">' +
-      '      <block type="math_number">' +
-      '        <field name="NUM">100</field>' +
-      '      </block>' +
-      '    </value>' +
-      '  </block>' +
-      '</xml>';
-  BlocklyApps.loadBlocks(defaultXml);
+  
 
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
