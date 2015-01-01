@@ -19,6 +19,7 @@ description: This app allows much more advanced programming techniques to be use
 <script type="text/javascript" src="/assets/apps/blockly/js/turtle.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/slider.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/workspaces.js"></script>
+<script type="text/javascript" src="/assets/apps/blockly/js/FileSaver.min.js"></script>
 <script type="text/javascript">
   var init = function(){
     Turtle.init();
@@ -45,5 +46,19 @@ description: This app allows much more advanced programming techniques to be use
 		<div class="label">Manage Existing:</div>
 		<select id="WorkspaceList"><option value=""></option></select><button class="secondary" onclick="WMManger.Load()">Load</button>
 		<button class="secondary" onclick="WMManger.Delete()">Delete</button>
+	</div>
+</div>
+<div class="Workspaces" id="WorkspacesUI">
+	<div class="label">Project Files:</div>
+	
+	<div class="Workspaces" id="WorkspacesUI">
+		<div class="label">Save:</div>
+		<input type="text" id="FileName"/>
+		<button class="secondary" onclick="WMManger.FileSave()">Save</button>  
+	</div>
+	<div class="Workspaces" id="WorkspacesUI">
+		<div class="label">Load:</div>
+		<input type="file" id="fileInput">
+		<button class="secondary" onclick="WMManger.FileLoad()">Load</button>  
 	</div>
 </div>

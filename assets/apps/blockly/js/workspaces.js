@@ -94,3 +94,40 @@ WMManger.LoadWorkspaceList=function(){
 		}	
 	}
 }
+
+WMManger.FileSave=function(){
+	var wsnInput=document.getElementById('FileName');
+	if(wsnInput==null) {
+		alert("can't find the FileName textbox.  this shouldn't happen.  can't continue");
+		return;
+	}
+	var FileNameValue=wsnInput.value;
+	if(FileNameValue==""){
+		alert("Please enter a file name to save your workplace to in the textbox.");
+		return;
+	}
+	
+	var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+    
+	var blob = new Blob([Blockly.Xml.domToPrettyText(xml)], {type: "text/plain;charset=utf-8"});
+	saveAs(blob, FileNameValue + ".txt");
+}
+
+WMManger.FileLoad=function(){
+	var fileInput = document.getElementById('fileInput');
+	var file = fileInput.files[0];
+	var textType = /text.*/;
+
+	if (file.type.match(textType)) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), Blockly.Xml.textToDom(reader.result));
+		}
+
+		reader.readAsText(file);	
+	} else {
+		alert("File not supported!");
+	}
+	
+}
