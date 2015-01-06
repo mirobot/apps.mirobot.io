@@ -34,31 +34,27 @@ description: This app allows much more advanced programming techniques to be use
 
   window.addEventListener('load', init);
 </script>
+
 <div class="Workspaces" id="WorkspacesUI">
-	<div class="label">Workspaces:</div>
-		<button class="secondary" onclick="Blockly.getMainWorkspace().clear()">Clear Workspace</button>  
+	<div class="label">Save programs</div>
 	<div class="Workspaces">
-		<div class="label">Save Current:</div>
+		<div class="label">Save current</div>
 		<input type="text" id="WorkspaceName"/>
-		<button class="secondary" onclick="WMManger.Save()">Save</button>  
+		<button class="secondary small" onclick="WMManger.Save()">Save</button>
 	</div>
 	<div class="Workspaces" id="ExistingWorkspacesUI">
-		<div class="label">Manage Existing:</div>
-		<select id="WorkspaceList"><option value=""></option></select><button class="secondary" onclick="WMManger.Load()">Load</button>
-		<button class="secondary" onclick="WMManger.Delete()">Delete</button>
+		<div class="label">Manage existing</div>
+		<select id="WorkspaceList"><option value=""></option></select><button class="secondary small" onclick="WMManger.Load()">Load</button>
+		<button class="secondary small" onclick="WMManger.Delete()">Delete</button>
 	</div>
-</div>
-<div class="Workspaces" id="WorkspacesUI">
-	<div class="label">Project Files:</div>
-	
 	<div class="Workspaces" id="WorkspacesUI">
-		<div class="label">Save:</div>
+		<div class="label">Download</div>
 		<input type="text" id="FileName"/>
-		<button class="secondary" onclick="WMManger.FileSave()">Save</button>  
+		<button class="secondary small" onclick="WMManger.FileSave()">Save</button>
 	</div>
 	<div class="Workspaces" id="WorkspacesUI">
-		<div class="label">Load:</div>
+		<div class="label">Upload</div>
 		<input type="file" id="fileInput">
-		<button class="secondary" onclick="WMManger.FileLoad()">Load</button>  
+		<button class="secondary small" onclick="WMManger.FileLoad()">Load</button>
 	</div>
 </div>
