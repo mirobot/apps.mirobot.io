@@ -23,12 +23,12 @@ WMManger.Save=function(){
 		alert("Please enter a name to save your workplace to in the textbox.");
 		return;
 	}
-	if(window.localStorage[WorkspaceNameValue]){
+	if(window.localStorage[WMManger.WorkspaceNamespace() + WorkspaceNameValue]){
 		if(confirm("Are you sure you want to save over your existing workspace named " + WorkspaceNameValue)==false) return;
 	}
 	
 	var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-    window.localStorage.setItem(WorkspaceNameValue, Blockly.Xml.domToText(xml));
+    window.localStorage.setItem(WMManger.WorkspaceNamespace() + WorkspaceNameValue, Blockly.Xml.domToText(xml));
 	alert(WorkspaceNameValue + " Saved");
 	WMManger.LoadWorkspaceList();
 }
@@ -46,7 +46,7 @@ WMManger.Load=function(){
 	//in this way, the programmer can build up libraries of functions one at a time,
 	//then append them together into one master program later.
 	//if this isn't the desired effect, the user can just "clear workspace" before loading.
-	Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), Blockly.Xml.textToDom(window.localStorage[WorkspaceNameValue]));
+	Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), Blockly.Xml.textToDom(window.localStorage[WMManger.WorkspaceNamespace() + WorkspaceNameValue]));
 }
 
 WMManger.Delete=function(){
@@ -57,7 +57,7 @@ WMManger.Delete=function(){
 		return;
 	}
     if(confirm("Are you sure you want to DELETE your existing workspace named " + WorkspaceNameValue)){
-		localStorage.removeItem(WorkspaceNameValue);
+		localStorage.removeItem( WMManger.WorkspaceNamespace() + WorkspaceNameValue);
 		WMManger.LoadWorkspaceList();
 	}
 }
@@ -72,18 +72,22 @@ WMManger.WorkspaceListValue=function(){
 }
 
 WMManger.LoadWorkspaceList=function(){
-	var url = window.location.href.split('#')[0];
 	var wsnInput=document.getElementById('WorkspaceList');
 	if(wsnInput==null) { return;}
+	var url = window.location.href.split('#')[0];
+	var namespace = WMManger.WorkspaceNamespace();
+	
     while(wsnInput.options.length > 0){                
 		wsnInput.remove(0);
 	}
 	for (var i=0; i<=localStorage.length-1; i++)  
     {  
-	
-		var option = document.createElement("option");
-		option.text = localStorage.key(i);
-		if(url!=option.text) wsnInput.add(option);
+		var key = localStorage.key(i);
+		if(key.indexOf(namespace)==0){
+			var option = document.createElement("option");
+			option.text = key.substring(namespace.length);;
+			wsnInput.add(option);
+		}
     }
 	var WorkspacesUIel=document.getElementById('ExistingWorkspacesUI');
 	if(WorkspacesUIel!=null) {
@@ -93,6 +97,14 @@ WMManger.LoadWorkspaceList=function(){
 			WorkspacesUIel.style.display="none";
 		}	
 	}
+}
+
+WMManger.WorkspaceNamespace=function(){
+	var url = window.location.href.split('#')[0];
+	var namespace = '/unknown/workspaces/';
+	var urlArr=url.substr(8).split('/')
+	if(urlArr.length>1) namespace=urlArr[1]+'/workspaces/';
+	return namespace;
 }
 
 WMManger.FileSave=function(){
