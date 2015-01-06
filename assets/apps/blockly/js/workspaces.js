@@ -85,7 +85,7 @@ WMManger.LoadWorkspaceList=function(){
 		var key = localStorage.key(i);
 		if(key.indexOf(namespace)==0){
 			var option = document.createElement("option");
-			option.text = key.substring(namespace.length);;
+			option.text = key.substring(namespace.length);
 			wsnInput.add(option);
 		}
     }
@@ -100,11 +100,7 @@ WMManger.LoadWorkspaceList=function(){
 }
 
 WMManger.WorkspaceNamespace=function(){
-	var url = window.location.href.split('#')[0];
-	var namespace = '/unknown/workspaces/';
-	var urlArr=url.substr(8).split('/')
-	if(urlArr.length>1) namespace=urlArr[1]+'/workspaces/';
-	return namespace;
+	return window.location.pathname + 'programs/';
 }
 
 WMManger.FileSave=function(){
