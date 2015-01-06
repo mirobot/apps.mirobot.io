@@ -63,7 +63,11 @@ button.disabled {
 button.notext {
   font-size: 10%;
 }
-
+button.small{
+  font-size:small;
+  padding:4px;
+  margin:2px;
+}
 /* Dialogs */
 #dialog {
   visibility: hidden;
