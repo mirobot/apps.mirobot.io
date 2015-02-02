@@ -153,7 +153,6 @@ Turtle.prototype = {
   },
   addTurtle: function(){
     var self = this;
-    console.log((window.innerHeight - this.el.getBoundingClientRect().top - 10) + 'px');
     this.el.style.height = (window.innerHeight - this.el.getBoundingClientRect().top - 15) + 'px';
     this.canvas = document.createElement('canvas');
     this.context = this.canvas.getContext('2d');
