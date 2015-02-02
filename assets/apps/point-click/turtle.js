@@ -134,7 +134,7 @@ Turtle.prototype = {
     var x = (w/2)%gridSize;
     var y = (h/2)%gridSize;
     this.context.beginPath();
-    this.context.strokeStyle = '#FCFCFC';
+    this.context.strokeStyle = '#EEE';
     this.context.lineWidth = 1;
     while(y < h){
       this.context.moveTo(0, y);
