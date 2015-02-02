@@ -21,6 +21,8 @@ Turtle.prototype = {
     this.angle = Math.atan2(this.mouse_x(e) - this.bot_x(), - (this.mouse_y(e) - this.bot_y()) )*(180/Math.PI);
     this.robot.style["-webkit-transform"] = 'rotate(' + this.angle + 'deg)';
     this.robot.style['-moz-transform'] = 'rotate(' + this.angle + 'deg)';
+    this.robot.style['-ms-transform'] = 'rotate(' + this.angle + 'deg)';
+    this.robot.style['transform'] = 'rotate(' + this.angle + 'deg)';
   },
   move: function(e){
     var self = this;
