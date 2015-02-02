@@ -43,6 +43,7 @@ Turtle.prototype = {
     this.context.lineWidth = 2;
     this.context.moveTo(this.bot_x(), this.bot_y());
     var mover = function(){
+      if(!self.moving){return;}
       steps--;
       if(self.penDown){
         self.context.lineTo(self.bot_x() + _dx, self.bot_y() + _dy);
@@ -115,6 +116,7 @@ Turtle.prototype = {
     e.cancelBubble = true;
   },
   resetControlHandler: function(e){
+    this.moving = false;
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawGrid();
     this.js.value = '';
