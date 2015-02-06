@@ -3,6 +3,9 @@ var Mirobot = function(url){
   this.connect();
   this.cbs = {};
   this.listeners = [];
+  this.sensorState = {follow: null, collide: null};
+  this.collideListening = false;
+  this.followListening = false;
 }
 
 Mirobot.prototype = {
@@ -44,7 +47,9 @@ Mirobot.prototype = {
   
   broadcast: function(msg){
     for(i in this.listeners){
-      this.listeners[i](msg);
+      if(this.listeners.hasOwnProperty(i)){
+        this.listeners[i](msg);
+      }
     }
   },
 
@@ -102,6 +107,50 @@ Mirobot.prototype = {
 
   follow: function(cb){
     this.send({cmd: 'follow'}, cb);
+  },
+
+  collisionSensorState: function(cb){
+    if(this.sensorState.collide === null || !this.collideListening){
+      var self = this;
+      this.send({cmd: 'collideState'}, function(state, msg){
+        if(state === 'complete'){
+          self.sensorState.collide = msg.msg;
+          cb(self.sensorState.collide);
+        }
+      });
+    }else{
+      cb(this.sensorState.collide);
+    }
+  },
+
+  followSensorState: function(cb){
+    if(this.sensorState.follow === null || !this.followListening){
+      var self = this;
+      this.send({cmd: 'followState'}, function(state, msg){
+        if(state === 'complete'){
+          self.sensorState.follow = msg.msg;
+          cb(self.sensorState.follow);
+        }
+      });
+    }else{
+      cb(this.sensorState.follow);
+    }
+  },
+
+  collideSensorNotify: function(state, cb){
+    var self = this;
+    this.send({cmd: 'collideNotify', arg: (state ? 'true' : 'false')}, function(){
+      self.collideListening = true;
+      cb();
+    });
+  },
+
+  followSensorNotify: function(state, cb){
+    var self = this;
+    this.send({cmd: 'followNotify', arg: (state ? 'true' : 'false')}, function(){
+      self.followListening = true;
+      cb();
+    });
   },
 
   stop: function(cb){
@@ -165,6 +214,11 @@ Mirobot.prototype = {
   handle_ws: function(ws_msg){
     msg = JSON.parse(ws_msg.data);
     console.log(msg);
+    if(msg.status === 'notify'){
+      this.broadcast(msg.id);
+      this.sensorState[msg.id] = msg.msg;
+      return;
+    }
     if(this.msg_stack.length > 0 && this.msg_stack[0].id == msg.id){
       if(msg.status === 'accepted'){
         if(this.cbs[msg.id]){

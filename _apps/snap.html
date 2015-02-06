@@ -1,0 +1,61 @@
+---
+title: Snap!
+author: Ben Pirt
+contact: ben@pirt.co.uk
+layout: app
+description: Snap! is very similar to Scratch and is good for using the addon sensors in code
+---
+
+<script type="text/javascript" src="/assets/apps/snap/morphic.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/widgets.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/blocks.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/threads.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/objects.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/gui.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/paint.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/lists.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/byob.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/xml.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/store.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/locale.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/cloud.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/sha512.js"></script>
+<script type="text/javascript" src="/assets/apps/snap/mirobot-snap.js"></script>
+<script type="text/javascript">
+  var mirobot;
+  var world;
+  
+  var app  = new MirobotApp(function(m){
+    mirobot = m;
+    m.version(function(status, msg){
+      if(Number(msg.msg) < 20150201 && !localStorage['_warning_done_']){
+        localStorage['_warning_done_'] = true;
+        alert("You'll need to update your Arduino firmware to use the addon blocks (bump and line following) in this app, but the other blocks should still work fine.");
+      }
+    });
+  });
+  
+  window.onload = function () {
+    IDE_Morph.prototype.reactToWorldResize = function (rect) {
+      if (this.isAutoFill) {
+        rect.origin.y = document.getElementById('header').getBoundingClientRect().height;
+        this.setPosition(rect.origin);
+        this.setExtent(rect.extent());
+      }
+      if (this.filePicker) {
+        document.body.removeChild(this.filePicker);
+        this.filePicker = null;
+      }
+    };
+    
+    world = new WorldMorph(document.getElementById('world'));
+    
+    world.worldCanvas.focus();
+    new IDE_Morph(false).openIn(world);
+    setInterval(loop, 1);
+  };
+  function loop() {
+    world.doOneCycle();
+  }
+</script>
+<canvas id="world" tabindex="1" style="position: absolute;" />
