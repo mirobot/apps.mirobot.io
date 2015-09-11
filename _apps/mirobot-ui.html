@@ -13,13 +13,11 @@ description: This is the default app used to program Mirobot
 <script type="text/javascript" src="/assets/apps/mirobot-ui/snack.sortableList.js"></script>
 <div id="code"></div>
 <script>
-var $;
-  var init = function(){
-    $ = snack.wrap;
-    var app  = new MirobotApp(function(mirobot){
-      var builder = new Builder($('#code'), mirobot);
-    });
-    
-  }
-  window.addEventListener('load', init);
+
+var $ = snack.wrap;
+var builder = new Builder($('#code'));
+var app  = new MirobotApp(function(mirobot){
+  builder.setMirobot(mirobot);
+});
+
 </script>

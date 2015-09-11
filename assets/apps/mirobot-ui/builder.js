@@ -76,6 +76,15 @@ var Builder = function(el, mirobot){
 
 Builder.prototype = {
   prog:null,
+  setMirobot: function(mirobot){
+    this.mirobot = mirobot;
+    this.initMirobot();
+  },
+  initMirobot: function(){
+    if(typeof this.mirobot === 'undefined') return;
+    var self = this;
+    this.mirobot.addListener(function(state){ self.mirobotHandler(state) });
+  },
   init: function(){
     var self = this;
     var adjustment;
@@ -107,7 +116,8 @@ Builder.prototype = {
     this.clear.attach('click', function(e){self.clearProgram()});
     this.follow.attach('click', function(e){self.followClick()});
     this.collide.attach('click', function(e){self.collideClick()});
-    this.mirobot.addListener(function(state){ self.mirobotHandler(state) });
+    
+    this.initMirobot();
 
     this.addFunctions();
     this.resumeProgram();
@@ -241,7 +251,7 @@ Builder.prototype = {
     });
   },
   runProgram: function(){
-    if(this.following || this.colliding){ return; }
+    if(this.following || this.colliding || !this.mirobot){ return; }
     if(this.paused){
       this.mirobot.resume();
     }else{
@@ -256,6 +266,7 @@ Builder.prototype = {
   pauseProgram: function(){
     var self = this;
     this.paused = true;
+    if(!this.mirobot){ return; }
     this.mirobot.pause(function(){
       self.runner.show();
       self.pause.hide();
@@ -263,6 +274,7 @@ Builder.prototype = {
   },
   stopProgram: function(cb){
     var self = this;
+    if(!this.mirobot){ return; }
     this.mirobot.stop(function(){
       self.runner.show();
       self.pause.hide();
