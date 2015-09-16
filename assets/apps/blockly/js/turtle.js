@@ -83,7 +83,6 @@ Turtle.init = function() {
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout();\n';
 
   window.setTimeout(function() {
-    BlocklyStorage.restoreBlocks();
     if(Blockly.mainWorkspace.getAllBlocks().length==0){
       var defaultXml =
         '<xml>' +
@@ -97,9 +96,7 @@ Turtle.init = function() {
         '</xml>';
       BlocklyApps.loadBlocks(defaultXml);
     }
-  }, 0);
-
-  BlocklyStorage.backupOnUnload();
+  }, 1000);
 
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout();\n';
 
@@ -107,21 +104,9 @@ Turtle.init = function() {
   // (execute) and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('Turtle,code');
 
-  /*
-  window.addEventListener('beforeunload', function(e) {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = BlocklyApps.getMsg('Turtle_unloadWarning');  // Gecko.
-      return BlocklyApps.getMsg('Turtle_unloadWarning');  // Webkit.
-    }
-    return null;
-  });
-*/
-
   // Initialize the slider.
   var sliderSvg = document.getElementById('slider');
   Turtle.speedSlider = new Slider(10, 35, 130, sliderSvg);
-
-  
 
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');

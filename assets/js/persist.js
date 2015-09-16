@@ -32,6 +32,7 @@ Persister.prototype = {
     if(program){
       this.currentProgram = name;
       localStorage['/' + this.namespace + '/currentProgram'] = name;
+      this.clearHandler();
       this.loadHandler(program);
       this.notify();
     }
