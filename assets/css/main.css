@@ -95,4 +95,51 @@ border-top-right-radius: 10px;
   color:#666;
 }
 
+#save{
+  float:right;
+  text-align:right;
+  background-color:#FFF;
+  position:absolute;
+  right:5px;
+  top:5px;
+  text-decoration:underline;
+  color:#999;
+}
+#save ul{
+  display:none;
+  background-color:#FCFCFC;
+}
+#save .wrapper{
+  -webkit-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.4);
+}
+#save ul li{
+  text-align:left;
+  padding:7px 12px;
+  min-width:150px;
+}
+#save ul li:hover{
+  background-color:#EEE;
+  cursor:hand;
+}
+#save ul li.inactive:hover{
+  background-color:#FCFCFC;
+  cursor:hand;
+}
+#save ul li.inactive{
+  text-decoration:none;
+}
+#save.show ul{
+  display:block;
+}
+#save ul#progs li{
+  padding-left:30px;
+}
+#uploader{
+  display: block;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
 

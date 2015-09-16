@@ -169,74 +169,7 @@ a{
 body.dragging, body.dragging * {
   cursor: move !important;
 }
-.connState{
-  position:absolute;
-  right:10px;
-  color:#D12121;
-}
-.connState.connected{
-  color:#33D121;
-}
-#miroConnState{
-  top:50px;
-}
-#wifiConnState{
-  top:25px;
-}
-#wifiConnState.connected{
-  text-decoration:none;
-}
-#wifiConnState.connected:hover{
-  text-decoration:underline;
-}
-#header{
-  padding:10px 0;
-  margin:0 0 10px;
-  border-bottom: 1px solid #BBB;
-}
 
-.modal{
-  position:absolute;
-  top:0;
-  left:0;
-}
-.modal{
-  background-color:rgba(0,0,0,0.5);
-  width:100%;
-  height:100%;
-  text-align:center;
-  z-index:100000;
-}
-.modal .content{
-  background-color:#FFF;
-  width:400px;
-  margin:30px auto;
-  padding:10px;
-  border:5px solid #999;
-  text-align:center;
-}
-#wifiConfig .content input[type=text],#wifiConfig .content input[type=password]{
-  width:200px;
-}
-#wifiConfig .content td{
-  text-align:right;
-  padding:4px;
-}
-#wifiConfig .content td.left{
-  text-align:left;
-}
-#wifiConfig iframe{
-  width:400px;
-  height:500px;
-  border:none;
-}
-#version{
-  font-size:75%;
-  color:#CCC;
-  position:absolute;
-  bottom:5px;
-  right:10px;
-}
 .editor .extra{
   padding:10px;
 }

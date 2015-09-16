@@ -59,15 +59,16 @@ FnInstance.prototype = {
   }
 }
 
-var Builder = function(el, mirobot){
+var Builder = function(el, mirobot, disableLocalstorage){
   var self = this;
   this.el = el;
   this.mirobot = mirobot;
-  this.init();
   this.fns = {};
   this.paused = false;
   this.following = false;
   this.colliding = false;
+  this.store = !disableLocalstorage;
+  this.init();
 
   snack.each(this.functions, function(f){
     self.fns[f.name] = f;
@@ -129,21 +130,28 @@ Builder.prototype = {
       return false;
     }
   },
+  saveProgram: function(){
+    var prog = new FnInstance(null, null, null);
+    this.generate($('.editor ol.program')[0], prog);
+    return JSON.stringify(prog.toObject());
+  },
+  loadProgram: function(input){
+    this.clearProgram();
+    var prog = JSON.parse(input);
+    if(prog.fn === 'root' && prog.children && prog.children.length > 0){
+      this.instantiateProgram(prog.children, document.querySelectorAll('.editor .program')[0]);
+      this.showHints();
+      this.sortLists();
+    }
+  },
   storeProgram: function(){
-    if(this.supportsLocalStorage()){
-      var prog = new FnInstance(null, null, null);
-      this.generate($('.editor ol.program')[0], prog);
-      localStorage['mirobot.currentProgram'] = JSON.stringify(prog.toObject());
+    if(this.supportsLocalStorage() && this.store){
+      localStorage['mirobot.currentProgram'] = this.saveProgram();
     }
   },
   resumeProgram: function(){
-    if(this.supportsLocalStorage() && localStorage['mirobot.currentProgram']){
-      var prog = JSON.parse(localStorage['mirobot.currentProgram']);
-      if(prog.fn === 'root' && prog.children && prog.children.length > 0){
-        this.instantiateProgram(prog.children, document.querySelectorAll('.editor .program')[0]);
-        this.showHints();
-        this.sortLists();
-      }
+    if(this.supportsLocalStorage() && localStorage['mirobot.currentProgram'] && this.store){
+      this.loadProgram(localStorage['mirobot.currentProgram'])
     }
   },
   instantiateProgram: function(fns, el){

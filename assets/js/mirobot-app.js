@@ -15,9 +15,24 @@ MirobotApp.prototype.extractConfig = function(){
   }
 }
 
-MirobotApp.prototype.init = function(){
+MirobotApp.prototype.supportsLocalStorage = function(){
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+MirobotApp.prototype.init = function(conf){
   this.initted = false;
+  this.conf = conf;
   this.connect();
+}
+
+MirobotApp.prototype.initPersistence = function(conf){
+  if(this.supportsLocalStorage()){
+    this.saveMenu = new MirobotSave(document.getElementById('save'), conf);
+  }
 }
 
 MirobotApp.prototype.connect = function(){
