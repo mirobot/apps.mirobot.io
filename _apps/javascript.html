@@ -1,0 +1,43 @@
+---
+title: Javascript
+author: Ben Pirt
+contact: ben@pirt.co.uk
+layout: app
+stylesheets:
+ - main.css
+description: Program Mirobot using Javascript directly from your browser
+---
+
+<script type="text/javascript" src="/assets/apps/javascript/src-min-noconflict/ace.js"></script>
+<script type="text/javascript" src="/assets/apps/javascript/jseditor.js"></script>
+<pre id="editor">function draw_polygon(sides) {
+    var i;
+    for (i = 0; i < sides; i++) {
+        var angle = 180 - (360/sides);
+        mirobot.left(angle);
+        mirobot.forward(100);
+    }
+}
+
+mirobot.pendown();
+draw_polygon(5);
+mirobot.penup();</pre>
+<div id="controlBar"><button class="run">&#9654; Run</button><button class="pause" style="display:none;">&#10074;&#10074; Pause</button><button class="stop">&#9724; Stop</button><button class="clear">&#10006; Clear</button></div>
+<script>
+
+var editor = new JSEditor('editor', 'controlBar');
+
+//var builder = new Builder($('#code'), undefined, true);
+var app  = new MirobotApp(function(mirobot){
+  editor.setMirobot(mirobot);
+});
+
+app.initPersistence({
+  saveHandler: function(){ return editor.saveProgram(); },
+  loadHandler: function(prog){ return editor.loadProgram(prog); },
+  clearHandler: function(){ return editor.clearProgram(); },
+  fileType: 'js'
+});
+
+
+</script>

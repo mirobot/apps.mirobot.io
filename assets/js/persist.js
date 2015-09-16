@@ -7,6 +7,7 @@ var Persister = function(conf){
     this.loadHandler = conf.loadHandler;
     this.clearHandler = conf.clearHandler;
   }
+  this.fileType = conf.fileType || 'txt';
   this.currentProgram = localStorage['/' + this.namespace + '/currentProgram']
   this.init();
 }
@@ -65,7 +66,7 @@ Persister.prototype = {
   downloadCurrent: function(){
     if(this.currentProgram){
       var blob = new Blob([this.saveHandler(this.currentProgram)], {type: "text/plain;charset=utf-8"});
-      var fileName = this.namespace + '-' + this.currentProgram + '.txt';
+      var fileName = this.namespace + '-' + this.currentProgram + '.' + this.fileType;
       saveAs(blob, fileName);
     }
   },
