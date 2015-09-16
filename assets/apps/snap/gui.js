@@ -2307,6 +2307,7 @@ IDE_Morph.prototype.projectMenu = function () {
         shiftClicked = (world.currentKey === 16);
 
     menu = new MenuMorph(this);
+    /*
     menu.addItem('Project notes...', 'editProjectNotes');
     menu.addLine();
     menu.addItem('New', 'createNewProject');
@@ -2377,6 +2378,7 @@ IDE_Morph.prototype.projectMenu = function () {
         function () {myself.exportGlobalBlocks(); },
         'show global custom block definitions as XML\nin a new browser window'
     );
+    */
 /*
     if (shiftClicked) {
         menu.addItem(
@@ -2432,8 +2434,8 @@ IDE_Morph.prototype.projectMenu = function () {
         },
         'Select categories of additional blocks to add to this project.'
     );
-    */
     menu.addLine();
+    */
 
     menu.addItem(
         localize(graphicsName) + '...',

@@ -44,11 +44,11 @@ Persister.prototype = {
       localStorage.removeItem('/' + this.namespace + '/unsaved');
     }else{
       // Program has changed, so save unsaved changes
-      localStorage['/' + this.namespace + '/unsaved'] = this.saveHandler();
+      localStorage['/' + this.namespace + '/unsaved'] = this.saveHandler(this.currentProgram || 'untitled');
     }
   },
   unsaved: function(){
-    return !this.currentProgram || localStorage['/' + this.namespace + '/programs/' + this.currentProgram] !== this.saveHandler();
+    return !this.currentProgram || localStorage['/' + this.namespace + '/programs/' + this.currentProgram] !== this.saveHandler(this.currentProgram);
   },
   exists: function(name){
     return typeof localStorage['/' + this.namespace + '/programs/' + name] !== 'undefined'
@@ -64,7 +64,7 @@ Persister.prototype = {
   },
   downloadCurrent: function(){
     if(this.currentProgram){
-      var blob = new Blob([this.saveHandler()], {type: "text/plain;charset=utf-8"});
+      var blob = new Blob([this.saveHandler(this.currentProgram)], {type: "text/plain;charset=utf-8"});
       var fileName = this.namespace + '-' + this.currentProgram + '.txt';
       saveAs(blob, fileName);
     }
@@ -84,11 +84,13 @@ Persister.prototype = {
     this.notify();
   },
   saveProgram: function(){
-    localStorage['/' + this.namespace + '/programs/' + this.currentProgram] = this.saveHandler();
+    localStorage['/' + this.namespace + '/programs/' + this.currentProgram] = this.saveHandler(this.currentProgram);
   },
   notify: function(){
     for(var i in this.listeners){
-      this.listeners[i]();
+      if(this.listeners.hasOwnProperty(i)){
+        this.listeners[i]();
+      }
     }
   },
   subscribe: function(cb){

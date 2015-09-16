@@ -51,7 +51,18 @@ description: Snap! is very similar to Scratch and is good for using the addon se
     world = new WorldMorph(document.getElementById('world'));
     
     world.worldCanvas.focus();
-    new IDE_Morph(false).openIn(world);
+    var IDE = new IDE_Morph(false)
+    IDE.openIn(world);
+
+    app.initPersistence({
+      saveHandler: function(name){
+        IDE.setProjectName(name);
+        return IDE.serializer.serialize(IDE.stage);
+      },
+      loadHandler: function(prog){ return IDE.rawOpenProjectString(prog); },
+      clearHandler: function(){ return IDE.newProject(); }
+    });
+
     setInterval(loop, 1);
   };
   function loop() {
