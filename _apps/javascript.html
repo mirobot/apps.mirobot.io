@@ -22,6 +22,20 @@ description: Program Mirobot using Javascript directly from your browser
 mirobot.pendown();
 draw_polygon(5);
 mirobot.penup();</pre>
+<button id="helpButton">Show help</button>
+<div id="help">
+  <h2>Controlling Mirobot with Javascript</h2>
+  <p>Use these simple commands to get started controlling Mirobot:</p>
+  <ul>
+    <li><em>mirobot.forward(100)</em> - move 100 mm forward</li>
+    <li><em>mirobot.back(100)</em> - move 100mm back</li>
+    <li><em>mirobot.left(90)</em> - turn 90 degrees to the left</li>
+    <li><em>mirobot.right(90)</em> - turn 90 degrees to the right</li>
+    <li><em>mirobot.penup()</em> - lift the pen up</li>
+    <li><em>mirobot.pendown()</em> - lower the pen to draw</li>
+    <li><em>mirobot.beep()</em> - make it beep</li>
+  </ul>
+</div>
 <div id="controlBar"><button class="run">&#9654; Run</button><button class="pause" style="display:none;">&#10074;&#10074; Pause</button><button class="stop">&#9724; Stop</button><button class="clear">&#10006; Clear</button></div>
 <script>
 

@@ -15,6 +15,8 @@ JSEditor.prototype = {
     this.editor.$blockScrolling = Infinity;
     this.editor.setShowPrintMargin(false);
     window.addEventListener('resize', function(){ self.resize(); });
+    this.help = document.querySelector('#help');
+    document.querySelector('#helpButton').addEventListener('click', function(){ self.helpHandler(); });
   },
   initControls: function(id){ 
     var self = this;
@@ -29,6 +31,16 @@ JSEditor.prototype = {
     var height = window.innerHeight - document.getElementById(this.editorId).offsetTop - this.controls.getBoundingClientRect().height - 10;
     document.getElementById(this.editorId).style.height = height + "px";
     this.editor.resize();
+    this.help.style.height = (height - 70) + 'px'
+  },
+  helpHandler: function(){
+    if(this.help.style.display !== 'block'){
+      this.help.style.display = 'block';
+      document.querySelector('#helpButton').innerText = 'Hide help';
+    }else{
+      this.help.style.display = '';
+      document.querySelector('#helpButton').innerText = 'Show help';
+    }
   },
   setRunButtonState: function(state){
     this.controls.querySelector('.run').style.display = (state==='run' ? '' : 'none');
