@@ -13,6 +13,7 @@ JSEditor.prototype = {
     this.editor.setTheme("ace/theme/xcode");
     this.editor.getSession().setMode("ace/mode/javascript");
     this.editor.$blockScrolling = Infinity;
+    this.editor.setShowPrintMargin(false);
     window.addEventListener('resize', function(){ self.resize(); });
   },
   initControls: function(id){ 
