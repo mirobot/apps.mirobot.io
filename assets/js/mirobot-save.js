@@ -79,6 +79,15 @@ MirobotSave.prototype.init = function(){
     }
   });
   this.el.addEventListener('mouseleave', function(){ self.el.className = "";});
+  window.addEventListener("keydown", function(e){ self.handleKeyboard(e);}, false);
+}
+
+MirobotSave.prototype.handleKeyboard = function(e){
+  if(e.keyCode === 83 && e.metaKey){
+    this.saveHandler();
+    e.preventDefault();
+    return false;
+  }
 }
 
 MirobotSave.prototype.saveHandler = function(){
