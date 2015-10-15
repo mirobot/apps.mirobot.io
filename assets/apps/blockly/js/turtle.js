@@ -94,7 +94,8 @@ Turtle.init = function() {
         '    </value>' +
         '  </block>' +
         '</xml>';
-      BlocklyApps.loadBlocks(defaultXml);
+      var xml = Blockly.Xml.textToDom(defaultXml);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
     }
   }, 1000);
 
