@@ -90,7 +90,6 @@ Mirobot.prototype = {
   },
 
   turn: function(direction, angle, cb){
-    angle = angle % 360;
     if(angle < 0){
       angle = -angle;
       direction = (direction === 'left' ? 'right' : 'left')
