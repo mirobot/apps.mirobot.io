@@ -105,12 +105,12 @@ Mirobot.prototype = {
     this.move('back', distance, cb);
   },
   
-  left: function(distance, cb){
-    this.turn('left', distance, cb);
+  left: function(angle, cb){
+    this.turn('left', angle, cb);
   },
   
-  right: function(distance, cb){
-    this.turn('right', distance, cb);
+  right: function(angle, cb){
+    this.turn('right', angle, cb);
   },
 
   penup: function(cb){
