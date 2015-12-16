@@ -1,0 +1,21 @@
+---
+---
+
+{% include base.manifest %}
+/assets/apps/blockly/js/storage.js
+/assets/apps/blockly/js/blockly_compressed.js
+/assets/apps/blockly/js/blocks_compressed.js
+/assets/apps/blockly/js/javascript_compressed.js
+/assets/apps/blockly/js/blocks.js
+/assets/apps/blockly/js/soyutils.js
+/assets/apps/blockly/js/common.js
+/assets/apps/blockly/js/turtle.js
+/assets/apps/blockly/js/slider.js
+/assets/apps/blockly/js/prettify.js
+/assets/apps/blockly/css/common.css
+/assets/apps/blockly/css/style.css
+/assets/apps/blockly/generated/en.js
+/assets/apps/blockly/msg/js/en.js
+/assets/apps/blockly/media/1x1.gif
+/assets/apps/blockly/media/icons.png
+/assets/apps/blockly/media/sprites.png

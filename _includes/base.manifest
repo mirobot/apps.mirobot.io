@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# {{ site.time }}
+
+FALLBACK:
+/ /fallback.html
+
+NETWORK:
+*
+
+CACHE:
+/assets/js/FileSaver.min.js
+/assets/js/mirobot.js
+/assets/js/mirobot-save.js
+/assets/js/mirobot-app.js
+/assets/js/persist.js
+/assets/css/main.css
+/assets/logo_lg.png
+/assets/logo_sm.png

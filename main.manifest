@@ -1,0 +1,8 @@
+---
+---
+
+{% include base.manifest %}
+/
+{% for app in site.apps %}
+/assets/apps{{ app.url }}icon.jpg
+{% endfor %}

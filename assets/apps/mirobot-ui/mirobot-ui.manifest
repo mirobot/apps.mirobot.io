@@ -1,0 +1,8 @@
+---
+---
+
+{% include base.manifest %}
+/assets/apps/mirobot-ui/snack.js
+/assets/apps/mirobot-ui/builder.js
+/assets/apps/mirobot-ui/snack.sortableList.js
+/assets/apps/mirobot-ui/main.css

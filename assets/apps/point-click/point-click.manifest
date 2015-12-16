@@ -1,0 +1,6 @@
+---
+---
+
+{% include base.manifest %}
+/assets/apps/point-click/main.css
+/assets/apps/point-click/turtle.js

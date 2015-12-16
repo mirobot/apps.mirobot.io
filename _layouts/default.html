@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+{% if page.manifest %}
+<html manifest="{{ page.manifest }}">
+{% else %}
 <html>
+{% endif %}
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
