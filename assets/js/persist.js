@@ -8,31 +8,47 @@ var Persister = function(conf){
     this.clearHandler = conf.clearHandler;
   }
   this.fileType = conf.fileType || 'txt';
-  this.currentProgram = localStorage['/' + this.namespace + '/currentProgram']
   this.init();
 }
 
 Persister.prototype = {
   listeners: [],
   init: function(){
-    var unsaved = localStorage['/' + this.namespace + '/unsaved'];
+  	this.initLocalStorage();
+  	if(!this.localStorage) return;
+		this.currentProgram = localStorage['/' + this.namespace + '/currentProgram']
+    var unsaved = this.localStorage['/' + this.namespace + '/unsaved'];
     if(unsaved){
       this.loadHandler(unsaved);
     }else{
       if(this.currentProgram){
-        var program = localStorage['/' + this.namespace + '/programs/' + this.currentProgram]
+        var program = this.localStorage['/' + this.namespace + '/programs/' + this.currentProgram]
         if(program){
           this.loadHandler(program);
         }
       }
     }  
   },
+  initLocalStorage: function(){
+		try {
+			localStorage.setItem('test', true);
+			localStorage.removeItem('test');
+			this.localStorage = window.localStorage;
+		} catch (e) {
+			// No local storage
+			if('chrome' in window && 'storage' in window.chrome){
+				// We are running as a chrome app
+				this.localStorage = window.chrome.storage;
+			}else{
+				this.localStorage = false;
+			}
+		}
+  },
   load: function(name){
-    console.log('loading ' + name);
-    var program = localStorage['/' + this.namespace + '/programs/' + name]
+    var program = this.localStorage['/' + this.namespace + '/programs/' + name]
     if(program){
       this.currentProgram = name;
-      localStorage['/' + this.namespace + '/currentProgram'] = name;
+      this.localStorage['/' + this.namespace + '/currentProgram'] = name;
       this.clearHandler();
       this.loadHandler(program);
       this.notify();
@@ -42,20 +58,20 @@ Persister.prototype = {
     // compare the programs to check for differences
     if(!this.unsaved()){
       // Program has not changed so no need to store unsaved
-      localStorage.removeItem('/' + this.namespace + '/unsaved');
+      this.localStorage.removeItem('/' + this.namespace + '/unsaved');
     }else{
       // Program has changed, so save unsaved changes
-      localStorage['/' + this.namespace + '/unsaved'] = this.saveHandler(this.currentProgram || 'untitled');
+      this.localStorage['/' + this.namespace + '/unsaved'] = this.saveHandler(this.currentProgram || 'untitled');
     }
   },
   unsaved: function(){
-    return !this.currentProgram || localStorage['/' + this.namespace + '/programs/' + this.currentProgram] !== this.saveHandler(this.currentProgram);
+    return !this.currentProgram || this.localStorage['/' + this.namespace + '/programs/' + this.currentProgram] !== this.saveHandler(this.currentProgram);
   },
   exists: function(name){
-    return typeof localStorage['/' + this.namespace + '/programs/' + name] !== 'undefined'
+    return typeof this.localStorage['/' + this.namespace + '/programs/' + name] !== 'undefined'
   },
   saveAs: function(name){
-    localStorage['/' + this.namespace + '/currentProgram'] = name;
+    this.localStorage['/' + this.namespace + '/currentProgram'] = name;
     this.currentProgram = name;
     this.saveProgram();
     this.notify();
@@ -71,10 +87,10 @@ Persister.prototype = {
     }
   },
   delete: function(program){
-    if(localStorage['/' + this.namespace + '/currentProgram'] === program){
-      localStorage.removeItem('/' + this.namespace + '/currentProgram');
+    if(this.localStorage['/' + this.namespace + '/currentProgram'] === program){
+      this.localStorage.removeItem('/' + this.namespace + '/currentProgram');
     }
-    localStorage.removeItem('/' + this.namespace + '/programs/' + program);
+    this.localStorage.removeItem('/' + this.namespace + '/programs/' + program);
     this.currentProgram = undefined;
     this.clearHandler();
     this.notify();
@@ -85,7 +101,7 @@ Persister.prototype = {
     this.notify();
   },
   saveProgram: function(){
-    localStorage['/' + this.namespace + '/programs/' + this.currentProgram] = this.saveHandler(this.currentProgram);
+    this.localStorage['/' + this.namespace + '/programs/' + this.currentProgram] = this.saveHandler(this.currentProgram);
   },
   notify: function(){
     for(var i in this.listeners){
@@ -100,8 +116,8 @@ Persister.prototype = {
   fileList: function(){
     var files = [];
     var prefix = '/' + this.namespace + '/programs/';
-    for(var i=0; i< localStorage.length; i++){
-      var name = localStorage.key(i);
+    for(var i=0; i< this.localStorage.length; i++){
+      var name = this.localStorage.key(i);
       if(name.startsWith(prefix)){
         files.push(name.replace(prefix, ''));
       }
