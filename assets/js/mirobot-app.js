@@ -26,7 +26,32 @@ MirobotApp.prototype.supportsLocalStorage = function(){
 MirobotApp.prototype.init = function(conf){
   this.initted = false;
   this.conf = conf;
+  this.initConnMenu();
   this.connect();
+}
+
+MirobotApp.prototype.initConnMenu = function(){
+	var self = this;
+	var cs = document.querySelector('#header .connState');
+	cs.innerHTML = '<span class="csIcon"></span> <a href="#" class="csLink"></a><div class="wrapper"><div class="subMenu"></div></div>';
+  cs.querySelector('a').addEventListener('click', function(e){
+		cs.classList.toggle('show');
+		e.preventDefault();
+		return false;
+	});
+  cs.addEventListener('mouseleave', function(){ cs.classList.remove("show");});
+  this.updateConnMenu();
+}
+
+MirobotApp.prototype.updateConnMenu = function(){
+	var self = this;
+	var menu = document.querySelector('#header .connState .subMenu');
+	if(this.connState === 'connected'){
+		menu.innerHTML = 'Connected';
+	}else{
+		menu.innerHTML = '<p>Enter the address for your Mirobot here:</p><input type="text" placeholder="192.168.1.100" value=""/><button>Connect</button>';
+		menu.querySelector('button').addEventListener('click', function(e){ self.configure(e) });
+	}
 }
 
 MirobotApp.prototype.initPersistence = function(conf){
@@ -61,13 +86,15 @@ MirobotApp.prototype.handler = function(state){
       this.connState = 'disconnected';
     }
   }
+	this.updateConnMenu();
   this.setConnState();
 }
 
 MirobotApp.prototype.configure = function(e){
-  var ip = prompt("Enter the address for your Mirobot here:\n (e.g. 192.168.1.100)", this.hashConfig['m']);
+  var ip = document.querySelector('.connState input').value;
   if(ip){
     window.location = '#m=' + ip;
+    updateLinks();
     this.connect();
   }
   e.preventDefault();
@@ -77,25 +104,32 @@ MirobotApp.prototype.configure = function(e){
 MirobotApp.prototype.setConnState = function(){
   var self = this;
   var cs = document.querySelector('#header .connState');
+  var csLink = document.querySelector('#header .connState .csLink');
+  var csIcon = document.querySelector('#header .connState .csIcon');
   switch(this.connState){
     case 'not_set':
-      cs.innerHTML = '&#10007; <a href="#">Configure Mirobot connection</a>';
-      cs.querySelector('a').addEventListener('click', function(e){ self.configure(e) });
-      cs.className = 'connState';
+      csLink.innerHTML = 'Configure Mirobot connection';
+      csIcon.innerHTML = '&#10007;';
+      cs.classList.remove('connected');
+      cs.classList.remove('error');
       break;
     case 'connected':
-      cs.innerHTML = '&#10003; Connected to Mirobot';
-      cs.className = 'connState connected';
+      csLink.innerHTML = 'Connected to Mirobot';
+      csIcon.innerHTML = '&#10003;';
+      cs.classList.remove('error');
+      cs.classList.add('connected');
       break;
     case 'cant_connect':
-      cs.innerHTML = '&#10007; <a href="#">Can\'t connect to Mirobot<a>';
-      cs.querySelector('a').addEventListener('click', function(e){ self.configure(e) });
-      cs.className = 'connState error';
+      csLink.innerHTML = 'Can\'t connect to Mirobot';
+      csIcon.innerHTML = '&#10007;';
+      cs.classList.remove('connected');
+      cs.classList.add('error');
       break;
     case 'disconnected':
-      cs.innerHTML = '&#10007; <a href="#">Reconnecting to Mirobot</a>';
-      cs.querySelector('a').addEventListener('click', function(e){ self.configure(e) });
-      cs.className = 'connState error';
+      csLink.innerHTML = 'Reconnecting to Mirobot';
+      csIcon.innerHTML = '&#10007;';
+      cs.classList.remove('connected');
+      cs.classList.add('error');
       break;
   }
 }

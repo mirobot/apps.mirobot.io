@@ -51,6 +51,7 @@ MirobotSave.prototype.init = function(){
   this.el.appendChild(wrap);
   var menu = document.createElement('ul');
   menu.id="saveMenu";
+  menu.className="subMenu";
   menu.appendChild(this.createMenuItem('Save', function(){ self.saveHandler();}));
   menu.appendChild(this.createMenuItem('Save as...', function(){ self.saveAsHandler();}));
   menu.appendChild(this.createMenuItem('New program', function(){ self.newHandler();}));
@@ -72,13 +73,9 @@ MirobotSave.prototype.init = function(){
   this.createFileMenu(wrap);
   
   this.el.addEventListener('click', function(){
-    if(self.el.className === 'show'){
-      self.el.className = ''
-    }else{
-      self.el.className = "show";
-    }
+    self.el.classList.toggle('show');
   });
-  this.el.addEventListener('mouseleave', function(){ self.el.className = "";});
+  this.el.addEventListener('mouseleave', function(){ self.el.classList.remove('show');});
   window.addEventListener("keydown", function(e){ self.handleKeyboard(e);}, false);
 }
 

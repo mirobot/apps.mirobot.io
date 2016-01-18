@@ -27,7 +27,7 @@ html, body{
 .connState{
   position:absolute;
   right:5px;
-  bottom:5px;
+  top:30px;
   color:#999;
 }
 .connState a{ color:#999}
@@ -105,32 +105,32 @@ border-top-right-radius: 10px;
   text-decoration:underline;
   color:#999;
 }
-#save ul{
+.subMenu{
   display:none;
   background-color:#FCFCFC;
 }
-#save .wrapper{
+.wrapper{
   -webkit-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
   box-shadow: 0 0 12px 0 rgba(0,0,0,0.4);
 }
-#save ul li{
+ul.subMenu li{
   text-align:left;
   padding:7px 12px;
   min-width:150px;
 }
-#save ul li:hover{
+ul.subMenu li:hover{
   background-color:#EEE;
   cursor:hand;
 }
-#save ul li.inactive:hover{
+ul.subMenu li.inactive:hover{
   background-color:#FCFCFC;
   cursor:hand;
 }
-#save ul li.inactive{
+ul.subMenu li.inactive{
   text-decoration:none;
 }
-#save.show ul{
+.show .subMenu{
   display:block;
 }
 #save ul#progs li{
@@ -143,3 +143,13 @@ border-top-right-radius: 10px;
   height: 0;
 }
 
+.connState{
+ text-align:right;
+}
+.connState .subMenu{
+	padding:10px;
+}
+.connState .subMenu p{
+	color:#999;
+	margin-bottom:0.5em;
+}
