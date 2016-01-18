@@ -1,0 +1,15 @@
+{
+  "name": "Mirobot",
+  "description": "An app that lets you control Mirobot using a number of different programming tools",
+  "version": "0.1",
+  "manifest_version": 2,
+  "permissions":[
+  	"storage"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["chrome.js"]
+    }
+  },
+  "icons": { "16": "assets/mirobot-16.png", "48": "assets/mirobot-48.png" , "128": "assets/mirobot-128.png" }
+}
