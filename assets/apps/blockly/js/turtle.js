@@ -35,8 +35,18 @@ BlocklyApps.LANGUAGES =
      'sco', 'sv', 'tr', 'uk', 'vi', 'zh-hans', 'zh-hant'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="/assets/apps/blockly/generated/' +
-               BlocklyApps.LANG + '.js"></script>\n');
+var thisScript = document.querySelector("script[src='/assets/apps/blockly/js/turtle.js']");
+
+var script1 = document.createElement('script');
+script1.type = 'text/javascript';
+script1.src = '/assets/apps/blockly/generated/' + BlocklyApps.LANG + '.js';
+thisScript.parentNode.insertBefore(script1, thisScript.nextSibling);
+
+var script2 = document.createElement('script');
+script2.type = 'text/javascript';
+script2.src = '/assets/apps/blockly/msg/js/' + BlocklyApps.LANG + '.js';
+thisScript.parentNode.insertBefore(script2, thisScript.nextSibling);
+
 
 Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;

@@ -1,9 +1,13 @@
 var init = function(){
-	var thisScript = document.querySelector("script[src='/assets/apps/blockly/init.js']");
-	thisScript.insertAdjacentHTML("afterend", turtlepage.start({}, null,
-		{lang: BlocklyApps.LANG,
-		 langSrc: BlocklyApps.languagePack()}));
-		 
+	if(!('turtlepage' in window)){ return window.setTimeout(init, 100);}
+
+	var appNode = document.querySelector("#app");
+	var temp = document.createElement('div');
+	temp.innerHTML = turtlepage.start({}, null, {lang: BlocklyApps.LANG, langSrc: BlocklyApps.languagePack()});
+	while (temp.childNodes.length > 0) {
+			appNode.appendChild(temp.childNodes[0]);
+	}
+
 	Turtle.init();
 	var app  = new MirobotApp(function(mirobot){
 		Turtle.setMirobot(mirobot);
