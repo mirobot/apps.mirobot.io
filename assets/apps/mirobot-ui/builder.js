@@ -125,7 +125,9 @@ Builder.prototype = {
   },
   supportsLocalStorage: function(){
     try {
-      return 'localStorage' in window && window['localStorage'] !== null;
+      localStorage.setItem('test', true);
+      localStorage.removeItem('test');
+      return true;
     } catch (e) {
       return false;
     }

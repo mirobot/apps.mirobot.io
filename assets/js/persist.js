@@ -1,6 +1,6 @@
 var Persister = function(conf){
   var self = this;
-  this.namespace = window.location.pathname.replace(/\//g, '')
+  this.namespace = window.location.pathname.replace(/\//g, '').replace('index.html', '');
   window.addEventListener('beforeunload', function(){return self.handleUnload();});
   if(conf.saveHandler && typeof conf.saveHandler === 'function' && conf.loadHandler && typeof conf.loadHandler === 'function'){
     this.saveHandler = conf.saveHandler;
@@ -14,9 +14,9 @@ var Persister = function(conf){
 Persister.prototype = {
   listeners: [],
   init: function(){
-  	this.initLocalStorage();
-  	if(!this.localStorage) return;
-		this.currentProgram = localStorage['/' + this.namespace + '/currentProgram']
+    this.initLocalStorage();
+    if(!this.localStorage) return;
+    this.currentProgram = this.localStorage['/' + this.namespace + '/currentProgram']
     var unsaved = this.localStorage['/' + this.namespace + '/unsaved'];
     if(unsaved){
       this.loadHandler(unsaved);
@@ -30,19 +30,19 @@ Persister.prototype = {
     }  
   },
   initLocalStorage: function(){
-		try {
-			localStorage.setItem('test', true);
-			localStorage.removeItem('test');
-			this.localStorage = window.localStorage;
-		} catch (e) {
-			// No local storage
-			if('chrome' in window && 'storage' in window.chrome){
-				// We are running as a chrome app
-				this.localStorage = window.chrome.storage;
-			}else{
-				this.localStorage = false;
-			}
-		}
+    try {
+      localStorage.setItem('test', true);
+      localStorage.removeItem('test');
+      this.localStorage = window.localStorage;
+    } catch (e) {
+      // No local storage
+      if('chrome' in window && 'storage' in window.chrome){
+        // We are running as a chrome app
+        this.localStorage = window.chrome.storage;
+      }else{
+        this.localStorage = false;
+      }
+    }
   },
   load: function(name){
     var program = this.localStorage['/' + this.namespace + '/programs/' + name]
