@@ -13,17 +13,4 @@ manifest: /assets/apps/mirobot-ui/mirobot-ui.manifest
 <script type="text/javascript" src="/assets/apps/mirobot-ui/builder.js"></script>
 <script type="text/javascript" src="/assets/apps/mirobot-ui/snack.sortableList.js"></script>
 <div id="code"></div>
-<script>
-
-var $ = snack.wrap;
-var builder = new Builder($('#code'), undefined, true);
-var app  = new MirobotApp(function(mirobot){
-  builder.setMirobot(mirobot);
-});
-app.initPersistence({
-  saveHandler: function(){ return builder.saveProgram(); },
-  loadHandler: function(prog){ return builder.loadProgram(prog); },
-  clearHandler: function(){ return builder.clearProgram(); }
-});
-
-</script>
+<script type="text/javascript" src="/assets/apps/mirobot-ui/init.js"></script>

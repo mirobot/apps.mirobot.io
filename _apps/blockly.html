@@ -18,23 +18,4 @@ manifest: /assets/apps/blockly/blockly.manifest
 <script type="text/javascript" src="/assets/apps/blockly/js/common.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/turtle.js"></script>
 <script type="text/javascript" src="/assets/apps/blockly/js/slider.js"></script>
-<script type="text/javascript">
-  var init = function(){
-    Turtle.init();
-    var app  = new MirobotApp(function(mirobot){
-      Turtle.setMirobot(mirobot);
-    });
-    app.initPersistence({
-      saveHandler: function(){ return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace())); },
-      loadHandler: function(prog){ return Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), Blockly.Xml.textToDom(prog)); },
-      clearHandler: function(){ return Blockly.getMainWorkspace().clear(); }
-    });
-  }
-  
-  document.write(turtlepage.start({}, null,
-      {lang: BlocklyApps.LANG,
-       langSrc: BlocklyApps.languagePack()}));
-
-  window.addEventListener('load', init);
-  
-</script>
+<script type="text/javascript" src="/assets/apps/blockly/init.js"></script>
