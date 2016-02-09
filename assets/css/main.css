@@ -94,45 +94,90 @@ border-top-right-radius: 10px;
   padding:5px;
   color:#666;
 }
-
-#save{
-  float:right;
-  text-align:right;
-  background-color:#FFF;
-  position:absolute;
-  right:5px;
-  top:5px;
-  text-decoration:underline;
-  color:#999;
-}
-.subMenu{
-  display:none;
-  background-color:#FCFCFC;
-}
 .wrapper{
   -webkit-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
   -moz-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
   box-shadow: 0 0 12px 0 rgba(0,0,0,0.4);
+  position:absolute;
 }
+
+
+/* Header Menu CSS */
+
+#menu{
+  float:right;
+  display:block;
+  height:100%;
+  position:relative;
+  margin-right:5px;
+}
+#menu .menuItem{
+  display:inline-block;
+  padding:10px 5px 11px;
+  background:#EEE;
+  height:100%;
+  margin:0;
+  border:0;
+  min-width:40px;
+  text-align:center;
+  position:relative;
+}
+#menu .menuItem a{
+  text-decoration:none;
+  color:#666;
+}
+#menu .menuItem:hover{
+  background-color:#DDD;
+}
+#menu .menuItem:hover a{
+  text-decoration:none;
+  color:#000;
+}
+#menu .menuItem:hover .subMenu{
+  background-color:#DDD;
+}
+
+#menu .show .wrapper{
+  display:block;
+}
+
+#menu .wrapper{
+  display:none;
+  background-color:#FCFCFC;
+  right:0;
+  position:absolute;
+  margin-top:10px;
+  text-align:left;
+}
+
+
+
 ul.subMenu li{
   text-align:left;
   padding:7px 12px;
-  min-width:150px;
+  min-width:200px;
 }
 ul.subMenu li:hover{
   background-color:#EEE;
   cursor:hand;
 }
 ul.subMenu li.inactive:hover{
-  background-color:#FCFCFC;
+  background-color:#DDD;
   cursor:hand;
 }
 ul.subMenu li.inactive{
   text-decoration:none;
 }
-.show .subMenu{
-  display:block;
+
+#conn .subMenu{
+
+	padding:10px;
 }
+#conn .subMenu p{
+  width:320px;
+	margin-bottom:0.5em;
+}
+
 #save ul#progs li{
   padding-left:30px;
 }
@@ -141,15 +186,4 @@ ul.subMenu li.inactive{
   visibility: hidden;
   width: 0;
   height: 0;
-}
-
-.connState{
- text-align:right;
-}
-.connState .subMenu{
-	padding:10px;
-}
-.connState .subMenu p{
-	color:#999;
-	margin-bottom:0.5em;
 }

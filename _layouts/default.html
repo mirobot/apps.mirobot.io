@@ -9,10 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         
         <title>{{ page.title }}</title>
-  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="/assets/css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <script type="text/javascript" src="/assets/js/FileSaver.min.js"></script>
-        <script type="text/javascript" src="/assets/js/classList.min.js"></script>
+        <script type="text/javascript" src="/assets/js/polyfills.min.js"></script>
         <script type="text/javascript" src="/assets/js/mirobot.js"></script>
         <script type="text/javascript" src="/assets/js/mirobot-save.js"></script>
         <script type="text/javascript" src="/assets/js/mirobot-app.js"></script>
@@ -30,8 +31,10 @@
 {% if page.index == true %}
         <h1 class="title"><a href="/"><img src="/assets/logo_lg.png" alt="Mirobot Apps" /></a></h1>
 {% else %}
-        <span class="connState"></span>
-        <div id="save"></div>
+        <div id="menu">
+          <div id="conn" class="menuItem"><a class="fa fa-wifi fa-2x" href="#"></a></div>
+          <div id="save" class="menuItem"><a class="fa fa-save fa-2x" href="#"></a></div>
+        </div>
         <h1 class="title"><a href="/"><img src="/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>
 {% endif %}
       </div>

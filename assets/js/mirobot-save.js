@@ -6,7 +6,7 @@ MirobotSave = function(el, conf){
 
 MirobotSave.prototype.createMenuItem = function(text, cb){
   var li = document.createElement('li');
-  li.innerText = text;
+  li.innerHTML = text;
   li.addEventListener('click', cb);
   return li
 }
@@ -17,6 +17,7 @@ MirobotSave.prototype.createFileMenu = function(menu){
   if(!progs_ul){
     var progs_ul = document.createElement('ul');
     progs_ul.id = 'progs';
+    progs_ul.className = 'subMenu';
     menu.appendChild(progs_ul);
   }else{
     progs_ul.innerHTML = '';
@@ -28,11 +29,11 @@ MirobotSave.prototype.createFileMenu = function(menu){
 }
 
 MirobotSave.prototype.setSaveFilename = function(name){
-  var title = this.el.querySelector('.title');
+  var title = this.el.querySelector('#menu .title');
   if(name){
-    title.innerText = '['+name+']';
+    title.innerHTML = '['+name+']';
   }else{
-    title.innerText = '';
+    title.innerHTML = '';
   }
 }
 
@@ -43,8 +44,6 @@ MirobotSave.prototype.handleUpdate = function(){
 
 MirobotSave.prototype.init = function(){
   var self = this;
-  this.el.innerHTML = '&#10515; Save Program <span class="title"></span>';
-  if(this.persister.currentProgram){ this.setSaveFilename(this.persister.currentProgram);}
   this.persister.subscribe(function(){self.handleUpdate();});
   var wrap = document.createElement('div');
   wrap.className = 'wrapper';
@@ -52,7 +51,7 @@ MirobotSave.prototype.init = function(){
   var menu = document.createElement('ul');
   menu.id="saveMenu";
   menu.className="subMenu";
-  menu.appendChild(this.createMenuItem('Save', function(){ self.saveHandler();}));
+  menu.appendChild(this.createMenuItem('Save <span class="title"></span>', function(){ self.saveHandler();}));
   menu.appendChild(this.createMenuItem('Save as...', function(){ self.saveAsHandler();}));
   menu.appendChild(this.createMenuItem('New program', function(){ self.newHandler();}));
   menu.appendChild(this.createMenuItem('Delete program', function(){ self.deleteHandler();}));
@@ -65,10 +64,11 @@ MirobotSave.prototype.init = function(){
   menu.appendChild(this.createMenuItem('Upload program', function(){ self.uploadHandler();}));
   
   var progs_li = document.createElement('li');
-  progs_li.innerText = "Open program:"
+  progs_li.innerHTML = "Open program:"
   progs_li.className = 'inactive';
   menu.appendChild(progs_li);
   wrap.appendChild(menu);
+  if(this.persister.currentProgram){ this.setSaveFilename(this.persister.currentProgram);}
   
   this.createFileMenu(wrap);
   

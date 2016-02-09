@@ -6,20 +6,6 @@ a{
   color:#333;
 }
 #configure{ display:none}
-#menu li{
-  display:inline-block;
-  list-style-type:none;
-  border:1px solid #888;
-  padding:10px;
-  background-color: #EEE;
-}
-#menu li a{
-  text-decoration:none;
-  color:#333;
-}
-#menu li.selected{
-  background-color:#FFF;
-}
 .editor{
   display:block;
   min-width:600px;

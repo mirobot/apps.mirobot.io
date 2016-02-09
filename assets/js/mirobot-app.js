@@ -32,8 +32,8 @@ MirobotApp.prototype.init = function(conf){
 
 MirobotApp.prototype.initConnMenu = function(){
 	var self = this;
-	var cs = document.querySelector('#header .connState');
-	cs.innerHTML = '<span class="csIcon"></span> <a href="#" class="csLink"></a><div class="wrapper"><div class="subMenu"></div></div>';
+	var cs = document.querySelector('#conn');
+	cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
   cs.querySelector('a').addEventListener('click', function(e){
 		cs.classList.toggle('show');
 		e.preventDefault();
@@ -45,7 +45,7 @@ MirobotApp.prototype.initConnMenu = function(){
 
 MirobotApp.prototype.updateConnMenu = function(){
 	var self = this;
-	var menu = document.querySelector('#header .connState .subMenu');
+	var menu = document.querySelector('#conn .subMenu');
 	if(this.connState === 'connected'){
 		menu.innerHTML = 'Connected';
 	}else{
@@ -56,7 +56,7 @@ MirobotApp.prototype.updateConnMenu = function(){
 
 MirobotApp.prototype.initPersistence = function(conf){
   if(this.supportsLocalStorage()){
-    this.saveMenu = new MirobotSave(document.getElementById('save'), conf);
+    this.saveMenu = new MirobotSave(document.querySelector('#save'), conf);
   }
 }
 
@@ -68,7 +68,7 @@ MirobotApp.prototype.connect = function(){
     self.mirobot = new Mirobot('ws://' + self.hashConfig['m'] + ':8899/websocket');
     self.mirobot.addListener(function(r){ self.handler(r) });
   }
-  self.setConnState();
+  //self.setConnState();
 }
 
 MirobotApp.prototype.handler = function(state){
@@ -87,7 +87,7 @@ MirobotApp.prototype.handler = function(state){
     }
   }
 	this.updateConnMenu();
-  this.setConnState();
+  //this.setConnState();
 }
 
 MirobotApp.prototype.configure = function(e){
