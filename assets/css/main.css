@@ -23,19 +23,6 @@ html, body{
   max-width:80%;
 }
 
-
-.connState{
-  position:absolute;
-  right:5px;
-  top:30px;
-  color:#999;
-}
-.connState a{ color:#999}
-.connState.error{ color:#D12121}
-.connState.error a{ color:#D12121}
-.connState.connected{color:#33D121}
-.connState.connected a{color:#33D121}
-
 #app{
   margin-top: 60px;
   padding:10px;
@@ -129,7 +116,7 @@ border-top-right-radius: 10px;
 #menu .menuItem:hover{
   background-color:#DDD;
 }
-#menu .menuItem:hover a{
+#menu .menuItem:hover .icon{
   text-decoration:none;
   color:#000;
 }
@@ -177,6 +164,11 @@ ul.subMenu li.inactive{
   width:320px;
 	margin-bottom:0.5em;
 }
+
+#conn.error .icon{ color:#D12121}
+#menu .menuItem.error:hover .icon{color:#a51b1b;}
+#conn.connected .icon{color:#33D121}
+#menu .menuItem.connected:hover .icon{color:#2c9e1f;}
 
 #save ul#progs li{
   padding-left:30px;

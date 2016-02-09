@@ -68,7 +68,7 @@ MirobotApp.prototype.connect = function(){
     self.mirobot = new Mirobot('ws://' + self.hashConfig['m'] + ':8899/websocket');
     self.mirobot.addListener(function(r){ self.handler(r) });
   }
-  //self.setConnState();
+  self.setConnState();
 }
 
 MirobotApp.prototype.handler = function(state){
@@ -87,11 +87,11 @@ MirobotApp.prototype.handler = function(state){
     }
   }
 	this.updateConnMenu();
-  //this.setConnState();
+  this.setConnState();
 }
 
 MirobotApp.prototype.configure = function(e){
-  var ip = document.querySelector('.connState input').value;
+  var ip = document.querySelector('#conn input').value;
   if(ip){
     window.location = '#m=' + ip;
     updateLinks();
@@ -103,31 +103,21 @@ MirobotApp.prototype.configure = function(e){
 
 MirobotApp.prototype.setConnState = function(){
   var self = this;
-  var cs = document.querySelector('#header .connState');
-  var csLink = document.querySelector('#header .connState .csLink');
-  var csIcon = document.querySelector('#header .connState .csIcon');
+  var cs = document.querySelector('#conn');
   switch(this.connState){
     case 'not_set':
-      csLink.innerHTML = 'Configure Mirobot connection';
-      csIcon.innerHTML = '&#10007;';
       cs.classList.remove('connected');
       cs.classList.remove('error');
       break;
     case 'connected':
-      csLink.innerHTML = 'Connected to Mirobot';
-      csIcon.innerHTML = '&#10003;';
       cs.classList.remove('error');
       cs.classList.add('connected');
       break;
     case 'cant_connect':
-      csLink.innerHTML = 'Can\'t connect to Mirobot';
-      csIcon.innerHTML = '&#10007;';
       cs.classList.remove('connected');
       cs.classList.add('error');
       break;
     case 'disconnected':
-      csLink.innerHTML = 'Reconnecting to Mirobot';
-      csIcon.innerHTML = '&#10007;';
       cs.classList.remove('connected');
       cs.classList.add('error');
       break;
