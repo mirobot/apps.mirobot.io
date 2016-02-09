@@ -8,11 +8,18 @@ NETWORK:
 *
 
 CACHE:
+/assets/js/polyfills.min.js
 /assets/js/FileSaver.min.js
 /assets/js/mirobot.js
 /assets/js/mirobot-save.js
 /assets/js/mirobot-app.js
 /assets/js/persist.js
+/assets/js/l10n.min.js
+/assets/js/localisations.js
 /assets/css/main.css
+/assets/css/flag-icon.css
 /assets/logo_lg.png
 /assets/logo_sm.png
+/assets/flags/gb.svg
+/assets/flags/us.svg
+/assets/flags/de.svg

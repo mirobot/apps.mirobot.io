@@ -1,4 +1,7 @@
-MirobotApp = function(ready){
+MirobotApp = function(ready, options){
+  options = options || {};
+  window.l10n = (typeof options.l10n !== 'undefined' && options.l10n);
+  initL10n();
   this.ready = ready;
   this.has_connected = false;
   this.init();
@@ -27,31 +30,61 @@ MirobotApp.prototype.init = function(conf){
   this.initted = false;
   this.conf = conf;
   this.initConnMenu();
+  this.initL10nMenu();
   this.connect();
 }
 
 MirobotApp.prototype.initConnMenu = function(){
-	var self = this;
-	var cs = document.querySelector('#conn');
-	cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
+  var self = this;
+  var cs = document.querySelector('#conn');
+  cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
   cs.querySelector('a').addEventListener('click', function(e){
-		cs.classList.toggle('show');
-		e.preventDefault();
-		return false;
-	});
+    cs.classList.toggle('show');
+    e.preventDefault();
+    return false;
+  });
   cs.addEventListener('mouseleave', function(){ cs.classList.remove("show");});
   this.updateConnMenu();
 }
 
+var langCb = function(lang){
+  return function(){
+    var loc = document.location;
+    var newLoc = loc.pathname + '?lang=' + lang + loc.hash;
+    window.location = newLoc;
+  }
+}
+
+MirobotApp.prototype.initL10nMenu = function(){
+  var el = document.getElementById('l10n')
+  if(window.l10n) el.classList.remove('hidden');
+  el.innerHTML += '<div class="wrapper"><ul class="subMenu"></ul></div>';
+  var menu = el.querySelector('ul.subMenu');
+  for(var locale in trans){
+    if(trans.hasOwnProperty(locale)){
+      var li = document.createElement('li');
+      li.addEventListener('click', langCb(locale));
+      li.innerHTML = '<span class="flag-icon flag-icon-' + trans[locale].flag + '"></span> ' + trans[locale].langName;
+      menu.appendChild(li);
+    }
+  }
+  el.querySelector('a').addEventListener('click', function(e){
+    el.classList.toggle('show');
+    e.preventDefault();
+    return false;
+  });
+  el.addEventListener('mouseleave', function(){ el.classList.remove("show");});
+}
+
 MirobotApp.prototype.updateConnMenu = function(){
-	var self = this;
-	var menu = document.querySelector('#conn .subMenu');
-	if(this.connState === 'connected'){
-		menu.innerHTML = 'Connected';
-	}else{
-		menu.innerHTML = '<p>Enter the address for your Mirobot here:</p><input type="text" placeholder="192.168.1.100" value=""/><button>Connect</button>';
-		menu.querySelector('button').addEventListener('click', function(e){ self.configure(e) });
-	}
+  var self = this;
+  var menu = document.querySelector('#conn .subMenu');
+  if(this.connState === 'connected'){
+    menu.innerHTML = 'Connected';
+  }else{
+    menu.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
+    menu.querySelector('button').addEventListener('click', function(e){ self.configure(e) });
+  }
 }
 
 MirobotApp.prototype.initPersistence = function(conf){

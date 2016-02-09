@@ -11,6 +11,7 @@
         <title>{{ page.title }}</title>
         <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="/assets/css/main.css">
+        <link rel="stylesheet" href="/assets/css/flag-icon.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <script type="text/javascript" src="/assets/js/FileSaver.min.js"></script>
         <script type="text/javascript" src="/assets/js/polyfills.min.js"></script>
@@ -19,6 +20,8 @@
         <script type="text/javascript" src="/assets/js/mirobot-app.js"></script>
         <script type="text/javascript" src="/assets/js/persist.js"></script>
         <script type="text/javascript" src="/assets/js/links.js"></script>
+        <script type="text/javascript" src="/assets/js/l10n.min.js"></script>
+        <script type="text/javascript" src="/assets/js/localisations.js"></script>
         {% if page.stylesheets %}
           {% for sheet in page.stylesheets %}
             <link rel="stylesheet" href="/assets/apps{{ page.url }}{{ sheet }}">
@@ -33,6 +36,7 @@
 {% else %}
         <div id="menu">
           <div id="conn" class="menuItem"><a class="icon fa fa-wifi fa-2x" href="#"></a></div>
+          <div id="l10n" class="menuItem hidden"><a class="icon fa fa-globe fa-2x" href="#"></a></div>
           <div id="save" class="menuItem"><a class="icon fa fa-save fa-2x" href="#"></a></div>
         </div>
         <h1 class="title"><a href="/"><img src="/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>

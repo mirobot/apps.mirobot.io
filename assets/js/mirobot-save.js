@@ -51,20 +51,20 @@ MirobotSave.prototype.init = function(){
   var menu = document.createElement('ul');
   menu.id="saveMenu";
   menu.className="subMenu";
-  menu.appendChild(this.createMenuItem('Save <span class="title"></span>', function(){ self.saveHandler();}));
-  menu.appendChild(this.createMenuItem('Save as...', function(){ self.saveAsHandler();}));
-  menu.appendChild(this.createMenuItem('New program', function(){ self.newHandler();}));
-  menu.appendChild(this.createMenuItem('Delete program', function(){ self.deleteHandler();}));
-  menu.appendChild(this.createMenuItem('Download current program', function(){ self.downloadHandler();}));
+  menu.appendChild(this.createMenuItem(l(':save') + ' <span class="title"></span>', function(){ self.saveHandler();}));
+  menu.appendChild(this.createMenuItem(l(':save-as') + '...', function(){ self.saveAsHandler();}));
+  menu.appendChild(this.createMenuItem(l(':new-prog'), function(){ self.newHandler();}));
+  menu.appendChild(this.createMenuItem(l(':delete-prog'), function(){ self.deleteHandler();}));
+  menu.appendChild(this.createMenuItem(l(':download'), function(){ self.downloadHandler();}));
   var uploader = document.createElement('input');
   uploader.type = 'file';
   uploader.id = "uploader";
   wrap.appendChild(uploader);
   uploader.addEventListener('change', function(e){ self.uploadFileHandler(e) }, false);
-  menu.appendChild(this.createMenuItem('Upload program', function(){ self.uploadHandler();}));
+  menu.appendChild(this.createMenuItem(l(':upload'), function(){ self.uploadHandler();}));
   
   var progs_li = document.createElement('li');
-  progs_li.innerHTML = "Open program:"
+  progs_li.innerHTML = l(':open') + ':';
   progs_li.className = 'inactive';
   menu.appendChild(progs_li);
   wrap.appendChild(menu);
@@ -72,8 +72,10 @@ MirobotSave.prototype.init = function(){
   
   this.createFileMenu(wrap);
   
-  this.el.addEventListener('click', function(){
+  this.el.addEventListener('click', function(e){
     self.el.classList.toggle('show');
+    e.preventDefault();
+    return false;
   });
   this.el.addEventListener('mouseleave', function(){ self.el.classList.remove('show');});
   window.addEventListener("keydown", function(e){ self.handleKeyboard(e);}, false);
@@ -96,10 +98,10 @@ MirobotSave.prototype.saveHandler = function(){
 }
 
 MirobotSave.prototype.saveAsHandler = function(){
-  var filename = window.prompt("Choose the file name");
+  var filename = window.prompt(l(':choose'));
   if(filename && filename !== ''){
     if(this.persister.exists(filename)){
-      alert("Error, file already exists with this name");
+      alert(l(':exists'));
     }else{
       this.persister.saveAs(filename);
     }
@@ -121,7 +123,7 @@ MirobotSave.prototype.uploadFileHandler = function(e){
   }else if(typeof e.target !== 'undefined'){
     var files = e.target.files;
   }
-  if(files.length > 1) return alert("Please select a single file to upload");
+  if(files.length > 1) return alert(l(':single-file'));
   
   // Read the file
   var r = new FileReader(files[0]);
@@ -138,7 +140,7 @@ MirobotSave.prototype.loadFromFile = function(content){
 
 MirobotSave.prototype.checkSaved = function(){
   if(this.persister.unsaved()){
-    return window.confirm("You have unsaved changes which will be lost. Do you want to continue?.")
+    return window.confirm(l(':unsaved'))
   }
   return true;
 }
@@ -156,7 +158,7 @@ MirobotSave.prototype.downloadHandler = function(){
 MirobotSave.prototype.deleteHandler = function(){
   var filename = this.persister.currentProgram;
   if(filename && filename !== ''){
-    if(confirm("Are you sure you want to delete program '" + filename + "'? This is permanent and cannot be undone.")){
+    if(confirm(l(':sure') + " '" + filename + "'? " + l(':permanent') + '.')){
       this.persister.delete(filename);
     }
   }

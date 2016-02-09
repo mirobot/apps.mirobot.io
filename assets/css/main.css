@@ -179,3 +179,7 @@ ul.subMenu li.inactive{
   width: 0;
   height: 0;
 }
+
+.hidden{
+  display:none !important;
+}
