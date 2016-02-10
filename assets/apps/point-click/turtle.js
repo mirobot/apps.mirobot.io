@@ -107,10 +107,10 @@ Turtle.prototype = {
   jsControlHandler: function(e){
     if(this.js.style.display === 'none'){
       this.js.style.display = 'block';
-      this.jsControl.innerHTML = "Hide Javascript";
+      this.jsControl.innerHTML = l(":hide-js");
     }else{
       this.js.style.display = 'none';
-      this.jsControl.innerHTML = "Show Javascript";
+      this.jsControl.innerHTML = l(":show-js");
     }
     e.preventDefault();
     e.cancelBubble = true;
@@ -161,18 +161,18 @@ Turtle.prototype = {
     this.robot = document.createElement('div');
     this.robot.innerHTML = '<svg version="1.1" x="0px" y="0px" width="10px" height="14px" viewBox="0 0 10 14" xml:space="preserve"><polygon fill="#FFFFFF" stroke="#FF0000" stroke-miterlimit="10" points="0,14 5,0 10,14 "/></svg>';
     var label = document.createElement('span');
-    label.innerHTML = "100mm grid";
+    label.innerHTML = l(":100mm-grid");
     this.penControl = document.createElement('button');
     this.penControl.id = "penControl";
-    this.penControl.innerHTML = "Pen Up";
+    this.penControl.innerHTML = l(":penup-cmd");
     this.penControl.addEventListener('click', function(e){ self.penControlHandler(e) });
     var controls = document.createElement('div');
     controls.id = 'controls';
     this.jsControl = document.createElement('button');
-    this.jsControl.innerHTML = "Show Javascript";
+    this.jsControl.innerHTML = l(":show-js");
     this.jsControl.addEventListener('click', function(e){ self.jsControlHandler(e) });
     this.resetControl = document.createElement('button');
-    this.resetControl.innerHTML = "Reset";
+    this.resetControl.innerHTML = l(":clear");
     this.resetControl.addEventListener('click', function(e){ self.resetControlHandler(e) });
     this.js = document.createElement('textarea');
     this.js.id = 'js';

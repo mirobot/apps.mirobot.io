@@ -47,7 +47,10 @@ trans.en = {
   ":js-right-help": "turn 90 degrees to the right",
   ":js-penup-help": "lift the pen up",
   ":js-pendown-help": "lower the pen to draw",
-  ":js-beep-help": "make it beep"
+  ":js-beep-help": "make it beep",
+  ":hide-js": "Hide Javascript",
+  ":show-js": "Show Javascript",
+  ":100mm-grid": "100mm grid"
 }
 
 for(var item in trans.en){
