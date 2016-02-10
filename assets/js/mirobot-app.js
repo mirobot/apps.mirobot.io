@@ -38,7 +38,7 @@ MirobotApp.prototype.initConnMenu = function(){
   var self = this;
   var cs = document.querySelector('#conn');
   cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
-  cs.querySelector('a').addEventListener('click', function(e){
+  cs.addEventListener('click', function(e){
     cs.classList.toggle('show');
     e.preventDefault();
     return false;
@@ -68,7 +68,7 @@ MirobotApp.prototype.initL10nMenu = function(){
       menu.appendChild(li);
     }
   }
-  el.querySelector('a').addEventListener('click', function(e){
+  el.addEventListener('click', function(e){
     el.classList.toggle('show');
     e.preventDefault();
     return false;
