@@ -1,8 +1,8 @@
 /*
 
-    lang-dk.js
+    lang-da.js
 
-    German translation for SNAP!
+    Danish translation for SNAP!
 
     written by FAB
 
@@ -166,7 +166,7 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.dk = {
+SnapTranslator.dict.da = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
@@ -1167,4 +1167,4 @@ SnapTranslator.dict.dk = {
         'Tilf\u00E6ldig'
 };
 
-addMirobotSnapTrans('dk')
+addMirobotSnapTrans('da')
