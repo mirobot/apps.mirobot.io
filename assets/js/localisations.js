@@ -50,11 +50,18 @@ trans.en = {
   ":js-beep-help": "make it beep",
   ":hide-js": "Hide Javascript",
   ":show-js": "Show Javascript",
-  ":100mm-grid": "100mm grid"
+  ":100mm-grid": "100mm grid",
+
+  // For snap!
+  'Move forward by %n mm':'Move forward by %n mm',
+  'Move back by %n mm':'Move back by %n mm',
+  'Beep for %n seconds':'Beep for %n seconds',
+  'Stop':'Stop',
+  'Bump sensor':'Bump sensor',
+  'Line sensor':'Line sensor',
+  'When I bump into something':'When I bump into something',
+  'When the line sensor changes':'When the line sensor changes'
 }
-
-
-
 
 trans.bn = {
   langName: "বাংলা",
@@ -173,6 +180,5 @@ for(var lang in trans){
     }
   }
 }
-*/
 
 String.toLocaleString(trans);

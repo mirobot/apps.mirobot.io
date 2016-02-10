@@ -1075,3 +1075,5 @@ SnapTranslator.dict.eo = {
     'any':
         'iu'
 };
+
+addMirobotSnapTrans('eo')

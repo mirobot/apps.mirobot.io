@@ -1387,3 +1387,5 @@ SnapTranslator.dict.pt_BR = {
     'open a new window\nwith a picture of this comment':
         'Abrir uma nova janela com\numa fotografia deste comentário.'
 };
+
+addMirobotSnapTrans('pt_BR')

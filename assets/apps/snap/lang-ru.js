@@ -1123,3 +1123,5 @@ SnapTranslator.dict.ru = {
     'undo':
         'отменить'
 };
+
+addMirobotSnapTrans('ru')

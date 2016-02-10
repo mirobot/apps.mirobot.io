@@ -1271,3 +1271,5 @@ SnapTranslator.dict.kn = {
     'any':
         '\u0CAF\u0CBE\u0CB5\u0CC1\u0CA6\u0CBE\u0CA6\u0CB0\u0CC1\u0020'
 };
+
+addMirobotSnapTrans('kn')

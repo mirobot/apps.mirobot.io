@@ -1166,3 +1166,5 @@ SnapTranslator.dict.dk = {
     'any':
         'Tilf\u00E6ldig'
 };
+
+addMirobotSnapTrans('dk')

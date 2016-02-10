@@ -2109,7 +2109,7 @@ IDE_Morph.prototype.settingsMenu = function () {
     }
 
     menu = new MenuMorph(this);
-    menu.addItem('Language...', 'languageMenu');
+    //menu.addItem('Language...', 'languageMenu');
     menu.addItem(
         'Zoom blocks...',
         'userSetBlocksScale'
@@ -3476,7 +3476,7 @@ IDE_Morph.prototype.languageMenu = function () {
 
 IDE_Morph.prototype.setLanguage = function (lang, callback) {
     var translation = document.getElementById('language'),
-        src = 'lang-' + lang + '.js',
+        src = '/assets/apps/snap/lang-' + lang + '.js',
         myself = this;
     SnapTranslator.unload();
     if (translation) {

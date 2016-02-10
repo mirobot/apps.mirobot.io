@@ -1212,3 +1212,5 @@ SnapTranslator.dict.zh = {
         '确定'
 
 };
+
+addMirobotSnapTrans('zh')

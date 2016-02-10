@@ -1278,3 +1278,5 @@ SnapTranslator.dict.fi = {
     'any':
         'mik\u00e4 tahansa'
 };
+
+addMirobotSnapTrans('fi')

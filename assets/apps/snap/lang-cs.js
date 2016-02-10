@@ -1134,3 +1134,5 @@ SnapTranslator.dict.cs = {
     'any':
         'jakýkoliv'
 };
+
+addMirobotSnapTrans('cs')

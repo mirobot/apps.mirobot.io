@@ -1164,3 +1164,5 @@ SnapTranslator.dict.fr = {
     'any':
         'n\u0027importe quel'
 };
+
+addMirobotSnapTrans('fr')

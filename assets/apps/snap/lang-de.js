@@ -1281,3 +1281,5 @@ SnapTranslator.dict.de = {
     'any':
         'beliebiges'
 };
+
+addMirobotSnapTrans('de')

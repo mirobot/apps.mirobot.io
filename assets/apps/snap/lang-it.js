@@ -1289,3 +1289,5 @@ SnapTranslator.dict.it = {
     'any':
         'qualunque'
 };
+
+addMirobotSnapTrans('it')

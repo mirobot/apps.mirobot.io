@@ -1248,3 +1248,5 @@ SnapTranslator.dict.ja_HIRA = {
         'サービスりようきやくをよみ\nそれにどういします',
 
 };
+
+addMirobotSnapTrans('ja_HIRA')

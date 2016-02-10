@@ -1224,3 +1224,5 @@ SnapTranslator.dict.el = {
     'any':
         'οποιοδήποτε'
 };
+
+addMirobotSnapTrans('el')

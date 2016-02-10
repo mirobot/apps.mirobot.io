@@ -1357,3 +1357,5 @@ SnapTranslator.dict.sv = {
 		'Beh\u00E5ll figurernas proportioner?\n(du kan ocks\u00E5 h\u00E5lla skift nedtryckt)'
 		
 };
+
+addMirobotSnapTrans('sv')

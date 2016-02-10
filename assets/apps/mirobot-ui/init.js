@@ -3,7 +3,8 @@ var builder = new Builder($('#code'), undefined, true);
 var app  = new MirobotApp(function(mirobot){
   builder.setMirobot(mirobot);
 }, {
-  l10n: true
+  l10n: true,
+  languages: ['en']
 });
 app.initPersistence({
   saveHandler: function(){ return builder.saveProgram(); },

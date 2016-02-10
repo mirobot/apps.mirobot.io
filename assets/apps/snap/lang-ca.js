@@ -1275,3 +1275,5 @@ SnapTranslator.dict.ca = {
     'any':
         'qualsevol'
 };
+
+addMirobotSnapTrans('ca')

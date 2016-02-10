@@ -1248,3 +1248,5 @@ SnapTranslator.dict.ja = {
         'サービス利用規約を読み\nそれに同意します',
 
 };
+
+addMirobotSnapTrans('ja')

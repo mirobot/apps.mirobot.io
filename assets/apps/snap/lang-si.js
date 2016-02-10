@@ -1067,3 +1067,5 @@ SnapTranslator.dict.si = {
     'any':
         'poljuben'
 };
+
+addMirobotSnapTrans('si')

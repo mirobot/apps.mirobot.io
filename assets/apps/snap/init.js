@@ -9,6 +9,9 @@ var app  = new MirobotApp(function(m){
 			alert("You'll need to update your Arduino firmware to use the addon blocks (bump and line following) in this app, but the other blocks should still work fine.");
 		}
 	});
+}, {
+  l10n: true,
+  languages: ['en', 'bn', 'ca', 'cs', 'de', 'dk', 'el', 'eo', 'es', 'fi', 'fr', 'it', 'ja_HIRA', 'ja', 'kn', 'ko', 'nl', 'no', 'pl', 'pt_BR', 'pt', 'ru', 'si', 'sv', 'tw', 'zh']
 });
 
 window.onload = function () {
@@ -27,8 +30,9 @@ window.onload = function () {
 	world = new WorldMorph(document.getElementById('world'));
 	
 	world.worldCanvas.focus();
-	var IDE = new IDE_Morph(false)
+	var IDE = new IDE_Morph(false);
 	IDE.openIn(world);
+	IDE.setLanguage(String.locale);
 
 	app.initPersistence({
 		saveHandler: function(name){

@@ -1212,3 +1212,5 @@ SnapTranslator.dict.tw = {
         '確定'
 
 };
+
+addMirobotSnapTrans('tw')

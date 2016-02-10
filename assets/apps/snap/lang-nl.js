@@ -1214,3 +1214,4 @@ SnapTranslator.dict.nl = {
         'alle'
 };
 
+addMirobotSnapTrans('nl')

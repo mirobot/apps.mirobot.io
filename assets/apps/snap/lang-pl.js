@@ -1223,3 +1223,5 @@ SnapTranslator.dict.pl = {
     'any':
         'dowolny'
 };
+
+addMirobotSnapTrans('pl')

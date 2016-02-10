@@ -1694,3 +1694,5 @@ SnapTranslator.dict.pt = {
         'Introduza o código que corresponda à operação do bloco (normalmente uma simples\n'
             + 'invocação de rotina). Use <#n> para referenciar os argumentos tal como mostrado'
 };
+
+addMirobotSnapTrans('pt')

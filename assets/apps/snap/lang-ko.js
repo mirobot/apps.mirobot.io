@@ -1392,3 +1392,5 @@ SnapTranslator.dict.ko = {
         '확인'
 
 };
+
+addMirobotSnapTrans('ko')

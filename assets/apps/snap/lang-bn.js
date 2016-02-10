@@ -1190,3 +1190,5 @@ SnapTranslator.dict.bn = {
     'any':
         'যেকোনো'
 };
+
+addMirobotSnapTrans('bn')

@@ -4,7 +4,8 @@ var editor = new JSEditor('editor', 'controlBar');
 var app  = new MirobotApp(function(mirobot){
   editor.setMirobot(mirobot);
 }, {
-  l10n: true
+  l10n: true,
+  languages: ['en']
 });
 
 app.initPersistence({

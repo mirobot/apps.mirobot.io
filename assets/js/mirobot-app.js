@@ -1,6 +1,7 @@
 MirobotApp = function(ready, options){
   options = options || {};
   window.l10n = (typeof options.l10n !== 'undefined' && options.l10n);
+  this.languages =  options.languages;
   initL10n();
   this.ready = ready;
   this.has_connected = false;
@@ -60,14 +61,14 @@ MirobotApp.prototype.initL10nMenu = function(){
   if(window.l10n) el.classList.remove('hidden');
   el.innerHTML += '<div class="wrapper"><ul class="subMenu"></ul></div>';
   var menu = el.querySelector('ul.subMenu');
-  for(var locale in trans){
+  this.languages.map(function(locale){
     if(trans.hasOwnProperty(locale)){
       var li = document.createElement('li');
       li.addEventListener('click', langCb(locale));
       li.innerHTML = '<span class="flag-icon flag-icon-' + trans[locale].flag + '"></span> ' + trans[locale].langName;
       menu.appendChild(li);
     }
-  }
+  });
   el.addEventListener('click', function(e){
     el.classList.toggle('show');
     e.preventDefault();

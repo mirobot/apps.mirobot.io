@@ -1193,78 +1193,78 @@ SpriteMorph.prototype.initBlocks = function () {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Move forward by %n mm',
+          spec: 'move forward by %n mm',
           defaults: [100]
         },
         mirobotBack: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Move back by %n mm',
+          spec: 'move back by %n mm',
           defaults: [100]
         },
         mirobotLeft: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Turn %counterclockwise by %n degrees',
+          spec: 'turn %counterclockwise %n degrees',
           defaults: [90]
         },
         mirobotRight: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Turn %clockwise by %n degrees',
+          spec: 'turn %clockwise %n degrees',
           defaults: [90]
         },
         mirobotPenup: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Pen up'
+          spec: 'pen up'
         },
         mirobotPendown: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Pen down'
+          spec: 'pen down'
         },
         mirobotBeep: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Beep for %n seconds',
+          spec: 'beep for %n seconds',
           defaults: [0.5]
         },
         mirobotStop: {
           only: Process,
           type: 'command',
           category: 'mirobot',
-          spec: 'Stop'
+          spec: 'stop'
         },
         mirobotBumpSensor: {
           only: Process,
           type: 'reporter',
           category: 'mirobot',
-          spec: 'Bump sensor'
+          spec: 'bump sensor'
         },
         mirobotLineSensor: {
           only: Process,
           type: 'reporter',
           category: 'mirobot',
-          spec: 'Line sensor'
+          spec: 'line sensor'
         },
         mirobotBumpEvent: {
           only: Process,
           type: 'hat',
           category: 'mirobot',
-          spec: 'When I bump into something'
+          spec: 'when I bump into something'
         },
         mirobotLineEvent: {
           only: Process,
           type: 'hat',
           category: 'mirobot',
-          spec: 'When the line sensor changes'
+          spec: 'when the line sensor changes'
         }
     };
 };
