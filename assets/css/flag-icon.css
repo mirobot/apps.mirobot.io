@@ -15,6 +15,7 @@
 .flag-icon:before {
   content: "\00a0";
 }
+.flag-icon-none {background:#AAA}
 .flag-icon-gb {background-image: url(/assets/flags/gb.svg)}
 .flag-icon-de {background-image: url(/assets/flags/de.svg)}
 .flag-icon-us {background-image: url(/assets/flags/us.svg)}
@@ -38,5 +39,11 @@
 .flag-icon-bd {background-image: url(/assets/flags/bd.svg)}
 .flag-icon-in {background-image: url(/assets/flags/in.svg)}
 .flag-icon-kr {background-image: url(/assets/flags/kr.svg)}
+.flag-icon-hu {background-image: url(/assets/flags/hu.svg)}
+.flag-icon-is {background-image: url(/assets/flags/is.svg)}
+.flag-icon-ro {background-image: url(/assets/flags/ro.svg)}
+.flag-icon-tr {background-image: url(/assets/flags/tr.svg)}
+.flag-icon-ua {background-image: url(/assets/flags/ua.svg)}
+.flag-icon-vn {background-image: url(/assets/flags/vn.svg)}
 .flag-icon-cat {background-image: url(/assets/flags/cat.svg)}
 .flag-icon-eu {background-image: url(/assets/flags/eu.svg)}

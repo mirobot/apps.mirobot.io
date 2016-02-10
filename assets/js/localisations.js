@@ -60,9 +60,61 @@ trans.en = {
   'Bump sensor':'Bump sensor',
   'Line sensor':'Line sensor',
   'When I bump into something':'When I bump into something',
-  'When the line sensor changes':'When the line sensor changes'
+  'When the line sensor changes':'When the line sensor changes',
+  
+  // For Blockly
+  ':run-on-mirobot': "Run on Mirobot",
+  ':stop-mirobot': "Stop Mirobot",
+  ':simulate-program': "Simulate Program",
+  ':reset-simulation': "Reset Simulation",
+  ':view-js-code': "View JS Code",
+  ':clear-program': "Clear Program"
 }
 
+trans.ar = {
+  langName: "العربية",
+  flag: 'none'
+}
+trans.fa = {
+  langName: "فارسی",
+  flag: 'none'
+}
+trans.hi = {
+  langName: "हिन्दी",
+  flag: 'in'
+}
+trans.hrx = {
+  langName: "Hunsrik",
+  flag: 'br'
+}
+trans.hu = {
+  langName: "Magyar",
+  flag: 'hu'
+}
+trans.is = {
+  langName: "Íslenska",
+  flag: 'is'
+}
+trans.ms = {
+  langName: "Bahasa Melayu",
+  flag: 'none'
+}
+trans.ro = {
+  langName: "Română",
+  flag: 'ro'
+}
+trans.tr = {
+  langName: "Türkçe",
+  flag: 'tr'
+}
+trans.uk = {
+  langName: "Українська",
+  flag: 'ua'
+}
+trans.vi = {
+  langName: "Tiếng Việt",
+  flag: 'vn'
+}
 trans.bn = {
   langName: "বাংলা",
   flag: 'bd'
@@ -163,6 +215,14 @@ trans.zh = {
   langName: "简体中文",
   flag: 'cn'
 }
+trans['zh-hans'] = {
+  langName: "簡體中文",
+  flag: 'cn'
+}
+trans['zh-hant'] = {
+  langName: "正體中文",
+  flag: 'cn'
+}
 trans['en-US'] = {
   langName: "American English",
   flag: 'us'
@@ -170,7 +230,7 @@ trans['en-US'] = {
 
 // Useful for double checking that the translation has been made
 for(var lang in trans){
-  var debug = true;
+  //var debug = true;
   if(typeof debug === 'undefined') break;
   if(trans.hasOwnProperty(lang)){
     for(var item in trans[lang]){
