@@ -183,3 +183,11 @@ ul.subMenu li.inactive{
 .hidden{
   display:none !important;
 }
+#l10n .subMenu{
+  min-width:448px;
+  max-width:800px;
+}
+#l10n .subMenu li{
+  min-width:200px;
+  display:inline-block;
+}
