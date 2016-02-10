@@ -299,6 +299,7 @@ BlocklyApps.init = function() {
   };
   languages.sort(comp);
   // Populate the language selection menu.
+  /*
   var languageMenu = document.getElementById('languageMenu');
   languageMenu.options.length = 0;
   for (var i = 0; i < languages.length; i++) {
@@ -311,7 +312,7 @@ BlocklyApps.init = function() {
     languageMenu.options.add(option);
   }
   languageMenu.addEventListener('change', BlocklyApps.changeLanguage, true);
-
+  */
   // Disable the link button if page isn't backed by App Engine storage.
   var linkButton = document.getElementById('linkButton');
   if(linkButton!=null){
