@@ -53,21 +53,125 @@ trans.en = {
   ":100mm-grid": "100mm grid"
 }
 
-for(var item in trans.en){
-  //var debug = true;
-  if(typeof debug === 'undefined') break;
-  if(item !== 'flag') trans.en[item] += '-';
-}
 
-/*
+
+
+trans.bn = {
+  langName: "বাংলা",
+  flag: 'bd'
+}
+trans.ca = {
+  langName: "Català",
+  flag: 'cat'
+}
+trans.cs = {
+  langName: "Česky",
+  flag: 'cz'
+}
+trans.de = {
+  langName: "Deutsch",
+  flag: 'de'
+}
+trans.da = {
+  langName: "Dansk",
+  flag: 'dk'
+}
+trans.el = {
+  langName: "Ελληνικά",
+  flag: 'gr'
+}
+trans.eo = {
+  langName: "Esperanto",
+  flag: 'eu'
+}
+trans.es = {
+  langName: "Espa\u00F1ol",
+  flag: 'es'
+}
+trans.fi = {
+  langName: "Suomi",
+  flag: 'fi'
+}
+trans.fr = {
+  langName: "Fran\u00E7ais",
+  flag: 'fr'
+}
+trans.it = {
+  langName: "Italiano",
+  flag: 'it'
+}
+trans['ja_HIRA'] = {
+  langName: "にほんご",
+  flag: 'jp'
+}
+trans.ja = {
+  langName: "日本語",
+  flag: 'jp'
+}
+trans.kn = {
+  langName: "\u0C95\u0CA8\u0CCD\u0CA8\u0CA1",
+  flag: 'in'
+}
+trans.ko = {
+  langName: "한국어",
+  flag: 'kr'
+}
+trans.nl = {
+  langName: "Nederlands",
+  flag: 'nl'
+}
+trans.no = {
+  langName: "Norsk",
+  flag: 'no'
+}
+trans.pl = {
+  langName: "Polski",
+  flag: 'pl'
+}
+trans['pt_BR'] = {
+  langName: "Português do Brasil",
+  flag: 'br'
+}
+trans.pt = {
+  langName: "Português",
+  flag: 'pt'
+}
+trans.ru = {
+  langName: "Русский",
+  flag: 'ru'
+}
+trans.si = {
+  langName: "Sloven\u0161\u010Dina",
+  flag: 'si'
+}
+trans.sv = {
+  langName: "Svenska",
+  flag: 'se'
+}
+trans.tw = {
+  langName: "繁體中文",
+  flag: 'cn'
+}
+trans.zh = {
+  langName: "简体中文",
+  flag: 'cn'
+}
 trans['en-US'] = {
   langName: "American English",
   flag: 'us'
 }
 
-trans.de = {
-  langName: "Deutsch",
-  flag: 'de'
+// Useful for double checking that the translation has been made
+for(var lang in trans){
+  var debug = true;
+  if(typeof debug === 'undefined') break;
+  if(trans.hasOwnProperty(lang)){
+    for(var item in trans[lang]){
+      if(trans[lang].hasOwnProperty(item)){
+        if(item !== 'flag') trans[lang][item] += '-' + lang;
+      }
+    }
+  }
 }
 */
 
