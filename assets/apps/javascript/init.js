@@ -3,6 +3,8 @@ var editor = new JSEditor('editor', 'controlBar');
 //var builder = new Builder($('#code'), undefined, true);
 var app  = new MirobotApp(function(mirobot){
   editor.setMirobot(mirobot);
+}, {
+  l10n: true
 });
 
 app.initPersistence({

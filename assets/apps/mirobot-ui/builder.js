@@ -219,31 +219,36 @@ Builder.prototype = {
       el.addEventListener('change', function(){ self.storeProgram();});
     });
   },
+  generateInput: function(conf){
+    if(conf.input === 'number'){
+      return '<input type="number" size="4" name="' + conf.name + '" value="' + conf.default + '" />';
+    }else if(conf.input === 'option'){
+      var select = '<select name="'+ conf.name +'">';
+      for(var j in conf.values){
+        select += '<option value="' + conf.values[j] + '"';
+        if(conf.default === conf.values[j]){
+          select += 'selected="selected"';
+        }
+        select += '>' + conf.values[j] + '</option>';
+      }
+      select += '</select>';
+      return select;
+    }
+  },
   addFunctions: function(){
     var self = this;
     snack.each(this.functions, function(i, f){
       f = self.functions[f];
       var fn = '<li class="function fn-' + f.name + ' draggable" data-fntype="' + f.name + '">';
-      for(var i in f.content){
-        if(typeof(f.content[i]) === 'string'){
-          fn += '<span> ' + f.content[i] + ' </span>';
-        }else if(typeof(f.content[i]) === 'object'){
-          if(f.content[i].input === 'number'){
-            fn += '<input type="number" size="4" name="' + f.content[i].name + '" value="' + f.content[i].default + '" />';
-          }else if(f.content[i].input === 'option'){
-            var select = '<select name="'+ f.content[i].name +'">';
-            for(var j in f.content[i].values){
-              select += '<option value="' + f.content[i].values[j] + '"';
-              if(f.content[i].default === f.content[i].values[j]){
-                select += 'selected="selected"';
-              }
-              select += '>' + f.content[i].values[j] + '</option>';
-            }
-            select += '</select>';
-            fn += select;
+      var content = f.content.str;
+      var re = /{{ ([^\ ]*) }}/g; 
+      while ((m = re.exec(content)) !== null) {
+          if (m.index === re.lastIndex) {
+              re.lastIndex++;
           }
-        }
+          content = content.replace('{{ ' + m[1] + ' }}', self.generateInput(f.content[m[1]]));
       }
+      fn += content;
       
       if(f.type === 'parent'){
         fn += '<ol><li class="end"><div class="hint">Drag functions into here!</div></li></li></ol>';
@@ -354,13 +359,11 @@ Builder.prototype = {
     {
       name:'move',
       type:'child',
-      content:[
-        'Move',
-        {input:'option', name:'direction', default:'forward', values:['forward', 'back']},
-        'by',
-        {input:'number', name:'distance', default:100},
-        'mm'
-      ],
+      content:{
+        str: l(":move-cmd"),
+        direction: {input:'option', default:'forward', values:[l(':forward'), l(':back')]},
+        distance: {input:'number', default:100}
+      },
       run: function(node, mirobot, cb){
         mirobot.move(node.args().direction, node.args().distance, cb);
       }
@@ -368,13 +371,11 @@ Builder.prototype = {
     {
       name:'turn',
       type:'child',
-      content:[
-        'Turn',
-        {input:'option', name:'direction', default:'left', values:['left', 'right']},
-        'by',
-        {input:'number', name:'angle', default:90},
-        'degrees'
-      ],
+      content:{
+        str: l(":turn-cmd"),
+        direction: {input:'option', default:'left', values:[l(':left'), l(':right')]},
+        angle: {input:'number', default:90}
+      },
       run: function(node, mirobot, cb){
         mirobot.turn(node.args().direction, node.args().angle, cb);
       }
@@ -382,7 +383,7 @@ Builder.prototype = {
     {
       name:'penup',
       type:'child',
-      content:['Pen up'],
+      content:{str: l(":penup-cmd")},
       run: function(node, mirobot, cb){
         mirobot.penup(cb);
       }
@@ -390,7 +391,7 @@ Builder.prototype = {
     {
       name:'pendown',
       type:'child',
-      content:['Pen down'],
+      content:{str: l(":pendown-cmd")},
       run: function(node, mirobot, cb){
         mirobot.pendown(cb);
       }
@@ -398,11 +399,10 @@ Builder.prototype = {
     {
       name:'repeat',
       type:'parent',
-      content:[
-        'Repeat',
-        {input:'number', name:'count', default:2},
-        'times'
-      ],
+      content:{
+        str: l(":repeat-cmd"),
+        count: {input:'number', default:2}
+      },
       run: function(node, mirobot, cb){
         for(var i=0; i< node.args().count; i++){
           for(var j=0; j< node.children.length; j++){
@@ -414,11 +414,10 @@ Builder.prototype = {
     {
       name:'beep',
       type:'child',
-      content:[
-        'Beep for',
-        {input:'number', name:'duration', default:0.5},
-        'seconds'
-      ],
+      content:{
+        str: l(":beep-cmd"),
+        duration: {input:'number', default:0.5}
+      },
       run: function(node, mirobot, cb){
         mirobot.beep(node.args().duration * 1000, cb);
       }
@@ -428,14 +427,14 @@ Builder.prototype = {
 
 
 
-Builder.prototype.mainUI = '<div class="left container"><h2>Toolbox</h2>\
+Builder.prototype.mainUI = '<div class="left container"><h2>' + l(':toolbox') + '</h2>\
 <ol class="functionList"></ol>\
-<div class="extra"><button id="follow">&#9654; Start Following Lines</button><button id="collide">&#9654; Start Collision Detection</button></div>\
+<div class="extra"><button id="follow">&#9654; ' + l(':start-following') + '</button><button id="collide">&#9654; ' + l(":start-collision") + '</button></div>\
 </div>\
-<div class="right container"><h2>Program</h2>\
+<div class="right container"><h2>' + l(':program') + '</h2>\
 <div class="programWrapper"><ol class="program" id="program">\
-<li class="end"><div class="hint">Drag functions from the left over here!</div></li></div>\
+<li class="end"><div class="hint">' + l(':drag') + '</div></li></div>\
 </ol>\
-<div class="buttons"><button class="run">&#9654; Run</button><button class="pause" style="display:none;">&#10074;&#10074; Pause</button><button class="stop">&#9724; Stop</button><button class="clear">&#10006; Clear</button></div>\
+<div class="buttons"><button class="run">&#9654; ' + l(':run') + '</button><button class="pause" style="display:none;">&#10074;&#10074; ' + l(':pause') + '</button><button class="stop">&#9724; ' + l(':stop') + '</button><button class="clear">&#10006; ' + l(':clear') + '</button></div>\
 </div>\
 ';

@@ -80,7 +80,7 @@ MirobotApp.prototype.updateConnMenu = function(){
   var self = this;
   var menu = document.querySelector('#conn .subMenu');
   if(this.connState === 'connected'){
-    menu.innerHTML = 'Connected';
+    menu.innerHTML = l(':connected');
   }else{
     menu.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
     menu.querySelector('button').addEventListener('click', function(e){ self.configure(e) });
