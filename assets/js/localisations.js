@@ -175,7 +175,7 @@ trans.it = {
   langName: "Italiano",
   flag: 'it'
 }
-trans['ja_HIRA'] = {
+trans['ja-hira'] = {
   langName: "にほんご",
   flag: 'jp'
 }
@@ -278,7 +278,7 @@ trans.pl = {
   langName: "Polski",
   flag: 'pl'
 }
-trans['pt_BR'] = {
+trans['pt-br'] = {
   langName: "Português do Brasil",
   flag: 'br'
 }

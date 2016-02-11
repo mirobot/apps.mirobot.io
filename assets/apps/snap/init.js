@@ -12,7 +12,7 @@ var app  = new MirobotApp(function(m){
 }, {
   l10n: true,
   languages: ['en', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'eo', 'es', 'fi', 'fr', 'it',
-  'ja_HIRA', 'ja', 'kn', 'ko', 'nl', 'no', 'pl', 'pt_BR', 'pt', 'ru', 'si', 'sv', 'tw', 'zh']
+  'ja-hira', 'ja', 'kn', 'ko', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ru', 'si', 'sv', 'tw', 'zh']
 });
 
 window.onload = function () {

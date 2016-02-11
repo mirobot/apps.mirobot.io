@@ -166,7 +166,7 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.ja_HIRA = {
+SnapTranslator.dict['ja-hira'] = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
@@ -1249,4 +1249,4 @@ SnapTranslator.dict.ja_HIRA = {
 
 };
 
-addMirobotSnapTrans('ja_HIRA')
+addMirobotSnapTrans('ja-hira')

@@ -176,7 +176,7 @@ SnapTranslator.dict.ja = {
         '2012-04-02'
 };
 
-SnapTranslator.dict.ja_HIRA = {
+SnapTranslator.dict['ja-hira'] = {
     // meta information
     'language_name':
         'にほんご',
@@ -404,7 +404,7 @@ SnapTranslator.dict.sv = {
         '2014-12-14'
 };
 
-SnapTranslator.dict.pt_BR = {
+SnapTranslator.dict['pt-br'] = {
     // meta information
     'language_name':
         'Português do Brasil',

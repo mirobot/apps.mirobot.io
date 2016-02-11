@@ -166,7 +166,7 @@
 
 /*global SnapTranslator*/
 
-SnapTranslator.dict.pt_BR = {
+SnapTranslator.dict['pt-br'] = {
 
 /*
     Special characters: (see <http://0xcc.net/jsescape/>)
@@ -1388,4 +1388,4 @@ SnapTranslator.dict.pt_BR = {
         'Abrir uma nova janela com\numa fotografia deste comentário.'
 };
 
-addMirobotSnapTrans('pt_BR')
+addMirobotSnapTrans('pt-br')
