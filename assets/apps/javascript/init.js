@@ -5,7 +5,7 @@ var app  = new MirobotApp(function(mirobot){
   editor.setMirobot(mirobot);
 }, {
   l10n: true,
-  languages: ['en']
+  languages: baseLanguages
 });
 
 app.initPersistence({

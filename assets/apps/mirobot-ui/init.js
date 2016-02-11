@@ -4,7 +4,7 @@ var app  = new MirobotApp(function(mirobot){
   builder.setMirobot(mirobot);
 }, {
   l10n: true,
-  languages: ['en']
+  languages: baseLanguages
 });
 app.initPersistence({
   saveHandler: function(){ return builder.saveProgram(); },
