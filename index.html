@@ -10,9 +10,12 @@ manifest: main.manifest
     {% for app in site.apps %}
       <li>
         <a class="icon" href="{{ app.url }}" style="background:url('/assets/apps{{ app.url }}icon.jpg')">&nbsp</a>
-        <a href="{{ app.url }}"><h2>{{ app.title }}</h2></a>
-        <p>{{ app.description }}</p>
+        <a href="{{ app.url }}"><h2 data-l10n=":{{ app.url | replace: '/', ''}}">{{ app.title }}</h2></a>
+        <p data-l10n=":{{ app.url | replace: '/', ''}}-desc">{{ app.description }}</p>
       </li>
     {% endfor %}
   </ul>
 </div>
+<script type="text/javascript">
+  l10nMenu('l10n', ['en', 'nl'])
+</script>

@@ -9,7 +9,7 @@ var init = function(){
 	}
 
 	Turtle.init();
-	updateL10n();
+	updateL10nStrings();
 	var app  = new MirobotApp(function(mirobot){
 		Turtle.setMirobot(mirobot);
 	}, {
