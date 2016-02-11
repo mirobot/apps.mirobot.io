@@ -37,12 +37,29 @@ MirobotApp.prototype.initConnMenu = function(){
   var self = this;
   var cs = document.querySelector('#conn');
   cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
-  cs.addEventListener('click', function(e){
-    cs.classList.toggle('show');
+
+  var showMenu = function(e){
+    cs.classList.add('show');
     e.preventDefault();
     return false;
+  }
+
+  var hideMenu = function(e){
+    cs.classList.remove('show');
+    if(e) e.preventDefault();
+    return false;
+  }
+  var timer;
+  cs.addEventListener('click', showMenu);
+  cs.addEventListener('mouseleave', function(){
+    timer = window.setTimeout(hideMenu, 500);
   });
-  cs.addEventListener('mouseleave', function(){ cs.classList.remove("show");});
+  cs.addEventListener('mouseenter', function(){
+    if(timer){
+      window.clearTimeout(timer);
+      timer = undefined;
+    }
+  });
   this.updateConnMenu();
 }
 
@@ -61,7 +78,18 @@ MirobotApp.prototype.updateConnMenu = function(){
     menu.innerHTML = l(':connected');
   }else{
     menu.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
-    menu.querySelector('button').addEventListener('click', function(e){ self.configure(e) });
+    menu.querySelector('button').addEventListener('click', function(e){
+      var ip = document.querySelector('#conn input').value;
+      if(ip){
+        window.location = '#m=' + ip;
+        updateLinks();
+        self.connect();
+      }
+      document.querySelector('#conn').classList.remove('show');
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    });
   }
 }
 
@@ -99,17 +127,6 @@ MirobotApp.prototype.handler = function(state){
   }
 	this.updateConnMenu();
   this.setConnState();
-}
-
-MirobotApp.prototype.configure = function(e){
-  var ip = document.querySelector('#conn input').value;
-  if(ip){
-    window.location = '#m=' + ip;
-    updateLinks();
-    this.connect();
-  }
-  e.preventDefault();
-  return false;
 }
 
 MirobotApp.prototype.setConnState = function(){
