@@ -36,10 +36,10 @@ JSEditor.prototype = {
   helpHandler: function(){
     if(this.help.style.display !== 'block'){
       this.help.style.display = 'block';
-      document.querySelector('#helpButton').innerText = 'Hide help';
+      document.querySelector('#helpButton').innerText = l(':hide-help');
     }else{
       this.help.style.display = '';
-      document.querySelector('#helpButton').innerText = 'Show help';
+      document.querySelector('#helpButton').innerText = l(':show-help');
     }
   },
   setRunButtonState: function(state){
