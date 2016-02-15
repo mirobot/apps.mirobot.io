@@ -43,6 +43,7 @@ var MainMenu = function(el){
 */
 var updateLinks = function(){
   [].forEach.call(document.links, function(l) {
+    if(!l.href.startsWith('http')) return;
     // Make the URL have index.html if running as a chrome app
     if('chrome' in window && 'storage' in window.chrome){
       if(l.href.slice(-1) === '/'){
