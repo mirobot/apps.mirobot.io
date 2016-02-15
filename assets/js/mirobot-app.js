@@ -29,7 +29,7 @@ MirobotApp.prototype.supportsLocalStorage = function(){
 MirobotApp.prototype.init = function(){
   this.initted = false;
   this.initConnMenu();
-  l10nMenu('l10n', this.languages);
+  if(l10n) l10nMenu('l10n', this.languages);
   this.connect();
 }
 
