@@ -37,29 +37,7 @@ MirobotApp.prototype.initConnMenu = function(){
   var self = this;
   var cs = document.querySelector('#conn');
   cs.innerHTML += '<div class="wrapper"><div class="subMenu"></div></div>';
-
-  var showMenu = function(e){
-    cs.classList.add('show');
-    e.preventDefault();
-    return false;
-  }
-
-  var hideMenu = function(e){
-    cs.classList.remove('show');
-    if(e) e.preventDefault();
-    return false;
-  }
-  var timer;
-  cs.addEventListener('click', showMenu);
-  cs.addEventListener('mouseleave', function(){
-    timer = window.setTimeout(hideMenu, 500);
-  });
-  cs.addEventListener('mouseenter', function(){
-    if(timer){
-      window.clearTimeout(timer);
-      timer = undefined;
-    }
-  });
+  new MainMenu(cs)
   this.updateConnMenu();
 }
 

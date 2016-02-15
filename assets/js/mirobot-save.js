@@ -71,29 +71,7 @@ MirobotSave.prototype.init = function(){
   if(this.persister.currentProgram){ this.setSaveFilename(this.persister.currentProgram);}
   
   this.createFileMenu(wrap);
-  
-  var showMenu = function(e){
-    self.el.classList.add('show');
-    e.preventDefault();
-    return false;
-  }
-
-  var hideMenu = function(e){
-    self.el.classList.remove('show');
-    if(e) e.preventDefault();
-    return false;
-  }
-  var timer;
-  self.el.addEventListener('click', showMenu);
-  self.el.addEventListener('mouseleave', function(){
-    timer = window.setTimeout(hideMenu, 500);
-  });
-  self.el.addEventListener('mouseenter', function(){
-    if(timer){
-      window.clearTimeout(timer);
-      timer = undefined;
-    }
-  });
+  new MainMenu(this.el);
 
   window.addEventListener("keydown", function(e){ self.handleKeyboard(e);}, false);
 }
