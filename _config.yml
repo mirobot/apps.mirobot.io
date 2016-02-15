@@ -9,4 +9,5 @@ exclude:
  - Gemfile.lock
  - s3_website.yml
  - README.md
- - /.*zip/
+ - "*.zip"
+ - bin
