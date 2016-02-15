@@ -1,6 +1,6 @@
 var Mirobot = function(url){
   this.url = url;
-  this.connect();
+  if(url) this.connect();
   this.cbs = {};
   this.listeners = [];
   this.sensorState = {follow: null, collide: null};
@@ -13,13 +13,16 @@ Mirobot.prototype = {
   connected: false,
   error: false,
   timeoutTimer: undefined,
+  simulating: false,
+  sim: undefined,
 
-  connect: function(){
-    if(!this.connected && !this.error){
+  connect: function(url){
+    if(url) this.url = url;
+    if(!this.connected && !this.error && this.url){
       var self = this;
       this.has_connected = false;
       this.ws = new WebSocket(this.url);
-      this.ws.onmessage = function(ws_msg){self.handle_ws(ws_msg)};
+      this.ws.onmessage = function(ws_msg){self.handle_msg(ws_msg)};
       this.ws.onopen = function(){
         self.version(function(){
           self.setConnectedState(true);
@@ -59,6 +62,10 @@ Mirobot.prototype = {
         }, 5000);
       }
     }
+  },
+
+  setSimulator: function(sim){
+    this.sim = sim;
   },
   
   broadcast: function(msg){
@@ -241,6 +248,9 @@ Mirobot.prototype = {
     if(['stop', 'pause', 'resume', 'ping', 'version'].indexOf(msg.cmd) >= 0){
       this.send_msg(msg);
     }else{
+      if(this.msg_stack.length === 0){
+        this.broadcast('program_start');
+      }
       this.msg_stack.push(msg);
       this.process_msg_queue();
     }
@@ -249,9 +259,13 @@ Mirobot.prototype = {
   send_msg: function(msg){
     var self = this;
     console.log(msg);
-    this.ws.send(JSON.stringify(msg));
-    if(this.timeoutTimer) clearTimeout(this.timeoutTimer);
-    this.timeoutTimer = window.setTimeout(function(){ self.handleError("Timeout") }, 3000);
+    if(this.simulating && this.sim){
+      this.sim.send(msg, function(msg){ self.handle_msg(msg) });
+    }else if(this.connected){
+      this.ws.send(JSON.stringify(msg));
+      if(this.timeoutTimer) clearTimeout(this.timeoutTimer);
+      this.timeoutTimer = window.setTimeout(function(){ self.handleError("Timeout") }, 3000);
+    }
   },
   
   process_msg_queue: function(){
@@ -261,8 +275,8 @@ Mirobot.prototype = {
     }
   },
   
-  handle_ws: function(ws_msg){
-    msg = JSON.parse(ws_msg.data);
+  handle_msg: function(msg){
+    if(typeof msg === 'string') msg = JSON.parse(msg.data);
     console.log(msg);
     clearTimeout(this.timeoutTimer);
     if(msg.status === 'notify'){

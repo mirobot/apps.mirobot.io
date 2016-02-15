@@ -1,10 +1,12 @@
 MirobotApp = function(ready, options){
   options = options || {};
   window.l10n = (typeof options.l10n !== 'undefined' && options.l10n);
+  this.simulation = !!options.simulation;
   this.languages =  options.languages;
   this.ready = ready;
   this.has_connected = false;
   this.init();
+  this.ready(this.mirobot);
 }
 
 MirobotApp.prototype.extractConfig = function(){
@@ -30,6 +32,11 @@ MirobotApp.prototype.init = function(){
   this.initted = false;
   this.initConnMenu();
   if(l10n) l10nMenu('l10n', this.languages);
+  this.mirobot = new Mirobot()
+  if(this.simulation){
+    var sim = new MirobotSim('sim', this.mirobot);
+    this.mirobot.setSimulator(sim);
+  }
   this.connect();
 }
 
@@ -74,7 +81,7 @@ MirobotApp.prototype.connect = function(){
   self.extractConfig();
   self.connState = self.hashConfig['m'] ? 'connecting' : 'not_set';
   if(self.hashConfig['m']){
-    self.mirobot = new Mirobot('ws://' + self.hashConfig['m'] + ':8899/websocket');
+    self.mirobot.connect('ws://' + self.hashConfig['m'] + ':8899/websocket');
     self.mirobot.addListener(function(r){ self.handler(r) });
   }
   self.setConnState();

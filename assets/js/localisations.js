@@ -84,7 +84,16 @@ trans.en = {
   ':simulate-program': "Simulate Program",
   ':reset-simulation': "Reset Simulation",
   ':view-js-code': "View JS Code",
-  ':clear-program': "Clear Program"
+  ':clear-program': "Clear Program",
+  
+  ':simulate': "Simulate",
+  ":chrome": "Chrome App",
+  ":chrome-desc": "Check out the standalone Chrome App which lets you run all of the apps from this site.",
+  ":chrome-intro": "You can now run all of the Mirobot Apps from one downloadable Chrome App",
+  ":chrome-link": "Install it from the Chrome Web Store",
+  ":hide-sim": "Hide until active",
+  ":fast-sim": "Speed up",
+  ":reset-sim": "Reset"
 }
 
 trans.ar = {
@@ -470,10 +479,6 @@ trans.fr = {
   ":reset-simulation": "Réinitialiser la simulation",
   ":view-js-code": "Afficher Code JS",
   ":clear-program": "Effacer Programme",
-  ":chrome": "Chrome",
-  ":chrome-desc": "Check out the standalone Chrome App which lets you run all of the apps from this site.",
-  ":chrome-intro": "You can now run all of the Mirobot Apps from one downloadable Chrome App",
-  ":chrome-link": "Install it from the Chrome Web Store"
 }
 trans.it = {
   langName: "Italiano",

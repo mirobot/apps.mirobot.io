@@ -57,6 +57,7 @@ a{
   vertical-align:top;
   border:none;
   width:33.33%;
+  display:inline-block;
   font-weight:bold;
   margin:0;
   background:#BBB;
@@ -177,7 +178,4 @@ body.dragging, body.dragging * {
 }
 .editor .extra button:focus{
   outline: 0;
-}
-#code{
-  margin-top:10px;
 }

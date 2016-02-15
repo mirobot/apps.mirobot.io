@@ -194,3 +194,111 @@ ul.subMenu li.inactive{
 #l10n.home .icon{
   padding:10px;
 }
+
+#simArea{
+  visibility:hidden;
+  width: 300px;
+  height:300px;
+  position: absolute;
+  background:#EEE;
+  top:70px;
+  right:10px;
+  border:2px solid #AAA;
+  -webkit-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
+  -moz-box-shadow: 0 0 12px 0  rgba(0,0,0,0.4);
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.4);
+}
+#simArea canvas{
+  width:100%;
+  height: 100%;
+}
+#simArea.show{
+  visibility:visible;
+}
+
+#resizer{
+  width:20px;
+  height:20px;
+  color:#AAA;
+  position:absolute;
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+  font-size:2em;
+  left:9px;
+  bottom:0;
+  cursor:sw-resize;
+}
+
+#simArea .label{
+  color:#AAA;
+  position:absolute;
+  font-size:90%;
+  top:3px;
+  left:3px;
+}
+
+#simArea button{
+  position:absolute;
+  top:3px;
+  right:3px;
+}
+
+#simArea .settings{
+  position:absolute;
+  bottom:3px;
+  right:3px;
+  text-align:right;
+}
+#simArea .settings label{
+  display:block;
+  font-size:90%;
+  color:#999;
+}
+
+#sim.menuItem{
+  font-size:120%;
+  padding:14px 10px 13px;
+}
+#sim.menuItem span{
+  display:inline-block;
+  margin:3px 5px 0;
+  vertical-align:top;
+  color: rgba(0,0,0,0.6);
+  text-shadow: 3px 3px 3px rgba(255,255,255,0.1);
+}
+
+.onoffswitch {
+  display:inline-block;
+  vertical-align:center;
+  position: relative; width: 47px;
+  -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+  display: none;
+}
+.onoffswitch-label {
+  display: block; overflow: hidden; cursor: pointer;
+  height: 19px; padding: 0; line-height: 19px;
+  border: 2px solid #CCCCCC; border-radius: 19px;
+  background-color: #EBEBEB;
+  transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+  content: "";
+  display: block; width: 19px; margin: 0px;
+  background: #FFFFFF;
+  position: absolute; top: 0; bottom: 0;
+  right: 26px;
+  border: 2px solid #CCCCCC; border-radius: 19px;
+  transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+  background-color: #49E845;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+  border-color: #49E845;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+  right: 0px;
+}
