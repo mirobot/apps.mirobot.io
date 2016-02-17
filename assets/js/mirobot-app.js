@@ -41,14 +41,6 @@ MirobotApp.prototype.initConnMenu = function(){
   this.updateConnMenu();
 }
 
-var langCb = function(lang){
-  return function(){
-    var loc = document.location;
-    var newLoc = loc.pathname + '?lang=' + lang + loc.hash;
-    window.location = newLoc;
-  }
-}
-
 MirobotApp.prototype.updateConnMenu = function(){
   var self = this;
   var menu = document.querySelector('#conn .subMenu');
