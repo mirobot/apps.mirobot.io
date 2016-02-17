@@ -1,7 +1,7 @@
 {
   "name": "Mirobot",
   "description": "An app that lets you control Mirobot using a number of different programming tools",
-  "version": "0.3",
+  "version": "0.4",
   "manifest_version": 2,
   "permissions":[
   	"storage"
