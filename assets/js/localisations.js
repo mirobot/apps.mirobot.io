@@ -394,7 +394,11 @@ trans.fr = {
   ":simulate-program": "Simuler Programme",
   ":reset-simulation": "Réinitialiser la simulation",
   ":view-js-code": "Afficher Code JS",
-  ":clear-program": "Effacer Programme"
+  ":clear-program": "Effacer Programme",
+  ":chrome": "Chrome",
+  ":chrome-desc": "Check out the standalone Chrome App which lets you run all of the apps from this site.",
+  ":chrome-intro": "You can now run all of the Mirobot Apps from one downloadable Chrome App",
+  ":chrome-link": "Install it from the Chrome Web Store"
 }
 trans.it = {
   langName: "Italiano",
