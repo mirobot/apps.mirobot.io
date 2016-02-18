@@ -8,7 +8,7 @@ manifest: main.manifest
 <div id="home">
   <ul class="apps">
     {% for app in site.apps %}
-      <li>
+      <li{% if app.class %} class="{{ app.class }}"{% endif %}>
         <a class="icon" href="{{ app.url }}" style="background:url('/assets/apps{{ app.url }}icon.jpg')">&nbsp</a>
         <a href="{{ app.url }}"><h2 data-l10n=":{{ app.url | replace: '/', ''}}">{{ app.title }}</h2></a>
         <p data-l10n=":{{ app.url | replace: '/', ''}}-desc">{{ app.description }}</p>
