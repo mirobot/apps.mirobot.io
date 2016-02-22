@@ -176,6 +176,12 @@ MirobotSim = function(button_id, mirobot){
     }
   });
 
+  if(self.localStorage && self.localStorage['mirobot-simulate-width']){
+    self.sim.style.width = self.localStorage['mirobot-simulate-width'] + "px";
+    self.sim.style.height = self.localStorage['mirobot-simulate-height'] + "px";
+    self.turtle.resize();
+  }
+
   var startX, startY, startW, startH;
 
   var drag = function(e){
@@ -200,6 +206,10 @@ MirobotSim = function(button_id, mirobot){
   }
 
   var endDrag = function(e){
+    if(self.localStorage){
+      self.localStorage['mirobot-simulate-width'] = self.sim.getBoundingClientRect().width;
+      self.localStorage['mirobot-simulate-height'] = self.sim.getBoundingClientRect().height;
+    }
     document.removeEventListener('mousemove', drag, false);
     document.removeEventListener('touchmove', drag, false);
     document.removeEventListener('mouseup', endDrag, false);
