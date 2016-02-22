@@ -14,7 +14,7 @@ manifest: /assets/apps/javascript/javascript.manifest
 <pre id="editor">function draw_polygon(sides) {
     var i;
     for (i = 0; i < sides; i++) {
-        var angle = 180 - (360/sides);
+        var angle = 360/sides;
         mirobot.left(angle);
         mirobot.forward(100);
     }
