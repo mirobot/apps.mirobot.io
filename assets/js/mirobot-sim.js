@@ -168,13 +168,17 @@ MirobotSim = function(button_id, mirobot){
   this.mirobot.addEventListener('programStart', function(){
     if(self.mirobot.simulating){
       showSim();
+      reset.disabled = true
     }
   });
   this.mirobot.addEventListener('programComplete', function(e){
-    if(self.mirobot.simulating && self.hide){
-      window.setTimeout(function(){
-        self.sim.classList.remove('show');
-      }, 3000);
+    if(self.mirobot.simulating){
+      reset.disabled = false
+      if(self.hide){
+        window.setTimeout(function(){
+          self.sim.classList.remove('show');
+        }, 3000);
+      }
     }
   })
 
@@ -257,7 +261,6 @@ MirobotSim = function(button_id, mirobot){
       if(self.turtle.moving){
         return cb({status: "error", id: msg.id});
       }
-      console.log(msg);
       if(msg.cmd === 'left'){
         var angle = -Number(msg.arg);
         this.turtle.rotate(angle, completeCb(cb, msg.id))
@@ -431,7 +434,7 @@ var Turtle = function(el){
   this.stop = function(cb){
     this.stopped = true;
     this.moving = false;
-    cb();
+    if(cb) cb();
   }
 
   this.pause = function(cb){
@@ -450,6 +453,7 @@ var Turtle = function(el){
     this.robotLoc={x:0,y:0};
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawList = [];
+    this.stop();
     this.draw();
     e.preventDefault();
     e.cancelBubble = true;

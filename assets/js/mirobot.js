@@ -227,6 +227,7 @@ Mirobot.prototype = {
         for(var i in self.cbs){
           self.cbs[i]('complete', undefined, true);
         }
+        self.emitEvent('programComplete');
         self.robot_state = 'idle';
         self.msg_stack = [];
         self.cbs = {};
