@@ -368,6 +368,7 @@ var Turtle = function(el){
 
     var animate = function(){
       if(self.stopped) return;
+      if(self.paused) return window.requestAnimationFrame(animate);
       var lastLine = self.drawList[self.drawList.length - 1];
       if(lastLine.currentStep < lastLine.totalSteps){
         lastLine.currentStep += self.speed;
@@ -395,6 +396,7 @@ var Turtle = function(el){
 
     var animate = function(){
       if(self.stopped) return;
+      if(self.paused) return window.requestAnimationFrame(animate);
       step += self.speed;
       if(step > steps) step = steps;
       self.angle = startAngle + (amount * step);
@@ -429,6 +431,16 @@ var Turtle = function(el){
   this.stop = function(cb){
     this.stopped = true;
     this.moving = false;
+    cb();
+  }
+
+  this.pause = function(cb){
+    this.paused = true;
+    cb();
+  }
+
+  this.resume = function(cb){
+    this.paused = false;
     cb();
   }
 
