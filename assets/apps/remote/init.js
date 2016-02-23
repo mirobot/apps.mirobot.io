@@ -1,4 +1,6 @@
-var app  = new MirobotApp({})
+var app  = new MirobotApp({
+  simulation: true
+})
 
 var Remote = function(mirobot){
   var sending = false;

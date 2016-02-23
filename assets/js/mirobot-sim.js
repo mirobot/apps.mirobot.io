@@ -227,39 +227,58 @@ MirobotSim = function(button_id, mirobot){
     this.process(msg, cb)
   }
 
-  var completeCb = function(cb, id){
+  var completeCb = function(cb, id, msg){
+    var output = {status: 'complete', id: id};
+    if(msg) output.msg = msg;
     return function(){
-      cb({status: 'complete', id: id});
+      cb(output);
     }
   }
 
   this.process = function(msg, cb){
-    if(self.turtle.moving){
-      return cb({status: "error", id: msg.id});
-    }
-    if(msg.cmd === 'left'){
-      var angle = -Number(msg.arg);
-      this.turtle.rotate(angle, completeCb(cb, msg.id))
-    }else if(msg.cmd === 'right'){
-      var angle = Number(msg.arg);
-      this.turtle.rotate(angle, completeCb(cb, msg.id))
-    }else if(msg.cmd === 'forward'){
-      var distance = Number(msg.arg);
-      this.turtle.move(distance, completeCb(cb, msg.id))
-    }else if(msg.cmd === 'back'){
-      var distance = -Number(msg.arg);
-      this.turtle.move(distance, completeCb(cb, msg.id))
-    }else if(msg.cmd === 'penup'){
-      this.turtle.penup(completeCb(cb, msg.id))
-    }else if(msg.cmd === 'pendown'){
-      this.turtle.pendown(completeCb(cb, msg.id))
-    }else if(msg.cmd === 'beep'){
-      this.turtle.beep(Number(msg.arg), completeCb(cb, msg.id))
-    }else if(msg.cmd === 'stop'){
-      //stop the turtle moving
-      this.turtle.stop(completeCb(cb, msg.id));
+    if(['stop', 'pause', 'resume', 'ping', 'version'].indexOf(msg.cmd) >= 0){
+      if(msg.cmd === 'stop'){
+        //stop the turtle moving
+        this.turtle.stop(completeCb(cb, msg.id));
+      }else if(msg.cmd === 'pause'){
+        //stop the turtle moving
+        this.turtle.pause(completeCb(cb, msg.id));
+      }else if(msg.cmd === 'resume'){
+        //stop the turtle moving
+        this.turtle.resume(completeCb(cb, msg.id));
+      }else if(msg.cmd === 'ping'){
+        //stop the turtle moving
+        completeCb(cb, msg.id)();
+      }else if(msg.cmd === 'version'){
+        //stop the turtle moving
+        completeCb(cb, msg.id, 'sim')();
+      }
     }else{
-      return cb({status: "error", id: msg.id});
+      if(self.turtle.moving){
+        return cb({status: "error", id: msg.id});
+      }
+      console.log(msg);
+      if(msg.cmd === 'left'){
+        var angle = -Number(msg.arg);
+        this.turtle.rotate(angle, completeCb(cb, msg.id))
+      }else if(msg.cmd === 'right'){
+        var angle = Number(msg.arg);
+        this.turtle.rotate(angle, completeCb(cb, msg.id))
+      }else if(msg.cmd === 'forward'){
+        var distance = Number(msg.arg);
+        this.turtle.move(distance, completeCb(cb, msg.id))
+      }else if(msg.cmd === 'back'){
+        var distance = -Number(msg.arg);
+        this.turtle.move(distance, completeCb(cb, msg.id))
+      }else if(msg.cmd === 'penup'){
+        this.turtle.penup(completeCb(cb, msg.id))
+      }else if(msg.cmd === 'pendown'){
+        this.turtle.pendown(completeCb(cb, msg.id))
+      }else if(msg.cmd === 'beep'){
+        this.turtle.beep(Number(msg.arg), completeCb(cb, msg.id))
+      }else{
+        return cb({status: "error", id: msg.id});
+      }
     }
   }
 }
@@ -277,6 +296,7 @@ var Turtle = function(el){
   this.drawList = [];
   this.initted = false;
   this.speed = 1;
+  this.stopped = false;
 
   function rotatePoint(point, angle){
     var xr = point[0] * Math.cos(angle) - point[1] * Math.sin(angle);
@@ -333,8 +353,9 @@ var Turtle = function(el){
   }
 
   this.move = function(distance, cb){
-    if(self.moving) return;
-    self.moving = true;
+    if(this.moving) return;
+    this.moving = true;
+    this.stopped = false;
     var rads = this.angle * (Math.PI/180);
     var rate = 1;
     var destX = this.robotLoc.x + Math.sin(rads) * distance;
@@ -344,6 +365,7 @@ var Turtle = function(el){
     this.drawList.push(new Line(this.robotLoc.x, this.robotLoc.y, destX, destY, steps, this.penDown));
 
     var animate = function(){
+      if(self.stopped) return;
       var lastLine = self.drawList[self.drawList.length - 1];
       if(lastLine.currentStep < lastLine.totalSteps){
         lastLine.currentStep += self.speed;
@@ -360,7 +382,9 @@ var Turtle = function(el){
   }
 
   this.rotate = function(angle, cb){
-    self.moving = true;
+    if(this.moving) return;
+    this.moving = true;
+    this.stopped = false;
     var rate = 1;
     var steps = Math.abs(angle / rate);
     var amount = angle / steps;
@@ -368,6 +392,7 @@ var Turtle = function(el){
     var step = 0;
 
     var animate = function(){
+      if(self.stopped) return;
       step += self.speed;
       if(step > steps) step = steps;
       self.angle = startAngle + (amount * step);
@@ -400,7 +425,8 @@ var Turtle = function(el){
   }
 
   this.stop = function(cb){
-    //TODO: wire it up
+    this.stopped = true;
+    this.moving = false;
     cb();
   }
 
