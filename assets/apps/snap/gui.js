@@ -2114,10 +2114,12 @@ IDE_Morph.prototype.settingsMenu = function () {
         'Zoom blocks...',
         'userSetBlocksScale'
     );
+    /*
     menu.addItem(
         'Stage size...',
         'userSetStageSize'
     );
+    */
     menu.addLine();
     addPreference(
         'Blurred shadows',
@@ -2151,6 +2153,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'settings menu prefer empty slots hint',
         true
     );
+    /*
     addPreference(
         'Long form input dialog',
         'toggleLongFormInputDialog',
@@ -2165,6 +2168,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'uncheck to always show (+) symbols\nin block prototype labels',
         'check to hide (+) symbols\nin block prototype labels'
     );
+    */
     addPreference(
         'Virtual keyboard',
         'toggleVirtualKeyboard',
@@ -2256,6 +2260,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         true
     );
     menu.addLine(); // everything below this line is stored in the project
+    /*
     addPreference(
         'Thread safe scripts',
         function () {stage.isThreadSafe = !stage.isThreadSafe; },
@@ -2263,6 +2268,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'uncheck to allow\nscript reentrance',
         'check to disallow\nscript reentrance'
     );
+    */
     addPreference(
         'Prefer smooth animations',
         'toggleVariableFrameRate',
@@ -2280,6 +2286,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'uncheck for round ends of lines',
         'check for flat ends of lines'
     );
+    /*
     addPreference(
         'Codification support',
         function () {
@@ -2294,6 +2301,7 @@ IDE_Morph.prototype.settingsMenu = function () {
         'check for block\nto text mapping features',
         false
     );
+    */
     menu.popup(world, pos);
 };
 

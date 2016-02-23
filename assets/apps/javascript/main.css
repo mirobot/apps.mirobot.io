@@ -24,11 +24,14 @@
 #controlBar .stop{background-color:#888;}
 #controlBar .stop:hover{background-color:#444;}
 #controlBar .stop:active{background-color:#000;}
-#controlBar .clear{background-color:#AAA;}
+#controlBar .clear{background-color:#BBB;}
 #controlBar .clear:hover{background-color:#777;}
 #controlBar .clear:active{background-color:#444;}
 #controlBar .disabled{background-color:#BBB;}
 #controlBar .disabled:hover{background-color:#BBB;}
+
+#controlBar.notReady .run{ background-color:#BBB }
+#controlBar.notReady .stop{ background-color:#AAA }
 
 #helpButton{
   position:absolute;

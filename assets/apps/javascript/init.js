@@ -1,13 +1,13 @@
 var editor = new JSEditor('editor', 'controlBar');
 
 //var builder = new Builder($('#code'), undefined, true);
-var app  = new MirobotApp(function(mirobot){
-  editor.setMirobot(mirobot);
-}, {
+var app  = new MirobotApp({
   l10n: true,
   languages: baseLanguages,
   simulation: true
 });
+
+editor.setMirobot(app.mirobot);
 
 app.initPersistence({
   saveHandler: function(){ return editor.saveProgram(); },

@@ -1,7 +1,10 @@
-var app  = new MirobotApp(function(mirobot){
+var app  = new MirobotApp({})
+
+var Remote = function(mirobot){
   var sending = false;
   
   var sendCommand = function(cmd){
+    if(!mirobot.ready()) return;
     document.querySelector('.' + cmd + ' .bg').className.baseVal = 'bg pressed';
     switch(cmd){
       case 'penup':
@@ -54,4 +57,6 @@ var app  = new MirobotApp(function(mirobot){
   document.addEventListener('keydown', keyHandler);
   document.addEventListener('keyup', stop);
   
-});
+}
+
+new Remote(app.mirobot);

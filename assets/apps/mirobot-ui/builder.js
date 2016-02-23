@@ -84,7 +84,9 @@ Builder.prototype = {
   initMirobot: function(){
     if(typeof this.mirobot === 'undefined') return;
     var self = this;
-    this.mirobot.addListener(function(state){ self.mirobotHandler(state) });
+    this.mirobot.addEventListener('programComplete', function(){ self.progCompleteHandler() });
+    this.mirobot.addEventListener('readyStateChange', function(){ self.updateMirobotState() });
+    this.updateMirobotState();
   },
   init: function(){
     var self = this;
@@ -122,6 +124,15 @@ Builder.prototype = {
 
     this.addFunctions();
     this.resumeProgram();
+  },
+  updateMirobotState: function(){
+    if(this.mirobot.ready()){
+      this.el.addClass('ready');
+      this.el.removeClass('notReady');
+    }else{
+      this.el.removeClass('ready');
+      this.el.addClass('notReady');
+    }
   },
   supportsLocalStorage: function(){
     try {
@@ -195,11 +206,9 @@ Builder.prototype = {
     right.style.height = y - right.offsetTop - 27 + 'px';
     prog.style.height = buttons.offsetTop - prog.offsetTop + 'px';
   },
-  mirobotHandler: function(state){
-    if(state === 'program_complete'){
-      this.runner.show();
-      this.pause.hide();
-    }
+  progCompleteHandler: function(e){
+    this.runner.show();
+    this.pause.hide();
   },
   showHints: function(){
     $('.editor .programWrapper ol').each(function(el){
@@ -266,6 +275,7 @@ Builder.prototype = {
     });
   },
   runProgram: function(){
+    if(!this.mirobot.ready()) return;
     if(this.following || this.colliding || !this.mirobot){ return; }
     if(this.paused){
       this.mirobot.resume();
@@ -279,6 +289,7 @@ Builder.prototype = {
     this.paused = false;
   },
   pauseProgram: function(){
+    if(!this.mirobot.ready()) return;
     var self = this;
     this.paused = true;
     if(!this.mirobot){ return; }
@@ -288,6 +299,7 @@ Builder.prototype = {
     });
   },
   stopProgram: function(cb){
+    if(!this.mirobot.ready()) return;
     var self = this;
     if(!this.mirobot){ return; }
     this.mirobot.stop(function(){

@@ -137,8 +137,15 @@ Turtle.init = function() {
 
 Turtle.setMirobot = function(mirobot){
   this.mirobot = mirobot;
-  document.getElementById('runButton').disabled = false;
-  document.getElementById('runButton').className = 'primary';
+  mirobot.addEventListener('connectedStateChange', function(e){
+    if(e.state === 'connected'){
+      document.getElementById('runButton').disabled = false;
+      document.getElementById('runButton').className = 'primary';
+    }else{
+      document.getElementById('runButton').disabled = true;
+      document.getElementById('runButton').className = 'disabled';
+    }
+  });
 }
 
 //window.addEventListener('load', Turtle.init);

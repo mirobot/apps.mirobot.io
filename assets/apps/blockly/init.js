@@ -10,14 +10,14 @@ var init = function(){
 
 	Turtle.init();
 	updateL10nStrings();
-	var app  = new MirobotApp(function(mirobot){
-		Turtle.setMirobot(mirobot);
-	}, {
+	var app  = new MirobotApp({
   	l10n: true,
   	languages: ['en', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'es', 'fa', 'fr', 'hi', 'hrx',
      'hu', 'is', 'it', 'ko', 'ms', 'nl', 'pl', 'pt-br', 'ro', 'ru', 'sv', 'tr',
      'uk', 'vi', 'zh-hans', 'zh-hant']
 	});
+	Turtle.setMirobot(app.mirobot);
+
 	app.initPersistence({
 		saveHandler: function(){ return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace())); },
 		loadHandler: function(prog){

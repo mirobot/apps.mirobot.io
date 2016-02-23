@@ -142,7 +142,7 @@ MirobotSim = function(button_id, mirobot){
 
   // Set simulation on or off
   var setSim = function(state, e){
-    self.mirobot.simulating = state;
+    self.mirobot.setSimulating(state);
     enable.checked = state;
     inputChangeHandler(e);
     // store setting in localStorage
@@ -165,16 +165,18 @@ MirobotSim = function(button_id, mirobot){
   });
 
   // show and auto hide the sim when clicking run
-  this.mirobot.addListener(function(msg){
-    if(msg === 'program_start'){
-      self.sim.classList.add('show');
+  this.mirobot.addEventListener('programStart', function(){
+    if(self.mirobot.simulating){
+      showSim();
     }
-    if(msg === 'program_complete' && self.hide){
+  });
+  this.mirobot.addEventListener('programComplete', function(e){
+    if(self.mirobot.simulating && self.hide){
       window.setTimeout(function(){
         self.sim.classList.remove('show');
       }, 3000);
     }
-  });
+  })
 
   if(self.localStorage && self.localStorage['mirobot-simulate-width']){
     self.sim.style.width = self.localStorage['mirobot-simulate-width'] + "px";
@@ -255,7 +257,7 @@ MirobotSim = function(button_id, mirobot){
       this.turtle.beep(Number(msg.arg), completeCb(cb, msg.id))
     }else if(msg.cmd === 'stop'){
       //stop the turtle moving
-      this.turtle.stop();
+      this.turtle.stop(completeCb(cb, msg.id));
     }else{
       return cb({status: "error", id: msg.id});
     }

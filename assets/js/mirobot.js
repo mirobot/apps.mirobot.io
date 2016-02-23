@@ -24,6 +24,7 @@ Mirobot.prototype = {
       this.ws = new WebSocket(this.url);
       this.ws.onmessage = function(ws_msg){self.handle_msg(ws_msg)};
       this.ws.onopen = function(){
+        self.connected = true;
         self.version(function(){
           self.setConnectedState(true);
         });
@@ -45,7 +46,8 @@ Mirobot.prototype = {
     if(state){ self.has_connected = true; }
     if(self.has_connected){
       setTimeout(function(){
-        self.broadcast(self.connected ? 'connected' : 'disconnected');
+        self.emitEvent('readyStateChange', {state: (self.ready() ? 'ready' : 'notReady')});
+        self.emitEvent('connectedStateChange', {state: (self.connected ? 'connected' : 'disconnected')});
       }, 500);
     }
     // Try to auto reconnect if disconnected
@@ -64,20 +66,30 @@ Mirobot.prototype = {
     }
   },
 
+  ready: function(){
+    return this.connected || this.simulating;
+  },
+
   setSimulator: function(sim){
     this.sim = sim;
   },
+
+  setSimulating: function(s){
+    this.simulating = s;
+    this.emitEvent('readyStateChange', {state: (this.ready() ? 'ready' : 'notReady')});
+  },
   
-  broadcast: function(msg){
-    for(i in this.listeners){
-      if(this.listeners.hasOwnProperty(i)){
-        this.listeners[i](msg);
+  emitEvent: function(event, msg){
+    if(typeof this.listeners[event] !== 'undefined'){
+      for(var i = 0; i< this.listeners[event].length; i++){
+        this.listeners[event][i](msg);
       }
     }
   },
 
-  addListener: function(listener){
-    this.listeners.push(listener);
+  addEventListener: function(event, listener){
+    this.listeners[event] =  this.listeners[event] || [];
+    this.listeners[event].push(listener);
   },
 
   handleError: function(err){
@@ -249,7 +261,7 @@ Mirobot.prototype = {
       this.send_msg(msg);
     }else{
       if(this.msg_stack.length === 0){
-        this.broadcast('program_start');
+        this.emitEvent('programStart');
       }
       this.msg_stack.push(msg);
       this.process_msg_queue();
@@ -276,11 +288,11 @@ Mirobot.prototype = {
   },
   
   handle_msg: function(msg){
-    if(typeof msg === 'string') msg = JSON.parse(msg.data);
+    if(typeof msg === 'object' && typeof msg.data === 'string') msg = JSON.parse(msg.data);
     console.log(msg);
     clearTimeout(this.timeoutTimer);
     if(msg.status === 'notify'){
-      this.broadcast(msg.id);
+      this.emitEvent(msg.id);
       this.sensorState[msg.id] = msg.msg;
       return;
     }
@@ -297,7 +309,7 @@ Mirobot.prototype = {
         }
         this.msg_stack.shift();
         if(this.msg_stack.length === 0){
-          this.broadcast('program_complete');
+          this.emitEvent('programComplete');
         }
         this.robot_state = 'idle';
         this.process_msg_queue();
@@ -310,7 +322,7 @@ Mirobot.prototype = {
     }
     if(msg.status && msg.status === 'error' && msg.msg === 'Too many connections'){
       this.error = true;
-      this.broadcast('error');
+      this.emitEvent('error');
     }
   },
   

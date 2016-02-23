@@ -65,39 +65,25 @@ a{
 .editor .buttons button:focus{
   outline-width: 0;
 }
-.editor .buttons .run{
-  background-color:#33D121;
-}
-.editor .buttons .run:hover{
-  background-color:#2CAD1D;
-}
-.editor .buttons .run:active{
-  background-color:#218216;
-}
-.editor .buttons .stop{
-  background-color:#888;
-}
-.editor .buttons .stop:hover{
-  background-color:#444;
-}
-.editor .buttons .stop:active{
-  background-color:#000;
-}
-.editor .buttons .clear{
-  background-color:#AAA;
-}
-.editor .buttons .clear:hover{
-  background-color:#777;
-}
-.editor .buttons .clear:active{
-  background-color:#444;
-}
-.editor .buttons .disabled{
-  background-color:#BBB;
-}
-.editor .buttons .disabled:hover{
-  background-color:#BBB;
-}
+
+.editor .buttons .run{ background-color:#33D121 }
+.editor .buttons .run:hover{ background-color:#2CAD1D }
+.editor .buttons .run:active{ background-color:#218216 }
+
+.editor .buttons .stop{ background-color:#888 }
+.editor .buttons .stop:hover{ background-color:#444 }
+.editor .buttons .stop:active{ background-color:#000 }
+
+.editor .buttons .clear{ background-color:#BBB }
+.editor .buttons .clear:hover{ background-color:#777 }
+.editor .buttons .clear:active{ background-color:#444 }
+
+.editor .buttons .disabled{ background-color:#BBB }
+.editor .buttons .disabled:hover{ background-color:#BBB }
+
+.editor.notReady .buttons .run{ background-color:#BBB }
+.editor.notReady .buttons .stop{ background-color:#AAA }
+
 .editor .program{
   overflow:hidden;
   min-width:300px;

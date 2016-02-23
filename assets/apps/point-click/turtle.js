@@ -85,7 +85,7 @@ Turtle.prototype = {
   },
   pushScript: function(func, arg){
     this.program.push([func, arg]);
-    if(this.mirobot){
+    if(this.mirobot && this.mirobot.ready()){
       this.mirobot[func](arg);
     }
     this.js.value += 'mirobot.' + func + '(' + (arg ? arg : '') + ')\n';

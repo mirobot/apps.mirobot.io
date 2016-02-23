@@ -1,12 +1,17 @@
-MirobotApp = function(ready, options){
+MirobotApp = function(options){
   options = options || {};
   window.l10n = (typeof options.l10n !== 'undefined' && options.l10n);
   this.simulation = !!options.simulation;
   this.languages =  options.languages;
-  this.ready = ready;
   this.has_connected = false;
-  this.init();
-  this.ready(this.mirobot);
+  this.initConnMenu();
+  if(l10n) l10nMenu('l10n', this.languages);
+  this.mirobot = new Mirobot()
+  if(this.simulation){
+    var sim = new MirobotSim('sim', this.mirobot);
+    this.mirobot.setSimulator(sim);
+  }
+  this.connect();
 }
 
 MirobotApp.prototype.extractConfig = function(){
@@ -26,18 +31,6 @@ MirobotApp.prototype.supportsLocalStorage = function(){
   } catch (e) {
     return false;
   }
-}
-
-MirobotApp.prototype.init = function(){
-  this.initted = false;
-  this.initConnMenu();
-  if(l10n) l10nMenu('l10n', this.languages);
-  this.mirobot = new Mirobot()
-  if(this.simulation){
-    var sim = new MirobotSim('sim', this.mirobot);
-    this.mirobot.setSimulator(sim);
-  }
-  this.connect();
 }
 
 MirobotApp.prototype.initConnMenu = function(){
@@ -82,20 +75,16 @@ MirobotApp.prototype.connect = function(){
   self.connState = self.hashConfig['m'] ? 'connecting' : 'not_set';
   if(self.hashConfig['m']){
     self.mirobot.connect('ws://' + self.hashConfig['m'] + ':8899/websocket');
-    self.mirobot.addListener(function(r){ self.handler(r) });
+    self.mirobot.addEventListener('connectedStateChange', function(r){ self.connHandler(r) });
   }
   self.setConnState();
 }
 
-MirobotApp.prototype.handler = function(state){
-  if(state === 'connected'){
+MirobotApp.prototype.connHandler = function(e){
+  if(e.state === 'connected'){
     this.connState = 'connected';
     this.has_connected = true;
-    if(!this.initted){
-      this.initted = true;
-      this.ready(this.mirobot);
-    }
-  }else if(state === 'disconnected'){
+  }else if(e.state === 'disconnected'){
     if(!this.has_connected){
       this.connState = 'cant_connect';
     }else{

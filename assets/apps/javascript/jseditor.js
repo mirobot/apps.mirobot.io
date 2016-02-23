@@ -48,30 +48,42 @@ JSEditor.prototype = {
   },
   clickRun: function(){
     "use strict"
+    if(!this.mirobot.ready()) return;
     this.setRunButtonState('pause');
     var prog = this.editor.getValue();
     var mirobot = this.mirobot;
     eval(prog);
   },
   clickPause: function(){
+    if(!this.mirobot.ready()) return;
     this.setRunButtonState('run');
   },
   clickStop: function(){
+    if(!this.mirobot.ready()) return;
     this.mirobot.stop();
     this.setRunButtonState('run');
   },
   clickClear: function(){
     this.clearProgram();
   },
-  mirobotHandler: function(msg){
-    if(msg === 'program_complete'){
+  completeHandler: function(msg){
     this.setRunButtonState('run');
-    }
   },
   setMirobot: function(mirobot){
     var self = this;
     this.mirobot = mirobot;
-    this.mirobot.addListener(function(msg){ self.mirobotHandler(msg); });
+    this.mirobot.addEventListener('programComplete', function(msg){ self.completeHandler(msg); });
+    this.mirobot.addEventListener('readyStateChange', function(){ self.updateMirobotState() });
+    this.updateMirobotState();
+  },
+  updateMirobotState: function(){
+    if(this.mirobot.ready()){
+      this.controls.classList.add('ready');
+      this.controls.classList.remove('notReady');
+    }else{
+      this.controls.classList.remove('ready');
+      this.controls.classList.add('notReady');
+    }
   },
   saveProgram: function(name){
     return this.editor.getValue();
