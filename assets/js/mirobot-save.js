@@ -93,7 +93,7 @@ MirobotSave.prototype.saveHandler = function(){
 }
 
 MirobotSave.prototype.saveAsHandler = function(){
-  var filename = window.prompt(l(':choose'));
+  var filename = window.prompt(l(':choose-name'));
   if(filename && filename !== ''){
     if(this.persister.exists(filename)){
       alert(l(':exists'));
