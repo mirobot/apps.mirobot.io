@@ -35,6 +35,7 @@ window.onload = function () {
 	IDE.loadNewProject = false;
 	IDE.userLanguage = String.locale;
 	IDE.openIn(world);
+	IDE.toggleStageSize(true);
 
 	app.initPersistence({
 		saveHandler: function(name){
