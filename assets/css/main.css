@@ -108,6 +108,7 @@ border-top-right-radius: 10px;
   min-width:40px;
   text-align:center;
   position:relative;
+  cursor:pointer;
 }
 #menu .menuItem a{
   text-decoration:none;
@@ -150,7 +151,7 @@ ul.subMenu li:hover{
 }
 ul.subMenu li.inactive:hover{
   background-color:#DDD;
-  cursor:hand;
+  cursor:pointer;
 }
 ul.subMenu li.inactive{
   text-decoration:none;
