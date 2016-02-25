@@ -22,7 +22,7 @@ StageMorph.prototype.setupMirobotEvents = function () {
     }
   }
 
-  var collideHandler = function(e){
+  var followHandler = function(e){
     if(lineHats.length > 0){
       myself.fireMirobotEvent('line');
     }
