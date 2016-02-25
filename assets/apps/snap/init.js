@@ -32,8 +32,9 @@ window.onload = function () {
 	
 	world.worldCanvas.focus();
 	var IDE = new IDE_Morph(false);
+	IDE.loadNewProject = false;
+	IDE.userLanguage = String.locale;
 	IDE.openIn(world);
-	IDE.setLanguage(String.locale);
 
 	app.initPersistence({
 		saveHandler: function(name){
@@ -43,6 +44,8 @@ window.onload = function () {
 		loadHandler: function(prog){ return IDE.rawOpenProjectString(prog); },
 		clearHandler: function(){ return IDE.newProject(); }
 	});
+
+	IDE.setLanguage(String.locale);
 
 	setInterval(loop, 1);
 };
