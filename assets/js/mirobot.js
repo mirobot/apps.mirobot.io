@@ -182,7 +182,7 @@ Mirobot.prototype = {
     this.send({cmd: 'calibrateTurn', arg: "" + factor}, cb);
   },
 
-  collisionSensorState: function(cb){
+  collideState: function(cb){
     if(this.sensorState.collide === null || !this.collideListening){
       var self = this;
       this.send({cmd: 'collideState'}, function(state, msg){
@@ -196,7 +196,7 @@ Mirobot.prototype = {
     }
   },
 
-  followSensorState: function(cb){
+  followState: function(cb){
     if(this.sensorState.follow === null || !this.followListening){
       var self = this;
       this.send({cmd: 'followState'}, function(state, msg){

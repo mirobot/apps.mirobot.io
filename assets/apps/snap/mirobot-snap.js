@@ -232,7 +232,7 @@ Process.prototype.mirobotBumpSensor = function () {
     var self = this;
     this.context.proceed = false;
     this.context.result = null;
-    mirobot.collisionSensorState(function(state){
+    mirobot.collideState(function(state){
       self.context.result = state;
       self.context.proceed = true;
     });
@@ -251,7 +251,7 @@ Process.prototype.mirobotLineSensor = function () {
     var self = this;
     this.context.proceed = false;
     this.context.result = null;
-    mirobot.followSensorState(function(state){
+    mirobot.followState(function(state){
       self.context.result = state;
       self.context.proceed = true;
     });
