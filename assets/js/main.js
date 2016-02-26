@@ -43,6 +43,7 @@ var MainMenu = function(el){
 */
 var updateLinks = function(){
   [].forEach.call(document.links, function(l) {
+    l.href = l.href.split('?')[0];
     if(l.href.startsWith('mailto')) return;
     // Make the URL have index.html if running as a chrome app
     if('chrome' in window && 'storage' in window.chrome){
