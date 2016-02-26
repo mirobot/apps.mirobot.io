@@ -39,17 +39,23 @@ Mirobot.prototype = {
     }
   },
 
+  disconnect: function(){
+    this.connected = false;
+    this.error = false
+    this.ws.onerror = function(){};
+    this.ws.onclose = function(){};
+    this.ws.close();
+  },
+
   setConnectedState: function(state){
     var self = this;
     clearTimeout(self.connTimeout);
     self.connected = state;
     if(state){ self.has_connected = true; }
-    if(self.has_connected){
-      setTimeout(function(){
-        self.emitEvent('readyStateChange', {state: (self.ready() ? 'ready' : 'notReady')});
-        self.emitEvent('connectedStateChange', {state: (self.connected ? 'connected' : 'disconnected')});
-      }, 500);
-    }
+    setTimeout(function(){
+      self.emitEvent('readyStateChange', {state: (self.ready() ? 'ready' : 'notReady')});
+      self.emitEvent('connectedStateChange', {state: (self.connected ? 'connected' : 'disconnected')});
+    }, 500);
     // Try to auto reconnect if disconnected
     if(state){
       if(self.reconnectTimer){
@@ -97,11 +103,11 @@ Mirobot.prototype = {
       if(this.ws.readyState === WebSocket.OPEN){
         this.ws.close();
       }
-      this.setConnectedState(false);
       this.msg_stack = [];
     }else{
       console.log(err);
     }
+    this.setConnectedState(false);
   },
 
   move: function(direction, distance, cb){

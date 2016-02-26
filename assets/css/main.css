@@ -138,16 +138,15 @@ border-top-right-radius: 10px;
   text-align:left;
 }
 
-
-
 ul.subMenu li{
   text-align:left;
   padding:7px 12px;
   min-width:200px;
+  cursor:pointer;
 }
 ul.subMenu li:hover{
   background-color:#EEE;
-  cursor:hand;
+  cursor:pointer;
 }
 ul.subMenu li.inactive:hover{
   background-color:#DDD;
@@ -157,13 +156,21 @@ ul.subMenu li.inactive{
   text-decoration:none;
 }
 
-#conn .subMenu{
-
-	padding:10px;
-}
 #conn .subMenu p{
-  width:320px;
+  width:300px;
 	margin-bottom:0.5em;
+}
+#conn.connected .subMenu .selected{
+  background-color:#edf7eb;
+  color:#258d19;
+}
+#conn.error .subMenu .selected{
+  background-color:#f7e2e2;
+  color:#D12121;
+}
+#conn .address{
+  opacity:0.4;
+  filter: alpha(opacity=40);
 }
 
 #conn.error .icon{ color:#D12121}
