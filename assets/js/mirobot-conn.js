@@ -145,11 +145,18 @@ MirobotConnMenu = function(el){
       }
     }
     
-    var devEl = document.createElement('li');
-    devEl.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
-    devEl.querySelector('button').addEventListener('click', function(e){
+    var submit = function(e){
       var ip = document.querySelector('#conn input').value;
       if(ip) return clickHandler(ip)(e);
+    }
+
+    var devEl = document.createElement('li');
+    devEl.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
+    devEl.querySelector('input').addEventListener('keypress', function(e){
+       if(e && e.keyCode == 13) return submit(e);
+    })
+    devEl.querySelector('button').addEventListener('click', function(e){
+      return submit(e)
     });
     menu.appendChild(devEl);
   }
