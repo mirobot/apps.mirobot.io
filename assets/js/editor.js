@@ -1,17 +1,18 @@
-function JSEditor(editorId, controlsId){
+function Editor(editorId, controlsId, lang){
   this.editorId = editorId;
   this.el = document.getElementById(editorId);
+  this.lang = lang;
   this.initControls(controlsId);
   this.init(editorId);
   this.resize();
 }
 
-JSEditor.prototype = {
+Editor.prototype = {
   init: function(id){
     var self = this;
     this.editor = ace.edit(id);
     this.editor.setTheme("ace/theme/xcode");
-    this.editor.getSession().setMode("ace/mode/javascript");
+    this.editor.getSession().setMode("ace/mode/" + this.lang);
     this.editor.$blockScrolling = Infinity;
     this.editor.setShowPrintMargin(false);
     window.addEventListener('resize', function(){ self.resize(); });
@@ -46,13 +47,13 @@ JSEditor.prototype = {
     this.controls.querySelector('.run').style.display = (state==='run' ? '' : 'none');
     this.controls.querySelector('.pause').style.display = (state==='pause' ? '' : 'none');
   },
+  onRun: function(cb){
+    this._onRun = cb;
+  },
   clickRun: function(){
-    "use strict"
     if(!this.mirobot.ready()) return;
     this.setRunButtonState('pause');
-    var prog = this.editor.getValue();
-    var mirobot = this.mirobot;
-    eval(prog);
+    if(this._onRun)this._onRun(this.editor.getValue());
   },
   clickPause: function(){
     if(!this.mirobot.ready()) return;

@@ -2,9 +2,9 @@
 ---
 
 {% include base.manifest %}
-/assets/apps/javascript/src-min-noconflict/ace.js
-/assets/apps/javascript/jseditor.js
-/assets/apps/javascript/src-min-noconflict/theme-xcode.js
-/assets/apps/javascript/src-min-noconflict/mode-javascript.js
-/assets/apps/javascript/src-min-noconflict/worker-javascript.js
+/assets/js/ace-src-min-noconflict/ace.js
+/assets/js/editor.js
+/assets/js/ace-src-min-noconflict/theme-xcode.js
+/assets/js/ace-src-min-noconflict/mode-javascript.js
+/assets/js/ace-src-min-noconflict/worker-javascript.js
 /assets/apps/javascript/main.css

@@ -1,4 +1,4 @@
-var editor = new JSEditor('editor', 'controlBar');
+var editor = new Editor('editor', 'controlBar', 'javascript');
 
 //var builder = new Builder($('#code'), undefined, true);
 var app  = new MirobotApp({
@@ -8,6 +8,11 @@ var app  = new MirobotApp({
 });
 
 editor.setMirobot(app.mirobot);
+editor.onRun(function(prog){
+  "use strict"
+  var mirobot = app.mirobot;
+  eval(prog);
+});
 
 app.initPersistence({
   saveHandler: function(){ return editor.saveProgram(); },
