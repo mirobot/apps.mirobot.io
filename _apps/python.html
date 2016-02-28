@@ -1,0 +1,44 @@
+---
+title: Python
+author: Ben Pirt
+contact: ben@pirt.co.uk
+layout: app
+stylesheets:
+ - main.css
+description: Program Mirobot using the Python language from within your browser
+manifest: /assets/apps/python/python.manifest
+---
+
+<script type="text/javascript" src="/assets/js/ace-src-min-noconflict/ace.js"></script>
+<script type="text/javascript" src="/assets/apps/python/skulpt/skulpt.min.js"></script>
+<script type="text/javascript" src="/assets/apps/python/skulpt/skulpt-stdlib.js"></script>
+<script type="text/javascript" src="/assets/js/editor.js"></script>
+<pre id="editor">from mirobot import Mirobot
+
+m = Mirobot()
+
+def draw_polygon(sides):
+    angle = 360/sides
+    for i in range(sides):
+        m.forward(50)
+        m.right(angle)
+        
+draw_polygon(6)
+</pre>
+<button id="helpButton" data-l10n=":show-help">Show help</button>
+<div id="help">
+  <h2 data-l10n=":js-help-title">Controlling Mirobot with Javascript</h2>
+  <p data-l10n=":js-help-intro">Use these simple commands to get started controlling Mirobot:</p>
+  <ul>
+    <li><em>mirobot.forward(100)</em> - <span data-l10n=":js-forward-help">move 100 mm forward</span></li>
+    <li><em>mirobot.back(100)</em> - <span data-l10n=":js-back-help">move 100mm back</span></li>
+    <li><em>mirobot.left(90)</em> - <span data-l10n=":js-left-help">turn 90 degrees to the left</span></li>
+    <li><em>mirobot.right(90)</em> - <span data-l10n=":js-right-help">turn 90 degrees to the right</span></li>
+    <li><em>mirobot.penup()</em> - <span data-l10n=":js-penup-help">lift the pen up</span></li>
+    <li><em>mirobot.pendown()</em> - <span data-l10n=":js-pendown-help">lower the pen to draw</span></li>
+    <li><em>mirobot.beep()</em> - <span data-l10n=":js-beep-help">make it beep</span></li>
+  </ul>
+</div>
+<div id="controlBar"><button class="run">&#9654; <span data-l10n=":run">Run</span></button><button class="pause" style="display:none;">&#10074;&#10074; <span data-l10n=":pause">Pause</span></button><button class="stop">&#9724; <span data-l10n=":stop">Stop</span></button><button class="clear">&#10006; <span data-l10n=":clear">Clear</span></button></div>
+
+<script type="text/javascript" src="/assets/apps/python/init.js"></script>

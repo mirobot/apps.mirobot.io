@@ -93,7 +93,9 @@ trans.en = {
   ":chrome-link": "Install it from the Chrome Web Store",
   ":hide-sim": "Hide until active",
   ":fast-sim": "Speed up",
-  ":reset-sim": "Reset"
+  ":reset-sim": "Reset",
+  ":python": "Python",
+  ":python-desc": "Program Mirobot using the Python language from within your browser."
 }
 
 trans.ar = {
