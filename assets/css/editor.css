@@ -47,7 +47,8 @@
   top:100px;
   height:500px;
   display:none;
-  z-index:100000;
+  z-index:1500;
+  background:#FFF;
   border:1px solid #DDD;
   padding:10px;
 }

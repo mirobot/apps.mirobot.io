@@ -29,6 +29,11 @@
             <link rel="stylesheet" href="/assets/apps{{ page.url }}{{ sheet }}">
           {% endfor %}
         {% endif %}
+        {% if page.global_stylesheets %}
+          {% for sheet in page.global_stylesheets %}
+            <link rel="stylesheet" href="/assets/css/{{ sheet }}">
+          {% endfor %}
+        {% endif %}
     </head>
     <body>
 
