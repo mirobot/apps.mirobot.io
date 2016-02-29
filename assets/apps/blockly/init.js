@@ -1,30 +1,27 @@
 var init = function(){
-	if(!('turtlepage' in window)){ return window.setTimeout(init, 100);}
+  var app  = new MirobotApp({
+    l10n: true,
+    simulation: true,
+    languages: baseLanguages.concat([])
+  });
+  // Other google translations
+  //[ 'ar', 'cs', 'da', 'de', 'el', 'fa', 'hi', 'hrx', 'hu', 'is', 'it', 'ko', 'ms', 'ro', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-hans', 'zh-hant']
+  // Load in the correct language script
+  var scriptEl = document.createElement('script');
+  scriptEl.onload = function(){
+    // translate the toolbox xml
+    updateL10nNames();
+    var editor = new MirobotBlockly('editor', 'controlBar');
+    editor.setMirobot(app.mirobot);
 
-	var appNode = document.querySelector("#app");
-	var temp = document.createElement('div');
-	temp.innerHTML = turtlepage.start({}, null, {lang: BlocklyApps.LANG, langSrc: BlocklyApps.languagePack()});
-	while (temp.childNodes.length > 0) {
-			appNode.appendChild(temp.childNodes[0]);
-	}
-
-	Turtle.init();
-	updateL10nStrings();
-	var app  = new MirobotApp({
-  	l10n: true,
-  	languages: ['en', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'es', 'fa', 'fr', 'hi', 'hrx',
-     'hu', 'is', 'it', 'ko', 'ms', 'nl', 'pl', 'pt-br', 'ro', 'ru', 'sv', 'tr',
-     'uk', 'vi', 'zh-hans', 'zh-hant']
-	});
-	Turtle.setMirobot(app.mirobot);
-
-	app.initPersistence({
-		saveHandler: function(){ return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace())); },
-		loadHandler: function(prog){
-			return Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), Blockly.Xml.textToDom(prog));
-		},
-		clearHandler: function(){ return Blockly.getMainWorkspace().clear(); }
-	});
+    app.initPersistence({
+      saveHandler: function(){ return editor.saveProgram() },
+      loadHandler: function(prog){ return editor.loadProgram(prog) },
+      clearHandler: function(){ return editor.clearProgram() }
+    });
+  }
+  scriptEl.src = "/assets/apps/blockly/msg/js/" + String.locale + ".js";
+  document.head.appendChild(scriptEl);
 }
 
 window.addEventListener('load', init);

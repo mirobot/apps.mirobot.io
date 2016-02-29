@@ -95,7 +95,14 @@ trans.en = {
   ":fast-sim": "Speed up",
   ":reset-sim": "Reset",
   ":python": "Python",
-  ":python-desc": "Program Mirobot using the Python language from within your browser."
+  ":python-desc": "Program Mirobot using the Python language from within your browser.",
+  
+  ':logic': 'Logic',
+  ':loops': 'Loops',
+  ':math': 'Math',
+  ':lists': 'Lists',
+  ':variables': 'Variables',
+  ':functions': 'Functions'
 }
 
 trans.ar = {
