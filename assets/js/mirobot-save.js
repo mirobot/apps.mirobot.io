@@ -72,6 +72,7 @@ MirobotSave.prototype.init = function(){
   
   this.createFileMenu(wrap);
   new MainMenu(this.el);
+  this.el.classList.remove('hidden');
 
   window.addEventListener("keydown", function(e){ self.handleKeyboard(e);}, false);
 }
