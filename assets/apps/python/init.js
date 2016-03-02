@@ -12,7 +12,9 @@ editor.setMirobot(app.mirobot);
 editor.onRun(function(prog){
   // set up an output function
   var outf = function (text) {
-    console.log(text);
+    if(! /\s+/g.test(text)){
+      console.log("Python: " + text);
+    }
   };
 
   var builtinRead = function(x) {
