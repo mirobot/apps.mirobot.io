@@ -180,13 +180,9 @@
 }
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
-.fa-globe:before {
-  content: "\f0ac";
-}
-.fa-wifi:before {
-  content: "\f1eb";
-}
-.fa-save:before,
-.fa-floppy-o:before {
-  content: "\f0c7";
-}
+.fa-globe:before{content: "\f0ac"}
+.fa-wifi:before{content: "\f1eb"}
+.fa-save:before{content: "\f0c7"}
+
+#fullscreen .icon:before{content: "\f065"}
+.fullscreen #fullscreen .icon:before{content: "\f066"}

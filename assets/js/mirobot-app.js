@@ -4,7 +4,8 @@ MirobotApp = function(options){
   this.simulation = !!options.simulation;
   this.languages =  options.languages;
   if(l10n) l10nMenu('l10n', this.languages);
-  this.mirobot = new Mirobot()
+  this.initFullScreenButton();
+  this.mirobot = new Mirobot();
   if(this.simulation){
     var sim = new MirobotSim('sim', this.mirobot);
     this.mirobot.setSimulator(sim);
@@ -24,5 +25,24 @@ MirobotApp.prototype.initPersistence = function(conf){
   if(this.supportsLocalStorage()){
     this.saveMenu = new MirobotSave(document.querySelector('#save'), conf);
   }
+}
+
+MirobotApp.prototype.initFullScreenButton = function(conf){
+  if(typeof document.fullscreenEnabled === 'undefined') return document.querySelector('#fullscreen').classList.add('hidden');
+
+  var setBodyClass = function(){
+    var fn = document.fullscreenElement ? 'add' : 'remove'
+    document.body.classList[fn]('fullscreen');
+  }
+
+  document.getElementById('fullscreen').addEventListener('click', function(){
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+  document.addEventListener('fullscreenchange', setBodyClass, false);
+  setBodyClass();
 }
 
