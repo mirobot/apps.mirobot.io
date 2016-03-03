@@ -18,6 +18,7 @@ Editor.prototype = {
     window.addEventListener('resize', function(){ self.resize(); });
     this.help = document.querySelector('#help');
     document.querySelector('#helpButton').addEventListener('click', function(){ self.helpHandler(); });
+    this.initConsole();
   },
   initControls: function(id){ 
     var self = this;
@@ -26,6 +27,32 @@ Editor.prototype = {
     this.controls.querySelector('.pause').addEventListener('click', function(){ self.clickPause(); })
     this.controls.querySelector('.stop').addEventListener('click', function(){ self.clickStop(); })
     this.controls.querySelector('.clear').addEventListener('click', function(){ self.clickClear(); })
+  },
+  printToConsole: function(text){
+    this.showConsole();
+    var pre = this.console.querySelector('pre');
+    pre.innerHTML += text + "\n";
+    // Scroll to bottom
+    pre.scrollTop = pre.scrollHeight;
+  },
+  showConsole: function(state){
+    if(state || typeof state === 'undefined'){
+      this.console.classList.remove('hide-console');
+      this.console.classList.add('show-console');
+    }else{
+      this.console.classList.add('hide-console');
+      this.console.classList.remove('show-console');
+    }
+  },
+  initConsole: function(){
+    var self = this;
+    this.console = document.createElement('div');
+    this.console.id = 'console';
+    this.console.className = 'hide-console';
+    this.console.innerHTML = '<button class="showButton">Show Console</button><button class="hideButton">Hide Console</button><pre></pre>';
+    this.console.querySelector('.showButton').addEventListener('click', function(){ self.showConsole(); });
+    this.console.querySelector('.hideButton').addEventListener('click', function(){ self.showConsole(false); });
+    document.body.appendChild(this.console)
   },
   resize: function(){
     // Find the top of the buttons

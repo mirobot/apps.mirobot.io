@@ -11,7 +11,16 @@ editor.setMirobot(app.mirobot);
 editor.onRun(function(prog){
   "use strict"
   var mirobot = app.mirobot;
-  eval(prog);
+  var console = {log: function(text){
+    editor.printToConsole(text);
+    window.console.log("Javascript: " + text);
+  }}
+  try{
+    eval(prog);
+  }catch(e){
+    console.log(e);
+  }
+  editor.completeHandler();
 });
 
 app.initPersistence({

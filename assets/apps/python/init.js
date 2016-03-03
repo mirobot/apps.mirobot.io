@@ -12,7 +12,8 @@ editor.setMirobot(app.mirobot);
 editor.onRun(function(prog){
   // set up an output function
   var outf = function (text) {
-    if(! /\s+/g.test(text)){
+    if(! /^\s+$/g.test(text)){
+      editor.printToConsole(text);
       console.log("Python: " + text);
     }
   };
@@ -26,13 +27,14 @@ editor.onRun(function(prog){
   Sk.configure({output: outf, read: builtinRead});
   window.__mirobot__ = app.mirobot;
   // Send the python to skulpt
-  try {
-    Sk.misceval.asyncToPromise(function() {
-        return Sk.importMainWithBody("<stdin>",false,prog,true);
-    });
-  } catch(e) {
-    outf(e.toString() + "\n")
-  }
+  Sk.misceval.asyncToPromise(function() {
+      return Sk.importMainWithBody("<stdin>",false,prog,true);
+  }).then(function(a){
+    editor.completeHandler();
+  }).catch(function(e){
+    editor.completeHandler();
+    outf(e.toString());
+  });
 });
 
     
