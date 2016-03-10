@@ -299,7 +299,7 @@ Mirobot.prototype = {
     console.log(msg);
     clearTimeout(this.timeoutTimer);
     if(msg.status === 'notify'){
-      this.emitEvent(msg.id);
+      this.emitEvent(msg.id, msg.msg);
       this.sensorState[msg.id] = msg.msg;
       return;
     }
