@@ -43,6 +43,7 @@ var MainMenu = function(el){
 */
 var updateLinks = function(){
   [].forEach.call(document.links, function(l) {
+    if(l.getAttribute('data-relink') && l.getAttribute('data-relink') === 'false') return;
     if(l.href.startsWith('mailto')) return;
     l.href = l.href.split('?')[0];
     l.href = l.href.split('#')[0];

@@ -1,9 +1,9 @@
 ---
-title: Chrome App
+title: Scratch
 author: Ben Pirt
 contact: ben@pirt.co.uk
 layout: app
-description: Check out the standalone Chrome App which lets you run all of the apps from this site.
+description: Use Scratch to program your Mirobot (requires Flash).
 class: chromehide
 ---
 
@@ -14,7 +14,12 @@ class: chromehide
 }
 #content p{
   font-size:150%;
+  line-height:1.5em;
 }
+#content p.sub{
+  font-size:110%;
+}
+
 #content a.button{
   font-size: 140%;
   color:#FFF;
@@ -42,10 +47,10 @@ class: chromehide
   -moz-box-shadow: 0px 0px 59px 6px rgba(0,0,0,0.52);
   box-shadow: 0px 0px 59px 6px rgba(0,0,0,0.52);
 }
-
 </style>
 <div id="content">
-<p data-l10n=":chrome-intro">You can now run all of the Mirobot Apps from one downloadable Chrome App.</p>
-<p><a href="https://chrome.google.com/webstore/detail/mirobot/bjkfmkklaabeoomedlpgfplgndpiijea" class="button" data-l10n=":chrome-link" data-relink="false">Install it from the Chrome Web Store</a></p>
-<a href="https://chrome.google.com/webstore/detail/mirobot/bjkfmkklaabeoomedlpgfplgndpiijea" data-relink="false"><img src="/assets/apps/chrome/screenshot.jpg"></a>
+<p data-l10n=":scratch-intro">Program Mirobot using the Scratch programming environment you know and love.</p>
+<p class="sub">You'll need Flash support in your browser for this, if you don't have this (e.g. you're using iOS) you can try the <a href="../snap/">Snap! App</a>.</p>
+<p><a href="http://scratchx.org/?url=https://mirobot.github.io/mirobot-scratch/main.js#scratch" class="button" data-l10n=":scratch-link" data-relink="false" target="_blank">Start Using Scratch!</a></p>
+<a href="http://scratchx.org/?url=https://mirobot.github.io/mirobot-scratch/main.js#scratch" data-relink="false" target="_blank"><img src="/assets/apps/scratch/screenshot.jpg"></a>
 </div>
