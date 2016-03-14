@@ -238,7 +238,7 @@ Builder.prototype = {
         if(conf.default === conf.values[j]){
           select += 'selected="selected"';
         }
-        select += '>' + conf.values[j] + '</option>';
+        select += '>' + l(':'+conf.values[j]) + '</option>';
       }
       select += '</select>';
       return select;
@@ -373,7 +373,7 @@ Builder.prototype = {
       type:'child',
       content:{
         str: l(":move-cmd"),
-        direction: {name: 'direction', input:'option', default:'forward', values:[l(':forward'), l(':back')]},
+        direction: {name: 'direction', input:'option', default:'forward', values:['forward', 'back']},
         distance: {name: 'distance', input:'number', default:100}
       },
       run: function(node, mirobot, cb){
@@ -385,7 +385,7 @@ Builder.prototype = {
       type:'child',
       content:{
         str: l(":turn-cmd"),
-        direction: {name: 'direction', input:'option', default:'left', values:[l(':left'), l(':right')]},
+        direction: {name: 'direction', input:'option', default:'left', values:['left', 'right']},
         angle: {name: 'angle', input:'number', default:90}
       },
       run: function(node, mirobot, cb){
