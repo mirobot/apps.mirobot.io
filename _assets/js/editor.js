@@ -10,6 +10,7 @@ function Editor(editorId, controlsId, lang){
 Editor.prototype = {
   init: function(id){
     var self = this;
+    ace.config.set("workerPath", '/assets/apps/javascript/')
     this.editor = ace.edit(id);
     this.editor.setTheme("ace/theme/xcode");
     this.editor.getSession().setMode("ace/mode/" + this.lang);
@@ -20,7 +21,7 @@ Editor.prototype = {
     document.querySelector('#helpButton').addEventListener('click', function(){ self.helpHandler(); });
     this.initConsole();
   },
-  initControls: function(id){ 
+  initControls: function(id){
     var self = this;
     this.controls = document.getElementById(id);
     this.controls.querySelector('.run').addEventListener('click', function(){ self.clickRun(); })

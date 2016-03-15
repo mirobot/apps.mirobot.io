@@ -2,20 +2,4 @@
 ---
 
 {% include base.manifest %}
-/assets/apps/snap/widgets.js
-/assets/apps/snap/blocks.js
-/assets/apps/snap/morphic.js
-/assets/apps/snap/threads.js
-/assets/apps/snap/paint.js
-/assets/apps/snap/gui.js
-/assets/apps/snap/byob.js
-/assets/apps/snap/lists.js
-/assets/apps/snap/objects.js
-/assets/apps/snap/xml.js
-/assets/apps/snap/store.js
-/assets/apps/snap/locale.js
-/assets/apps/snap/cloud.js
-/assets/apps/snap/sha512.js
-/assets/apps/snap/mirobot-snap.js
-/assets/apps/snap/snap_logo_sm.png
-/assets/apps/snap/click.wav
+{% asset_path snap/app.js %}

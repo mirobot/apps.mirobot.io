@@ -9,10 +9,6 @@ description: Program Mirobot using the Python language from within your browser
 manifest: /assets/apps/python/python.manifest
 ---
 
-<script type="text/javascript" src="/assets/js/ace-src-min-noconflict/ace.js"></script>
-<script type="text/javascript" src="/assets/apps/python/skulpt/skulpt.min.js"></script>
-<script type="text/javascript" src="/assets/apps/python/skulpt/skulpt-stdlib.js"></script>
-<script type="text/javascript" src="/assets/js/editor.js"></script>
 <pre id="editor">from mirobot import Mirobot
 
 m = Mirobot()
@@ -40,5 +36,4 @@ draw_polygon(6)
   </ul>
 </div>
 <div id="controlBar"><button class="run">&#9654; <span data-l10n=":run">Run</span></button><button class="pause" style="display:none;">&#10074;&#10074; <span data-l10n=":pause">Pause</span></button><button class="stop">&#9724; <span data-l10n=":stop">Stop</span></button><button class="clear">&#10006; <span data-l10n=":clear">Clear</span></button></div>
-
-<script type="text/javascript" src="/assets/apps/python/init.js"></script>
+{% javascript python/app %}

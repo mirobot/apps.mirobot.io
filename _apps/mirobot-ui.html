@@ -4,13 +4,10 @@ author: Ben Pirt
 contact: ben@pirt.co.uk
 layout: app
 stylesheets:
- - main.css
+ - mirobot-ui/main.css
 description: This is the default app used to program Mirobot
 manifest: /assets/apps/mirobot-ui/mirobot-ui.manifest
 ---
 
-<script type="text/javascript" src="/assets/apps/mirobot-ui/snack.js"></script>
-<script type="text/javascript" src="/assets/apps/mirobot-ui/builder.js"></script>
-<script type="text/javascript" src="/assets/apps/mirobot-ui/snack.sortableList.js"></script>
 <div id="code"></div>
-<script type="text/javascript" src="/assets/apps/mirobot-ui/init.js"></script>
+{% javascript mirobot-ui/app %}

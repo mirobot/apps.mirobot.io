@@ -9,8 +9,6 @@ description: Program Mirobot using Javascript directly from your browser
 manifest: /assets/apps/javascript/javascript.manifest
 ---
 
-<script type="text/javascript" src="/assets/js/ace-src-min-noconflict/ace.js"></script>
-<script type="text/javascript" src="/assets/js/editor.js"></script>
 <pre id="editor">function draw_polygon(sides) {
     var i;
     for (i = 0; i < sides; i++) {
@@ -39,4 +37,4 @@ mirobot.penup();</pre>
 </div>
 <div id="controlBar"><button class="run">&#9654; <span data-l10n=":run">Run</span></button><button class="pause" style="display:none;">&#10074;&#10074; <span data-l10n=":pause">Pause</span></button><button class="stop">&#9724; <span data-l10n=":stop">Stop</span></button><button class="clear">&#10006; <span data-l10n=":clear">Clear</span></button></div>
 
-<script type="text/javascript" src="/assets/apps/javascript/init.js"></script>
+{% javascript javascript/app %}

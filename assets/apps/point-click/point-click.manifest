@@ -2,5 +2,5 @@
 ---
 
 {% include base.manifest %}
-/assets/apps/point-click/main.css
-/assets/apps/point-click/turtle.js
+{% asset_path point-click/main.css %}
+{% asset_path point-click/app.js %}

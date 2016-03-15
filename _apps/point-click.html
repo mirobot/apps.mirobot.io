@@ -3,10 +3,9 @@ title: Point & Click
 author: Ben Pirt
 layout: app
 stylesheets:
- - main.css
+ - point-click/main.css
 description: Click to control Mirobot and see the program it would use
 manifest: /assets/apps/point-click/point-click.manifest
 ---
 <div id="turtle"></div>
-<script type="text/javascript" src="/assets/apps/point-click/turtle.js"></script>
-<script type="text/javascript" src="/assets/apps/point-click/init.js"></script>
+{% javascript point-click/app %}

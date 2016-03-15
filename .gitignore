@@ -4,3 +4,5 @@ s3_website.yml
 *.zip
 *.pem
 *.crx
+.asset-cache/
+.jekyll-metadata

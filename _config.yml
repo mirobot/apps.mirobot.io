@@ -11,3 +11,12 @@ exclude:
  - README.md
  - "*.zip"
  - bin
+gems:
+ - jekyll-assets
+assets:
+  prefix: "/assets"
+  digest: true
+  sources:
+    - _assets/js
+    - _assets/css
+    - _assets/apps

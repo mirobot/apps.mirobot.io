@@ -1,0 +1,16 @@
+//= require snap/morphic.js
+//= require snap/locale.js
+//= require snap/widgets.js
+//= require snap/blocks.js
+//= require snap/threads.js
+//= require snap/objects.js
+//= require snap/gui.js
+//= require snap/paint.js
+//= require snap/lists.js
+//= require snap/byob.js
+//= require snap/xml.js
+//= require snap/store.js
+//= require snap/cloud.js
+//= require snap/sha512.js
+//= require snap/mirobot-snap.js
+//= require snap/init.js
