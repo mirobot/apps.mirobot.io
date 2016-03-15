@@ -2,8 +2,8 @@
 
 var app  = new MirobotApp({
   l10n: true,
-  languages: ['en', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'eo', 'es', 'fi', 'fr', 'it',
-  'ja-hira', 'ja', 'kn', 'ko', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ru', 'si', 'sv', 'tw', 'zh'],
+  languages: ['en', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fr', 'it',
+  'ja-hira', 'ja', 'kn', 'ko', 'nl', 'no', 'pl', 'pt-br', 'pt', 'ru', 'si', 'sv', 'zh'],
   simulation: true
 });
 
