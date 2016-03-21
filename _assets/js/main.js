@@ -1,3 +1,4 @@
+//= require localisations.js
 //= require FileSaver.min.js
 //= require polyfills.min.js
 //= require mirobot.js
@@ -8,4 +9,3 @@
 //= require persist.js
 //= require base.js
 //= require l10n.min.js
-//= require localisations.js

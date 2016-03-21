@@ -28,10 +28,10 @@ Blockly.Blocks['mirobot_move'] = {
     var str = l(':move-cmd');
     var tokens = tokenise(str);
     for(var i = 0; i< tokens.length; i++){
-      if(tokens[i] === '[[ direction ]]'){
+      if(tokens[i] === '[[direction]]'){
         this.appendDummyInput()
           .appendField(new Blockly.FieldDropdown([[l(':forward'), "forward"], [l(':back'), "back"]]), "DIRECTION");
-      }else if(tokens[i] === '[[ distance ]]'){
+      }else if(tokens[i] === '[[distance]]'){
         this.appendValueInput("DISTANCE")
           .setCheck("Number");
       }else{
@@ -67,10 +67,10 @@ Blockly.Blocks['mirobot_turn'] = {
     DIRECTIONS[0][0] += ' \u21BA';
     DIRECTIONS[1][0] += ' \u21BB';
     for(var i = 0; i< tokens.length; i++){
-      if(tokens[i] === '[[ direction ]]'){
+      if(tokens[i] === '[[direction]]'){
         this.appendDummyInput()
           .appendField(new Blockly.FieldDropdown(DIRECTIONS), "DIRECTION");
-      }else if(tokens[i] === '[[ angle ]]'){
+      }else if(tokens[i] === '[[angle]]'){
         this.appendValueInput("ANGLE")
           .setCheck("Number");
       }else{
@@ -148,7 +148,7 @@ Blockly.Blocks['mirobot_beep'] = {
     var str = l(':beep-cmd');
     var tokens = tokenise(str);
     for(var i = 0; i< tokens.length; i++){
-        if(tokens[i] === '[[ duration ]]'){
+        if(tokens[i] === '[[duration]]'){
         this.appendValueInput("DURATION").setCheck("Number");
       }else{
         this.appendDummyInput().appendField(tokens[i]);

@@ -250,12 +250,12 @@ Builder.prototype = {
       f = self.functions[f];
       var fn = '<li class="function fn-' + f.name + ' draggable" data-fntype="' + f.name + '">';
       var content = f.content.str;
-      var re = /\[\[ ([^\ ]*) \]\]/g; 
+      var re = /\[\[([^\ ]*)\]\]/g; 
       while ((m = re.exec(content)) !== null) {
           if (m.index === re.lastIndex) {
               re.lastIndex++;
           }
-          content = content.replace('[[ ' + m[1] + ' ]]', self.generateInput(f.content[m[1]]));
+          content = content.replace('[[' + m[1] + ']]', self.generateInput(f.content[m[1]]));
       }
       fn += content;
       
