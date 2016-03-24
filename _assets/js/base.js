@@ -37,6 +37,9 @@ var MainMenu = function(el){
   window.addEventListener("keydown", function(e){ handleKeyboard(e);}, false);
 }
 
+var isChromeApp = function(){
+  return window.chrome && chrome.runtime && chrome.runtime.id;
+}
 
 /*
   Update the links so that they preserve the language and mirobot config
@@ -48,7 +51,7 @@ var updateLinks = function(){
     l.href = l.href.split('?')[0];
     l.href = l.href.split('#')[0];
     // Make the URL have index.html if running as a chrome app
-    if('chrome' in window && 'storage' in window.chrome){
+    if(isChromeApp()){
       if(l.href.slice(-1) === '/'){
         l.href += 'index.html';
       }
