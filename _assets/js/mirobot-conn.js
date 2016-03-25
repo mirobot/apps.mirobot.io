@@ -13,16 +13,14 @@ MirobotConn = function(mirobot, options){
   }
 
   this.connect = function(address){
-    var conn = function(){
-    }
     if(self.address !== address){
       if(this.mirobot.connected){
         this.mirobot.disconnect();
       }
       console.log('connecting to ' + address)
       self.address = address;
-      if(typeof self.devices[address] === 'undefined'){
-        self.devices[address] = {address: address, name: "Mirobot", last_seen: -1};
+      if(typeof mirobot.devices[address] === 'undefined'){
+        mirobot.devices[address] = {address: address, name: "Mirobot", last_seen: -1};
       }
       self.has_connected = false;
       self.connState = 'connecting';
@@ -35,18 +33,17 @@ MirobotConn = function(mirobot, options){
     var conf = this.extractConfig();
     if(typeof conf['m'] !== 'undefined'){
       // Check if there's already an address in the URL
-      self.devices[conf['m']] = {address: conf['m'], name: "Mirobot", last_seen: -1};
-      this.connect(conf['m']);
+      return this.connect(conf['m']);
     }
-    this.fetchDevices(function(){
-      if(Object.keys(self.devices).length == 1){
-        self.connect(Object.keys(self.devices)[0]);
+    mirobot.fetchDevices(function(devices){
+      if(Object.keys(devices).length == 1){
+        self.connect(Object.keys(devices)[0]);
       }
     });
   }
   
   this.updateMenu = function(){
-    this.menu.setDevices(this.devices, this.address);
+    this.menu.setDevices(mirobot.devices, this.address);
     this.menu.setConnState(this.connState);
   }
 
@@ -65,34 +62,12 @@ MirobotConn = function(mirobot, options){
     }
     this.updateMenu();
   }
-  
-  this.fetchDevices = function(cb){
-    var req = new XMLHttpRequest();
-    req.addEventListener("load", function(){
-      var resp = JSON.parse(this.responseText);
-      if(resp.devices && resp.devices.length > 0){
-        for(var i = 0; i< resp.devices.length; i++){
-          self.devices[resp.devices[i].address] = resp.devices[i];
-        }
-        self.updateMenu();
-        cb();
-        console.log(self.devices);
-      }
-    });
-    req.addEventListener("error", function(e){
-      console.log('Error fetching devices list');
-      console.log(e);
-    });
-    req.open("GET", "http://local.mirobot.io/devices.json");
-    req.send();
-  }
 
   this.init = function(){ 
     this.mirobot = mirobot;
     this.mirobot.addEventListener('connectedStateChange', function(r){ self.connHandler(r) });
     this.extractConfig();
     this.menu = new MirobotConnMenu('conn')
-    this.devices = {};
     this.connState = 'not_set';
     this.menu.onConnect(function(address){
       self.connect(address);

@@ -15,6 +15,7 @@ Mirobot.prototype = {
   timeoutTimer: undefined,
   simulating: false,
   sim: undefined,
+  devices: {},
 
   connect: function(url){
     if(url) this.url = url;
@@ -37,6 +38,26 @@ Mirobot.prototype = {
         }
       }, 1000);
     }
+  },
+  
+  fetchDevices: function(cb){
+    var self = this;
+    var req = new XMLHttpRequest();
+    req.addEventListener("load", function(){
+      var resp = JSON.parse(this.responseText);
+      if(resp.devices && resp.devices.length > 0){
+        for(var i = 0; i< resp.devices.length; i++){
+          self.devices[resp.devices[i].address] = resp.devices[i];
+        }
+        cb(self.devices);
+      }
+    });
+    req.addEventListener("error", function(e){
+      console.log('Error fetching devices list');
+      console.log(e);
+    });
+    req.open("GET", "http://local.mirobot.io/devices.json");
+    req.send();
   },
 
   disconnect: function(){
