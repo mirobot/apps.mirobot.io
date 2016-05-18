@@ -84,7 +84,8 @@ MirobotBlockly.prototype = {
     var self = this;
 
   	this.workspace = Blockly.inject(this.editorId,
-      {toolbox: document.getElementById('toolbox')});
+      {toolbox: document.getElementById('toolbox'),
+      media: '/assets/apps/blockly/media/'});
 
     window.addEventListener('resize', function(){ self.resize(); });
   },
