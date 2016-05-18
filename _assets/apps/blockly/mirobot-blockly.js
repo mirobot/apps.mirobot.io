@@ -4,6 +4,7 @@ function MirobotRunner(mirobot){
   this.stack = [];
   
   this.run = function(prog){
+    var self = this;
     console.log(prog);
     try {
       eval(prog);
