@@ -129,6 +129,7 @@ MirobotBlockly.prototype = {
   clickStop: function(){
     if(!this.mirobot.ready()) return;
     this.mirobot.stop();
+    if(this.runner) this.runner.stack = [];
     this.setRunButtonState('run');
   },
   clickClear: function(){
