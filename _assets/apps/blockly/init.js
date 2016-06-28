@@ -1,11 +1,10 @@
 var init = function(){
+  baseLanguages.splice(baseLanguages.indexOf('no'), 1)
   var app  = new MirobotApp({
     l10n: true,
     simulation: true,
-    languages: baseLanguages.concat([])
+    languages: baseLanguages
   });
-  // Other google translations
-  //[ 'ar', 'cs', 'da', 'de', 'el', 'fa', 'hi', 'hrx', 'hu', 'is', 'it', 'ko', 'ms', 'ro', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-hans', 'zh-hant']
   // Load in the correct language script
   var scriptEl = document.createElement('script');
   scriptEl.onload = function(){
