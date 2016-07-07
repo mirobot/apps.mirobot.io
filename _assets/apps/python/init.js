@@ -9,6 +9,15 @@ var app  = new MirobotApp({
 
 editor.setMirobot(app.mirobot);
 
+var interruptHandler = function (susp) {
+  if (Sk.hardInterrupt === true) {
+    throw new Sk.builtin.BaseException('aborted execution');
+    editor.completeHandler();
+  } else {
+    return null; // should perform default action
+  }
+};
+
 editor.onRun(function(prog){
   // set up an output function
   var outf = function (text) {
@@ -26,10 +35,11 @@ editor.onRun(function(prog){
   
   Sk.configure({output: outf, read: builtinRead});
   window.__mirobot__ = app.mirobot;
+  Sk.hardInterrupt = false;
   // Send the python to skulpt
   Sk.misceval.asyncToPromise(function() {
       return Sk.importMainWithBody("<stdin>",false,prog,true);
-  }).then(function(a){
+  }, {"*": interruptHandler}).then(function(a){
     editor.completeHandler();
   }).catch(function(e){
     editor.completeHandler();
@@ -37,7 +47,9 @@ editor.onRun(function(prog){
   });
 });
 
-    
+editor.onStop(function(){
+  Sk.hardInterrupt = true;
+});
 
 app.initPersistence({
   saveHandler: function(){ return editor.saveProgram(); },

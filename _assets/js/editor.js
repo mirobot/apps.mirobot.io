@@ -78,6 +78,9 @@ Editor.prototype = {
   onRun: function(cb){
     this._onRun = cb;
   },
+  onStop: function(cb){
+    this._onStop = cb;
+  },
   clickRun: function(){
     if(!this.mirobot.ready()) return;
     this.setRunButtonState('pause');
@@ -91,6 +94,7 @@ Editor.prototype = {
     if(!this.mirobot.ready()) return;
     this.mirobot.stop();
     this.setRunButtonState('run');
+    if(this._onStop)this._onStop();
   },
   clickClear: function(){
     this.clearProgram();

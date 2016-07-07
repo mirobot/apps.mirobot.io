@@ -227,7 +227,6 @@ MirobotSim = function(button_id, mirobot){
   this.resizer.addEventListener('touchstart', startDrag, false);
 
   this.send = function(msg, cb){
-    cb({status: 'accepted', id: msg.id});
     this.process(msg, cb)
   }
 
@@ -261,6 +260,7 @@ MirobotSim = function(button_id, mirobot){
       if(self.turtle.moving){
         return cb({status: "error", id: msg.id});
       }
+      cb({status: 'accepted', id: msg.id});
       if(msg.cmd === 'left'){
         var angle = -Number(msg.arg);
         this.turtle.rotate(angle, completeCb(cb, msg.id))
