@@ -1,7 +1,10 @@
 MirobotSave = function(el, conf){
+  var self = this;
   this.el = el;
   this.persister = new Persister(conf);
+  this.persister.subscribe(function(){self.handleUpdate();});
   this.init();
+  this.persister.init();
 }
 
 MirobotSave.prototype.createMenuItem = function(text, cb){
@@ -11,20 +14,15 @@ MirobotSave.prototype.createMenuItem = function(text, cb){
   return li
 }
 
-MirobotSave.prototype.createFileMenu = function(menu){
+MirobotSave.prototype.updateFileMenu = function(menu){
   var self = this;
   var progs_ul = menu.querySelector('ul#progs')
-  if(!progs_ul){
-    var progs_ul = document.createElement('ul');
-    progs_ul.id = 'progs';
-    progs_ul.className = 'subMenu';
-    menu.appendChild(progs_ul);
-  }else{
-    progs_ul.innerHTML = '';
-  }
-  
-  this.persister.fileList().map(function(f){
-    progs_ul.appendChild(self.createMenuItem(f, function(){ self.openProgram(f);}));
+  if(progs_ul) progs_ul.innerHTML = '';
+
+  this.persister.fileList(function(files){
+    files.map(function(f){
+      progs_ul.appendChild(self.createMenuItem(f, function(){ self.openProgram(f);}));
+    });
   });
 }
 
@@ -39,12 +37,11 @@ MirobotSave.prototype.setSaveFilename = function(name){
 
 MirobotSave.prototype.handleUpdate = function(){
   this.setSaveFilename(this.persister.currentProgram);
-  this.createFileMenu(document.getElementById('save'));  
+  this.updateFileMenu(document.getElementById('save'));
 }
 
 MirobotSave.prototype.init = function(){
   var self = this;
-  this.persister.subscribe(function(){self.handleUpdate();});
   var wrap = document.createElement('div');
   wrap.className = 'wrapper';
   this.el.appendChild(wrap);
@@ -68,9 +65,12 @@ MirobotSave.prototype.init = function(){
   progs_li.className = 'inactive';
   menu.appendChild(progs_li);
   wrap.appendChild(menu);
-  if(this.persister.currentProgram){ this.setSaveFilename(this.persister.currentProgram);}
   
-  this.createFileMenu(wrap);
+  var progs_ul = document.createElement('ul');
+  progs_ul.id = 'progs';
+  progs_ul.className = 'subMenu';
+  menu.appendChild(progs_ul);
+
   new MainMenu(this.el);
   this.el.classList.remove('hidden');
 
@@ -93,21 +93,55 @@ MirobotSave.prototype.saveHandler = function(){
   }
 }
 
+MirobotSave.prototype.saveAsModal = function(){
+  var el = document.createElement('div');
+  el.id = "saveAsModal";
+  var p = document.createElement('p');
+  p.innerHTML = l(':choose-name');
+  el.appendChild(p);
+  var input = document.createElement('input');
+  input.type = "text"
+  el.appendChild(input);
+  return el
+}
+
 MirobotSave.prototype.saveAsHandler = function(){
-  var filename = window.prompt(l(':choose-name'));
-  if(filename && filename !== ''){
-    if(this.persister.exists(filename)){
-      alert(l(':exists'));
-    }else{
-      this.persister.saveAs(filename);
-    }
-  }
+  var self = this;
+  var modal = nanoModal(this.saveAsModal(), {
+    autoRemove: true,
+    buttons: [
+      {
+        text: "Cancel",
+        handler: "hide",
+        primary: false
+      },
+      {
+        text: "Save",
+        primary: true,
+        handler: function(modal) {
+          var filename = document.querySelector("#saveAsModal input").value;
+          if(filename && filename !== ''){
+            self.persister.exists(filename, function(exists){
+              if(exists){
+                modal.hide();
+                nanoModal(l(':exists'), {autoRemove: true}).show().onHide(modal.show);
+              }else{
+                self.persister.saveAs(filename);
+                modal.hide();
+              }
+            })
+          }
+        }
+      }
+    ]
+  });
+  modal.show();
 }
 
 MirobotSave.prototype.uploadHandler = function(){
-  if(this.checkSaved()){
-    document.getElementById('uploader').click();
-  }
+  this.checkSaved(function(res){
+    if(res) document.getElementById('uploader').click();
+  });
 }
 
 MirobotSave.prototype.uploadFileHandler = function(e){
@@ -119,7 +153,7 @@ MirobotSave.prototype.uploadFileHandler = function(e){
   }else if(typeof e.target !== 'undefined'){
     var files = e.target.files;
   }
-  if(files.length > 1) return alert(l(':single-file'));
+  if(files.length > 1) return nanoModal(l(':single-file'), {autoRemove: true}).show();
   
   // Read the file
   var r = new FileReader(files[0]);
@@ -134,17 +168,23 @@ MirobotSave.prototype.loadFromFile = function(content){
   this.persister.loadHandler(content);
 }
 
-MirobotSave.prototype.checkSaved = function(){
-  if(this.persister.unsaved()){
-    return window.confirm(l(':unsaved'))
-  }
-  return true;
+MirobotSave.prototype.checkSaved = function(cb){
+  this.persister.unsaved(function(unsaved){
+    if(unsaved){
+      nanoConfirm(l(':unsaved'), function(res){
+        cb(res);
+      });
+    }else{
+      cb(true);
+    }
+  });
 }
 
 MirobotSave.prototype.newHandler = function(){
-  if(this.checkSaved()){
-    this.persister.new();
-  }
+  var self = this;
+  this.checkSaved(function(res){
+    if(res) self.persister.new();
+  });
 }
 
 MirobotSave.prototype.downloadHandler = function(){
@@ -152,16 +192,18 @@ MirobotSave.prototype.downloadHandler = function(){
 }
 
 MirobotSave.prototype.deleteHandler = function(){
+  var self = this;
   var filename = this.persister.currentProgram;
   if(filename && filename !== ''){
-    if(confirm(l(':sure') + " '" + filename + "'? " + l(':permanent') + '.')){
-      this.persister.delete(filename);
-    }
+    nanoConfirm(l(':sure') + " '" + filename + "'? " + l(':permanent') + '.', function(res){
+      if(res) self.persister.delete(filename);
+    });
   }
 }
 
 MirobotSave.prototype.openProgram = function(filename){
-  if(this.checkSaved()){
-    if(filename && filename !== '') this.persister.load(filename);
-  }
+  var self = this;
+  this.checkSaved(function(res){
+    if(res && filename && filename !== '') self.persister.load(filename);
+  });
 }

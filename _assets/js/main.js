@@ -9,3 +9,4 @@
 //= require persist.js
 //= require base.js
 //= require l10n.min.js
+//= require nanomodal.min.js
