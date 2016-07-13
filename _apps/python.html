@@ -13,13 +13,13 @@ manifest: /assets/apps/python/python.manifest
 
 mirobot = Mirobot()
 
-def draw_polygon(sides):
-    angle = 360/sides
-    for i in range(sides):
-        mirobot.forward(50)
-        mirobot.right(angle)
+def draw_square():
+    for i in range(4):
+        mirobot.forward(100)
+        mirobot.right(90)
         
-draw_polygon(6)
+draw_square()
+
 </pre>
 <button id="helpButton" data-l10n=":show-help">Show help</button>
 <div id="help">
