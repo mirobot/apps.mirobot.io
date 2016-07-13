@@ -1,5 +1,42 @@
 var editor = new Editor('editor', 'controlBar', 'python');
 
+Sk.inputfun = function(promptText) {
+  var el = document.createElement('div');
+  el.id = "inputModal";
+  if(promptText){
+    var p = document.createElement('p');
+    p.innerHTML = promptText;
+    el.appendChild(p);
+  }
+  var input = document.createElement('input');
+  input.type = "text"
+  el.appendChild(input);
+
+  return new Promise(function (resolve) {
+    var modal = nanoModal(el, {
+      autoRemove: true,
+      buttons: [
+        {
+          text: "Cancel",
+          primary: false,
+          handler: function(modal) {
+            modal.hide();
+            resolve('');
+          }
+        },
+        {
+          text: "OK",
+          primary: true,
+          handler: function(modal) {
+            var val = document.querySelector("#inputModal input").value;
+            modal.hide();
+            resolve(val);
+          }
+        }
+      ]
+    }).show();
+  });
+};
 //var builder = new Builder($('#code'), undefined, true);
 var app  = new MirobotApp({
   l10n: true,
