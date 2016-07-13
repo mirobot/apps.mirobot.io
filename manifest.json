@@ -1,7 +1,7 @@
 {
   "name": "Mirobot",
   "description": "An app that lets you control Mirobot using a number of different programming tools",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "manifest_version": 2,
   "minimum_chrome_version": "23",
   "permissions":[
