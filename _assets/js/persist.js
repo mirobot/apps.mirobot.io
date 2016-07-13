@@ -80,7 +80,7 @@ Persister.prototype = {
       self.currentProgram = currentProgram;
       self.localStorage.getItem('/' + self.namespace + '/unsaved', function(unsavedProgram){
         self.unsaved(function(unsaved){
-          if(unsaved){
+          if(unsaved && unsavedProgram){
             self.loadHandler(unsavedProgram);
             self.notify();
           }else{
