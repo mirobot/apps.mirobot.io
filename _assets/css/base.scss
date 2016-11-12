@@ -136,6 +136,8 @@ border-top-right-radius: 10px;
   position:absolute;
   margin-top:10px;
   text-align:left;
+  max-height:600px;
+  overflow-y:auto;
 }
 
 ul.subMenu li{

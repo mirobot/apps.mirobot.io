@@ -39,6 +39,7 @@ MirobotConn = function(mirobot, options){
       if(Object.keys(devices).length == 1){
         self.connect(Object.keys(devices)[0]);
       }
+      self.updateMenu();
     });
   }
   
