@@ -157,10 +157,11 @@ ul.subMenu li.inactive:hover{
 ul.subMenu li.inactive{
   text-decoration:none;
 }
-
 #conn .subMenu p{
-  width:300px;
 	margin-bottom:0.5em;
+}
+#conn .subMenu li{
+  min-width:300px;
 }
 #conn.connected .subMenu .selected{
   background-color:#edf7eb;

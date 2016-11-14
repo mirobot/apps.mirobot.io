@@ -19,9 +19,6 @@ MirobotConn = function(mirobot, options){
       }
       console.log('connecting to ' + address)
       self.address = address;
-      if(typeof mirobot.devices[address] === 'undefined'){
-        mirobot.devices[address] = {address: address, name: "Mirobot", last_seen: -1};
-      }
       self.has_connected = false;
       self.connState = 'connecting';
       self.mirobot.connect('ws://' + address + ':8899/websocket');
@@ -33,8 +30,9 @@ MirobotConn = function(mirobot, options){
     var conf = this.extractConfig();
     if(typeof conf['m'] !== 'undefined'){
       // Check if there's already an address in the URL
-      return this.connect(conf['m']);
+      this.connect(conf['m']);
     }
+    // Fetch the devices anyway in case you want to change
     mirobot.fetchDevices(function(devices){
       if(Object.keys(devices).length == 1){
         self.connect(Object.keys(devices)[0]);
@@ -84,6 +82,8 @@ MirobotConnMenu = function(el){
   var self = this;
   this.connectCb = undefined;
   this.el = document.getElementById(el);
+  this.selectedMenu = [];
+  this.menuData = {};
 
   this.init = function(){
     this.devices = {};
@@ -96,49 +96,117 @@ MirobotConnMenu = function(el){
     this.connectCb = cb;
   }
 
+  this.selectedNode = function(){
+    var n = self.menuData;
+    for(var i = 0; i< self.selectedMenu.length; i++){
+      n = n[self.selectedMenu[i]];
+    }
+    return n;
+  }
+
   this.updateConnMenu = function(){
     var menu = this.el.querySelector('.subMenu');
     menu.innerHTML = '';
     
-    var clickHandler = function(address){
+    var clickHandler = function(node){
       return function(e){
-        if(self.connectCb) self.connectCb(address);
+        var selected = self.selectedNode();
+        if(typeof selected[node] !== 'undefined'){
+          selected = selected[node];
+        }
+        if(typeof selected.__address__ === 'undefined'){
+          // It's an organisational node
+          self.selectedMenu.push(node);
+          self.updateConnMenu();
+        }else{
+          if(self.connectCb) self.connectCb(selected.__address__);
+        }
         e.preventDefault();
         e.stopPropagation();
         return false;
       }
-    }   
+    }
+
+    var selectedMenu = self.selectedNode();
+    if(typeof selectedMenu.__address__ !== 'undefined'){
+      // It's a selected device so use the parent node
+      selectedMenu = selectedMenu.__parent__;
+    }
     
-    for(var device in this.devices){
-      if(this.devices.hasOwnProperty(device)){
+    if(self.selectedMenu.length > 0){
+      // Add the back button
+      var backEl = document.createElement('li');
+      backEl.innerHTML += '← Back <span class="address">(' + selectedMenu.__name__ + ')</span>';
+      backEl.addEventListener('click', function(){
+        self.selectedMenu.pop();
+        self.updateConnMenu();
+      });
+      menu.appendChild(backEl);
+    }else{
+      // Add the manual entry box
+      var devEl = document.createElement('li');
+      devEl.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
+      devEl.querySelector('input').addEventListener('keypress', function(e){
+         if(e && e.keyCode == 13) return submit(e);
+      })
+      devEl.querySelector('button').addEventListener('click', function(e){
+        return submit(e)
+      });
+      menu.appendChild(devEl);
+    }
+
+    for(var menuItem in selectedMenu){
+      if(selectedMenu.hasOwnProperty(menuItem) && menuItem !== '__name__'){
         var devEl = document.createElement('li');
-        devEl.innerHTML = this.devices[device].name + ' <span class="address">(' + device + ')</span>';
-        devEl.addEventListener('click', clickHandler(this.devices[device].address));
-        if(this.selected_device === this.devices[device].address){
+        if(typeof selectedMenu[menuItem]['__address__'] !== 'undefined'){
+          devEl.innerHTML = menuItem + ' <span class="address">(' + selectedMenu[menuItem]['__address__'] + ')</span>';
+        }else{
+          devEl.innerHTML = menuItem + ' →';
+        }
+        devEl.addEventListener('click', clickHandler(menuItem));
+        if(this.selected_device === selectedMenu[menuItem]['__address__'] || this.devices[this.selected_device].name.substring(0, selectedMenu[menuItem].__name__.length) == selectedMenu[menuItem].__name__){
           devEl.classList.add('selected');
         }
         menu.appendChild(devEl);
       }
     }
-    
+
     var submit = function(e){
       var ip = document.querySelector('#conn input').value;
       if(ip) return clickHandler(ip)(e);
     }
+  }
 
-    var devEl = document.createElement('li');
-    devEl.innerHTML = '<p>' + l(':address') + ':</p><input type="text" placeholder="192.168.1.100" value=""/><button>' + l(':connect') + '</button>';
-    devEl.querySelector('input').addEventListener('keypress', function(e){
-       if(e && e.keyCode == 13) return submit(e);
-    })
-    devEl.querySelector('button').addEventListener('click', function(e){
-      return submit(e)
-    });
-    menu.appendChild(devEl);
+
+  this.parseDevices = function(devices){
+    self.menuData = {};
+    for(var device in devices){
+      var splitName = devices[device].name.split(':');
+      var dest = self.menuData;
+      for(var token in splitName){
+        if(token == (splitName.length - 1)){
+          dest[splitName[token]] = {__name__: devices[device].name, __address__: devices[device].address, __parent__: dest};
+        }else{
+          if(typeof dest[splitName[token]] === 'undefined'){
+            dest[splitName[token]] = {};
+            //debugger
+            dest[splitName[token]].__name__ = splitName.slice(0, token+1).join(':');
+          }
+          dest = dest[splitName[token]];
+        }
+      }
+    }
   }
 
   this.setDevices = function(devices, selected){
     this.devices = devices;
+    if(typeof this.devices[selected] === 'undefined'){
+      this.devices[selected] = {address: selected, name: "Mirobot", last_seen: -1};
+    }else{
+      this.selectedMenu = this.devices[selected].name.split(':');
+      this.selectedMenu.pop();
+    }
+    this.parseDevices(this.devices);
     this.selected_device = selected;
     this.updateConnMenu();
   }
