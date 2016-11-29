@@ -47,7 +47,6 @@ Mirobot.prototype = {
       var resp = JSON.parse(this.responseText);
       if(resp.devices && resp.devices.length > 0){
         for(var i = 0; i< resp.devices.length; i++){
-          resp.devices[i].address += i;
           self.devices[resp.devices[i].address] = resp.devices[i];
         }
         cb(self.devices);
