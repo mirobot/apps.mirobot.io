@@ -128,7 +128,7 @@ MirobotConnMenu = function(el){
     }
 
     var selectedMenu = self.selectedNode();
-    if(typeof selectedMenu.__address__ !== 'undefined'){
+    if(selectedMenu && typeof selectedMenu.__address__ !== 'undefined'){
       // It's a selected device so use the parent node
       selectedMenu = selectedMenu.__parent__;
     }
@@ -150,6 +150,7 @@ MirobotConnMenu = function(el){
          if(e && e.keyCode == 13) return submit(e);
       })
       devEl.querySelector('button').addEventListener('click', function(e){
+        e.preventDefault();
         return submit(e)
       });
       menu.appendChild(devEl);
@@ -173,7 +174,8 @@ MirobotConnMenu = function(el){
 
     var submit = function(e){
       var ip = document.querySelector('#conn input').value;
-      if(ip) return clickHandler(ip)(e);
+      if(ip) if(self.connectCb) self.connectCb(ip);
+      return false;
     }
   }
 
