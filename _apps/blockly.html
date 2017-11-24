@@ -1,19 +1,19 @@
 ---
-title: New Blockly
+title: Blockly
 author: Ben Pirt
 contact: ben@pirt.co.uk
 layout: app
 global_stylesheets:
  - editor.css
 stylesheets:
-description: This app allows much more advanced programming techniques to be used to control Mirobot
+description: This app allows much more advanced programming techniques to be used to control Mikeybot
 manifest: /assets/apps/blockly/blockly.manifest
 ---
 
 <div id="editor" class="hidden"></div>
 <div id="controlBar" class="hidden"><button class="run">&#9654; <span data-data-l10n=":run">Run</span></button><button class="pause" style="display:none;">&#10074;&#10074; <span data-data-l10n=":pause">Pause</span></button><button class="stop">&#9724; <span data-data-l10n=":stop">Stop</span></button><button class="clear">&#10006; <span data-data-l10n=":clear">Clear</span></button></div>
 <xml id="toolbox" style="display: none">
-  <category name="Mirobot" colour="0">
+  <category name="Mikeybot" colour="0">
     <block type="mirobot_move"><value name="DISTANCE"><block type="math_number"><field name="NUM">100</field></block></value></block>
     <block type="mirobot_turn"><value name="ANGLE"><block type="math_number"><field name="NUM">90</field></block></value></block>
     <block type="mirobot_penup"></block>
