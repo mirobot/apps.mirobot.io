@@ -26,6 +26,7 @@ Mirobot.prototype = {
       this.ws.onmessage = function(ws_msg){self.handle_msg(ws_msg)};
       this.ws.onopen = function(){
         self.connected = true;
+        self.robot_state = 'idle';
         self.version(function(){
           self.setConnectedState(true);
         });
@@ -86,6 +87,7 @@ Mirobot.prototype = {
     }else{
       if(!self.reconnectTimer){
         self.reconnectTimer = setTimeout(function(){
+          clearTimeout(self.reconnectTimer);
           self.reconnectTimer = undefined;
           self.connect();
         }, 5000);
@@ -301,10 +303,18 @@ Mirobot.prototype = {
     console.log(msg);
     if(this.simulating && this.sim){
       this.sim.send(msg, function(msg){ self.handle_msg(msg) });
-    }else if(this.connected){
-      this.ws.send(JSON.stringify(msg));
-      if(this.timeoutTimer) clearTimeout(this.timeoutTimer);
-      this.timeoutTimer = window.setTimeout(function(){ self.handleError("Timeout") }, 3000);
+    }else{
+      //explicitly check if the websocket is open every single time there's an attempt to send a message
+      if(this.ws.readyState === WebSocket.OPEN){
+          if(this.connected){
+          this.ws.send(JSON.stringify(msg));
+          if(this.timeoutTimer) clearTimeout(this.timeoutTimer);
+          this.timeoutTimer = window.setTimeout(function(){ self.handleError("Timeout") }, 3000);
+        }  
+      }else{
+        // thought the connection was open when it wasn't -> switch internal state to retry connections
+        setConnectedState(false);
+      }
     }
   },
   
