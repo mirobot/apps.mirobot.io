@@ -313,7 +313,7 @@ Mirobot.prototype = {
         }  
       }else{
         // thought the connection was open when it wasn't -> switch internal state to retry connections
-        setConnectedState(false);
+        this.setConnectedState(false);
       }
     }
   },
