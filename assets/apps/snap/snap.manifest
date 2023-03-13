@@ -1,5 +1,0 @@
----
----
-
-{% include base.manifest %}
-{% asset_path snap/app.js %}

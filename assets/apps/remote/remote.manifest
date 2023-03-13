@@ -1,5 +1,0 @@
----
----
-
-{% include base.manifest %}
-/assets/apps/remote/main.css

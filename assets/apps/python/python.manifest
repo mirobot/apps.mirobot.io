@@ -1,6 +1,0 @@
----
----
-
-{% include base.manifest %}
-{% asset_path python/app.js %}
-{% asset_path editor.css %}

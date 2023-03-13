@@ -1,7 +1,0 @@
----
----
-
-{% include base.manifest %}
-{% asset_path javascript/app.js %}
-{% asset_path editor.css %}
-/assets/apps/javascript/worker-javascript.js

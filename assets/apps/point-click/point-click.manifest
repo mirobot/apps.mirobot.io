@@ -1,6 +1,0 @@
----
----
-
-{% include base.manifest %}
-{% asset_path point-click/main.css %}
-{% asset_path point-click/app.js %}

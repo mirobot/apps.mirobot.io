@@ -1,6 +1,0 @@
----
----
-
-{% include base.manifest %}
-{% asset_path mirobot-ui/app.js %}
-{% asset_path mirobot-ui/main.css %}
