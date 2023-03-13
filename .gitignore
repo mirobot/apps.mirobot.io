@@ -6,3 +6,4 @@ s3_website.yml
 *.crx
 .asset-cache/
 .jekyll-metadata
+.sass-cache

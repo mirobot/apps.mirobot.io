@@ -1,24 +1,14 @@
 name: Mirobot Apps
-markdown: redcarpet
+markdown: kramdown
 collections:
   apps:
     output: true
     permalink: /:path/
 exclude:
- - Gemfile
- - Gemfile.lock
- - s3_website.yml
- - README.md
- - "*.zip"
- - bin
- - "*.psd"
-gems:
- - jekyll-assets
-assets:
-  prefix: "/assets"
-  digest: true
-  sources:
-    - assets/js
-    - _assets/js
-    - _assets/css
-    - _assets/apps
+  - Gemfile
+  - Gemfile.lock
+  - s3_website.yml
+  - README.md
+  - "*.zip"
+  - bin
+  - "*.psd"

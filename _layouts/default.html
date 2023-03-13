@@ -6,16 +6,27 @@
         
         <title>{{ page.title }}</title>
         <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
-        {% stylesheet main %}
-        {% javascript main %}
+        <script src="/assets/js/localisations.js"></script>
+        <script src="/assets/js/FileSaver.min.js"></script>
+        <script src="/assets/js/polyfills.min.js"></script>
+        <script src="/assets/js/mirobot.js"></script>
+        <script src="/assets/js/mirobot-save.js"></script>
+        <script src="/assets/js/mirobot-sim.js"></script>
+        <script src="/assets/js/mirobot-conn.js"></script>
+        <script src="/assets/js/mirobot-app.js"></script>
+        <script src="/assets/js/persist.js"></script>
+        <script src="/assets/js/base.js"></script>
+        <script src="/assets/js/l10n.min.js"></script>
+        <script src="/assets/js/nanomodal.min.js"></script>
+        <link rel="stylesheet" href="/assets/css/main.css">
         {% if page.stylesheets %}
           {% for sheet in page.stylesheets %}
-            {% stylesheet {{sheet}} %}
+            <link rel="stylesheet" href="{{sheet}}">
           {% endfor %}
         {% endif %}
         {% if page.global_stylesheets %}
           {% for sheet in page.global_stylesheets %}
-            {% stylesheet {{sheet}} %}
+            <link rel="stylesheet" href="/assets/css/{{sheet}}">
           {% endfor %}
         {% endif %}
     </head>

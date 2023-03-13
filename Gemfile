@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jekyll'
-gem 'redcarpet'
-gem 's3_website'
-gem 'jekyll-assets'
-gem 'uglifier'
+
+group :development do
+  gem "webrick", "~> 1.8"
+end

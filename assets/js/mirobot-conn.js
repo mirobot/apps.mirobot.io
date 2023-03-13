@@ -71,7 +71,7 @@ MirobotConn = function(mirobot, options){
     this.menu.onConnect(function(address){
       self.connect(address);
     });
-    this.autoConnect();
+    // this.autoConnect();
   }
   
   this.init();
