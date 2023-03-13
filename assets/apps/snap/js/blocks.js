@@ -1906,7 +1906,7 @@ BlockMorph.prototype.toggleSnapSound = function () {
         this.snapSound = null;
     } else {
         BlockMorph.prototype.snapSound = document.createElement('audio');
-        BlockMorph.prototype.snapSound.src = '/assets/apps/snap/click.wav';
+        BlockMorph.prototype.snapSound.src = '/apps.mirobot.io/assets/apps/snap/click.wav';
     }
     CommentMorph.prototype.snapSound = BlockMorph.prototype.snapSound;
 };

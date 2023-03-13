@@ -1,26 +1,33 @@
-var init = function(){
-  baseLanguages.splice(baseLanguages.indexOf('no'), 1)
-  var app  = new MirobotApp({
+var init = function () {
+  baseLanguages.splice(baseLanguages.indexOf("no"), 1);
+  var app = new MirobotApp({
     l10n: true,
     simulation: true,
-    languages: baseLanguages
+    languages: baseLanguages,
   });
   // Load in the correct language script
-  var scriptEl = document.createElement('script');
-  scriptEl.onload = function(){
+  var scriptEl = document.createElement("script");
+  scriptEl.onload = function () {
     // translate the toolbox xml
     updateL10nNames();
-    var editor = new MirobotBlockly('editor', 'controlBar');
+    var editor = new MirobotBlockly("editor", "controlBar");
     editor.setMirobot(app.mirobot);
 
     app.initPersistence({
-      saveHandler: function(){ return editor.saveProgram() },
-      loadHandler: function(prog){ return editor.loadProgram(prog) },
-      clearHandler: function(){ return editor.clearProgram() }
+      saveHandler: function () {
+        return editor.saveProgram();
+      },
+      loadHandler: function (prog) {
+        return editor.loadProgram(prog);
+      },
+      clearHandler: function () {
+        return editor.clearProgram();
+      },
     });
-  }
-  scriptEl.src = "/assets/apps/blockly/msg/js/" + String.locale + ".js";
+  };
+  scriptEl.src =
+    "/apps.mirobot.io/assets/apps/blockly/msg/js/" + String.locale + ".js";
   document.head.appendChild(scriptEl);
-}
+};
 
-window.addEventListener('load', init);
+window.addEventListener("load", init);

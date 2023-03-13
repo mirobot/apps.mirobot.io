@@ -8,11 +8,11 @@ index: true
   <ul class="apps">
     {% for app in site.apps %}
       <li{% if app.class %} class="{{ app.class }}"{% endif %}>
-        <a class="icon" href="{{ app.url }}" style="background:url('/assets/apps{{ app.url }}icon.jpg')">&nbsp</a>
-        <a href="{{ app.url }}"><h2 data-l10n=":{{ app.url | replace: '/', ''}}">{{ app.title }}</h2></a>
+        <a class="icon" href="{{ site.baseurl }}{{ app.url }}" style="background:url('{{ site.baseurl }}/assets/apps{{ app.url }}icon.jpg')">&nbsp</a>
+        <a href="{{ site.baseurl }}{{ app.url }}"><h2 data-l10n=":{{ app.url | replace: '/', ''}}">{{ app.title }}</h2></a>
         <p data-l10n=":{{ app.url | replace: '/', ''}}-desc">{{ app.description }}</p>
       </li>
     {% endfor %}
   </ul>
 </div>
-<script src="/assets/js/home-init.js"></script>
+<script src="{{ site.baseurl }}/assets/js/home-init.js"></script>

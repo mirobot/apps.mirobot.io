@@ -6,27 +6,27 @@
         
         <title>{{ page.title }}</title>
         <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
-        <script src="/assets/js/localisations.js"></script>
-        <script src="/assets/js/FileSaver.min.js"></script>
-        <script src="/assets/js/polyfills.min.js"></script>
-        <script src="/assets/js/mirobot.js"></script>
-        <script src="/assets/js/mirobot-save.js"></script>
-        <script src="/assets/js/mirobot-sim.js"></script>
-        <script src="/assets/js/mirobot-conn.js"></script>
-        <script src="/assets/js/mirobot-app.js"></script>
-        <script src="/assets/js/persist.js"></script>
-        <script src="/assets/js/base.js"></script>
-        <script src="/assets/js/l10n.min.js"></script>
-        <script src="/assets/js/nanomodal.min.js"></script>
-        <link rel="stylesheet" href="/assets/css/main.css">
+        <script src="{{ site.baseurl }}/assets/js/localisations.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/FileSaver.min.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/polyfills.min.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/mirobot.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/mirobot-save.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/mirobot-sim.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/mirobot-conn.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/mirobot-app.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/persist.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/base.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/l10n.min.js"></script>
+        <script src="{{ site.baseurl }}/assets/js/nanomodal.min.js"></script>
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
         {% if page.stylesheets %}
           {% for sheet in page.stylesheets %}
-            <link rel="stylesheet" href="{{sheet}}">
+            <link rel="stylesheet" href="{{ site.baseurl }}{{sheet}}">
           {% endfor %}
         {% endif %}
         {% if page.global_stylesheets %}
           {% for sheet in page.global_stylesheets %}
-            <link rel="stylesheet" href="/assets/css/{{sheet}}">
+            <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{sheet}}">
           {% endfor %}
         {% endif %}
     </head>
@@ -37,7 +37,7 @@
         <div id="menu">
           <div id="l10n" class="menuItem hidden home"><i class="icon fa fa-globe fa-2x"></i></div>
         </div>
-        <h1 class="title"><a href="/"><img src="/assets/logo_lg.png" alt="Mirobot Apps" /></a></h1>
+        <h1 class="title"><a href="{{ site.baseurl}}/"><img src="{{ site.baseurl }}/assets/logo_lg.png" alt="Mirobot Apps" /></a></h1>
 {% else %}
         <div id="menu">
           <div id="sim" class="menuItem hidden"></div>
@@ -46,7 +46,7 @@
           <div id="l10n" class="menuItem hidden"><i class="icon fa fa-globe fa-2x"></i></div>
           <div id="save" class="menuItem hidden"><i class="icon fa fa-save fa-2x"></i></div>
         </div>
-        <h1 class="title"><a href="/"><img src="/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>
+        <h1 class="title"><a href="{{ site.baseurl}}/"><img src="{{ site.baseurl }}/assets/logo_sm.png" alt="Mirobot Apps" /></a></h1>
 {% endif %}
       </div>
 

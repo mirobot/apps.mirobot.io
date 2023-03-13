@@ -1,5 +1,6 @@
 name: Mirobot Apps
 markdown: kramdown
+baseurl: /apps.mirobot.io
 collections:
   apps:
     output: true
