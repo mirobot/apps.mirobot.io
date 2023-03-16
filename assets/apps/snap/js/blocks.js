@@ -2466,7 +2466,7 @@ BlockMorph.prototype.showHelp = function () {
             block.fullImage()
         );
     } else {
-        pic.src = '/assets/apps/snap/help/' + spec + '.png';
+        pic.src = '/apps.mirobot.io/assets/apps/snap/help/' + spec + '.png';
     }
 };
 
